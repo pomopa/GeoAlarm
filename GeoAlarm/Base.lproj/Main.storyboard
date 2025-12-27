@@ -108,11 +108,62 @@
                         <outlet property="emailField" destination="DTo-JE-8nQ" id="g7i-Sl-RTO"/>
                         <outlet property="passwordField" destination="eXa-X3-iUK" id="8Yj-Ga-a5V"/>
                         <outlet property="registerButton" destination="nT1-j3-7nN" id="1w0-KP-VFX"/>
+                        <segue destination="Hix-Ro-FYv" kind="presentation" identifier="loginToMain" modalPresentationStyle="fullScreen" id="4Pa-7E-WeH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130.53435114503816" y="118.30985915492958"/>
+            <point key="canvasLocation" x="131" y="113"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ZMY-LE-ygt">
+            <objects>
+                <viewController id="Apa-rY-ILn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dgY-HO-6Jk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Ghi-c7-4Db"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="person.crop.circle" catalog="system" selectedImage="person.crop.circle.fill" id="P7o-4q-b6y"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e8D-Ym-bOk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2398" y="-15"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Okw-BL-gbN">
+            <objects>
+                <viewController id="DZY-Jf-qKJ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fK8-UG-tet">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="TXI-PE-Isk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="alarm" catalog="system" selectedImage="alarm.fill" id="SA9-HY-yKa"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xPt-45-rIO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2398" y="-622"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="gLD-34-r9c">
+            <objects>
+                <tabBarController id="Hix-Ro-FYv" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1rX-qj-1ai">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="DZY-Jf-qKJ" kind="relationship" relationship="viewControllers" id="Xqn-i1-KYq"/>
+                        <segue destination="Apa-rY-ILn" kind="relationship" relationship="viewControllers" id="udY-wh-bzr"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ed-Kl-yqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1490" y="-318"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="DrZ-gV-sgp">
@@ -234,6 +285,10 @@
     </scenes>
     <resources>
         <image name="AppLogo" width="1024" height="1024"/>
+        <image name="alarm" catalog="system" width="123" height="128"/>
+        <image name="alarm.fill" catalog="system" width="123" height="128"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="123"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
