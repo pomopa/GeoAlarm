@@ -22,6 +22,12 @@ that will activate based on their geographical coordinates.
 
 ## How to Start the Project
 
+### Firebase Setup
+1. Create a Firebase project
+2. Add an iOS app with bundle ID `com.polmonne.GeoAlarm`
+3. Download `GoogleService-Info.plist`
+4. Add it to the Xcode project root
+
 ---
 
 ## 📸 Demo Screenshots
