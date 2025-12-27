@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		251C860E2F00576D00E59965 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 251C860D2F00576D00E59965 /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		251C85B72F0009B000E59965 /* GeoAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				251C860E2F00576D00E59965 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = GeoAlarm;
 			packageProductDependencies = (
+				251C860D2F00576D00E59965 /* FirebaseAuth */,
 			);
 			productName = GeoAlarm;
 			productReference = 251C85B72F0009B000E59965 /* GeoAlarm.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 251C85AE2F0009B000E59965;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				251C860C2F00576C00E59965 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 251C85B82F0009B000E59965 /* Products */;
 			projectDirPath = "";
@@ -341,6 +350,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		251C860C2F00576C00E59965 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		251C860D2F00576D00E59965 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 251C860C2F00576C00E59965 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 251C85AF2F0009B000E59965 /* Project object */;
 }

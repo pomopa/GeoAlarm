@@ -1,0 +1,21 @@
+# Firebase
+GoogleService-Info.plist
+
+# Xcode
+DerivedData/
+*.xcuserstate
+*.xccheckout
+*.xcuserdata/
+
+# Swift Package Manager
+.build/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html

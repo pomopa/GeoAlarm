@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRegisterButton()
+        setupTextFields()
     }
 
     private func setupRegisterButton() {
@@ -38,6 +39,13 @@ class LoginViewController: UIViewController {
         ))
 
         registerButton.setAttributedTitle(text, for: .normal)
+    }
+    
+    private func setupTextFields() {
+        let textColor = UIColor(red: 0x1B/255, green: 0x2B/255, blue: 0x42/255, alpha: 1)
+
+        emailField.textColor = textColor
+        passwordField.textColor = textColor
     }
     
     @IBAction func loginUser(_ sender: Any) {
