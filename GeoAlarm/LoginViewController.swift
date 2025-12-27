@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
@@ -47,8 +48,38 @@ class LoginViewController: UIViewController {
         emailField.textColor = textColor
         passwordField.textColor = textColor
     }
+
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
     
     @IBAction func loginUser(_ sender: Any) {
+        guard let email = emailField.text, !email.isEmpty,
+                  let password = passwordField.text, !password.isEmpty else {
+            showAlert(title: "Error", message: "Please enter email and password")
+            return
+        }
+
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
+            guard let self = self else { return }
+
+            if let error = error {
+                self.showAlert(title: "Login Failed", message: error.localizedDescription)
+                return
+            }
+
+            guard let user = result?.user else {
+                self.showAlert(title: "Login Failed", message: "User not found")
+                return
+            }
+
+            print("User logged in:", user.uid)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "loginToMain", sender: nil)
+            }
+        }
     }
     
 }
