@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseStorage
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userEmailLabel: UILabel!
     
@@ -31,9 +31,21 @@ class ProfileViewController: UIViewController {
         }
 
         userEmailLabel.text = user.email
-    }
-    
-    @IBAction func editPicture(_ sender: Any) {
+        
+        let storageRef = Storage.storage().reference().child("profile_images/\(user.uid).jpg")
+
+        storageRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if let error = error {
+                print("Error downloading the profile picture:", error)
+                return
+            }
+
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.profileImageView.image = image
+                }
+            }
+        }
     }
     
     private func showSimpleAlert(_ title: String, _ message: String) {
@@ -42,6 +54,73 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    //--------------------------------------------
+    // IMAGE EDIT
+    //--------------------------------------------
+    @IBAction func editPicture(_ sender: Any) {
+        let alert = UIAlertController(title: "Change Profile Picture",
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
+            self.openImagePicker(source: .camera)
+        })
+
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
+            self.openImagePicker(source: .photoLibrary)
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(alert, animated: true)
+    }
+    
+    private func openImagePicker(source: UIImagePickerController.SourceType) {
+        guard UIImagePickerController.isSourceTypeAvailable(source) else { return }
+
+        let picker = UIImagePickerController()
+        picker.sourceType = source
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        picker.dismiss(animated: true)
+
+        guard let image = info[.editedImage] as? UIImage,
+              let imageData = image.jpegData(compressionQuality: 0.8),
+              let user = Auth.auth().currentUser else { return }
+
+        let storageRef = Storage.storage().reference()
+            .child("profile_images/\(user.uid).jpg")
+
+        storageRef.putData(imageData) { _, error in
+            if let error = error {
+                print("Upload failed:", error)
+                return
+            }
+
+            storageRef.downloadURL { url, _ in
+                guard let url = url else { return }
+
+                let changeRequest = user.createProfileChangeRequest()
+                changeRequest.photoURL = url
+                changeRequest.commitChanges { _ in
+                    DispatchQueue.main.async {
+                        self.profileImageView.image = image
+                    }
+                }
+            }
+        }
+    }
+
+    
+    //--------------------------------------------
+    // Password edit
+    //--------------------------------------------
     private func updatePassword(currentPassword: String, newPassword: String) {
         guard let user = Auth.auth().currentUser,
               let email = user.email else { return }
@@ -84,6 +163,9 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    //--------------------------------------------
+    // Delete account
+    //--------------------------------------------
     private func performAccountDeletion() {
         guard let user = Auth.auth().currentUser else { return }
 
