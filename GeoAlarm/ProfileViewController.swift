@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
@@ -67,8 +68,8 @@ class ProfileViewController: UIViewController {
     
     @IBAction func changePassword(_ sender: Any) {
         let alert = UIAlertController(title: "Change Password",
-                                          message: nil,
-                                          preferredStyle: .alert)
+                                      message: nil,
+                                      preferredStyle: .alert)
 
         alert.addTextField { $0.placeholder = "Current password"; $0.isSecureTextEntry = true }
         alert.addTextField { $0.placeholder = "New password"; $0.isSecureTextEntry = true }
@@ -83,6 +84,37 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func performAccountDeletion() {
+        guard let user = Auth.auth().currentUser else { return }
+
+        let imageRef = Storage.storage().reference()
+            .child("profile_images/\(user.uid).jpg")
+
+        imageRef.delete(completion: nil)
+
+        user.delete { error in
+            if let error = error {
+                self.showSimpleAlert("Error", error.localizedDescription)
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "profileToLogin", sender: nil)
+            }
+        }
+    }
+
+    
     @IBAction func deleteAccount(_ sender: Any) {
+        let alert = UIAlertController(title: "Delete Account",
+                                      message: "This action is permanent",
+                                      preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.performAccountDeletion()
+        })
+
+        present(alert, animated: true)
     }
 }

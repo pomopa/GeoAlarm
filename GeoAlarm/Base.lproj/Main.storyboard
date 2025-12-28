@@ -216,11 +216,12 @@
                     <connections>
                         <outlet property="profileImageView" destination="USP-Vh-KTE" id="ExO-f4-Mpc"/>
                         <outlet property="userEmailLabel" destination="jyA-hW-dEB" id="XJ3-jW-GtQ"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="profileToLogin" modalPresentationStyle="fullScreen" id="yBE-Lu-zSb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8D-Ym-bOk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2398" y="77"/>
+            <point key="canvasLocation" x="2398" y="186"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Okw-BL-gbN">
@@ -374,6 +375,9 @@
             <point key="canvasLocation" x="131" y="-736"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="yBE-Lu-zSb"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="1024" height="1024"/>
         <image name="alarm" catalog="system" width="123" height="128"/>
