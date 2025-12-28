@@ -24,9 +24,22 @@ that will activate based on their geographical coordinates.
 
 ### Firebase Setup
 1. Create a Firebase project
-2. Add an iOS app with bundle ID `com.polmonne.GeoAlarm`
+2. Add an iOS app with bundle ID `LS.GeoAlarm`
 3. Download `GoogleService-Info.plist`
 4. Add it to the Xcode project root
+
+You should set up Firebase Auth and Storgae on the Firebase console and set add them through the XCode dependencies manager. The rules for Firebase Storage are:
+
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+      match /{allPaths=**} {
+        allow read, write: if request.auth != null;
+      }
+    }
+}
+```
 
 ---
 
