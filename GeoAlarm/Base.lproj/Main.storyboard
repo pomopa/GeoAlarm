@@ -239,6 +239,38 @@
             </objects>
             <point key="canvasLocation" x="2398" y="-622"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="n1o-qK-y1I">
+            <objects>
+                <viewController id="VNI-A8-OJB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="084-9z-ELL">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="BxR-d3-Z8V"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="map" catalog="system" selectedImage="map.fill" id="haX-xP-ui9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FXi-my-dNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2398" y="-1471"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EK9-Mb-JXt">
+            <objects>
+                <viewController id="sUP-t4-E5b" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pln-Tq-NeA">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4pC-gU-5YI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="WbJ-O1-YTU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1C9-YW-goq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2398" y="992"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gLD-34-r9c">
             <objects>
@@ -250,6 +282,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="DZY-Jf-qKJ" kind="relationship" relationship="viewControllers" id="Xqn-i1-KYq"/>
+                        <segue destination="VNI-A8-OJB" kind="relationship" relationship="viewControllers" id="FQI-Iu-s6L"/>
+                        <segue destination="sUP-t4-E5b" kind="relationship" relationship="viewControllers" id="fjM-v3-2AZ"/>
                         <segue destination="Apa-rY-ILn" kind="relationship" relationship="viewControllers" id="udY-wh-bzr"/>
                     </connections>
                 </tabBarController>
@@ -382,6 +416,10 @@
         <image name="AppLogo" width="1024" height="1024"/>
         <image name="alarm" catalog="system" width="123" height="128"/>
         <image name="alarm.fill" catalog="system" width="123" height="128"/>
+        <image name="magnifyingglass.circle" catalog="system" width="128" height="123"/>
+        <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="map" catalog="system" width="128" height="112"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
