@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -246,14 +247,26 @@
                     <view key="view" contentMode="scaleToFill" id="084-9z-ELL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" showsUserTrackingButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="42J-9T-pVw">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="BxR-d3-Z8V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="42J-9T-pVw" firstAttribute="bottom" secondItem="084-9z-ELL" secondAttribute="bottom" id="Slr-5J-Lor"/>
+                            <constraint firstItem="42J-9T-pVw" firstAttribute="trailing" secondItem="BxR-d3-Z8V" secondAttribute="trailing" id="Ygh-3T-lKW"/>
+                            <constraint firstItem="42J-9T-pVw" firstAttribute="leading" secondItem="BxR-d3-Z8V" secondAttribute="leading" id="ggY-Qh-PXz"/>
+                            <constraint firstItem="42J-9T-pVw" firstAttribute="top" secondItem="084-9z-ELL" secondAttribute="top" id="w4A-hc-NcS"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="map" catalog="system" selectedImage="map.fill" id="haX-xP-ui9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXi-my-dNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2398" y="-1471"/>
+            <point key="canvasLocation" x="2397.709923664122" y="-1471.1267605633805"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="EK9-Mb-JXt">
