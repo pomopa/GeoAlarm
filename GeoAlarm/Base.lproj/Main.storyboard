@@ -243,13 +243,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Gz-qy-huz">
-                                                    <rect key="frame" x="39" y="0.0" width="314" height="95"/>
-                                                    <color key="backgroundColor" red="0.8608398438" green="0.3977050781" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <connections>
-                                                        <segue destination="TEJ-8Y-D9z" kind="embed" id="zh5-pE-km1"/>
-                                                    </connections>
-                                                </containerView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
                                                     <rect key="frame" x="54" y="24" width="125" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -263,25 +256,29 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCA-lB-fma">
-                                                    <rect key="frame" x="275" y="33" width="63" height="28"/>
+                                                    <rect key="frame" x="278" y="33" width="63" height="28"/>
                                                 </switch>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyu-AA-ojH">
+                                                    <rect key="frame" x="34" y="0.0" width="324" height="95"/>
+                                                    <color key="backgroundColor" red="0.85882352941176465" green="0.3979492188" blue="0.3029785156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="tintColor" red="0.8588867188" green="0.3979492188" blue="0.3029785156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="fCA-lB-fma" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="topMargin" constant="18" id="27b-qD-Zbl"/>
-                                                <constraint firstAttribute="trailing" secondItem="4Gz-qy-huz" secondAttribute="trailing" constant="40" id="AM4-Su-pQf"/>
                                                 <constraint firstItem="bRa-Bv-VC8" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leadingMargin" constant="34" id="GLX-bc-pNR"/>
+                                                <constraint firstAttribute="bottom" secondItem="gyu-AA-ojH" secondAttribute="bottom" id="GaO-mj-TIq"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="bRa-Bv-VC8" secondAttribute="bottom" constant="6" id="I9g-he-D4o"/>
-                                                <constraint firstItem="4Gz-qy-huz" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="top" id="NuE-ap-lrZ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="fCA-lB-fma" secondAttribute="bottom" constant="19" id="RDg-iz-TMR"/>
+                                                <constraint firstItem="gyu-AA-ojH" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leading" constant="34" id="bQ5-JO-DBh"/>
+                                                <constraint firstItem="gyu-AA-ojH" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="top" id="d85-m1-p1v"/>
                                                 <constraint firstItem="mIS-eT-QNp" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leadingMargin" constant="34" id="e7g-3W-zjU"/>
-                                                <constraint firstItem="4Gz-qy-huz" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leading" constant="39" id="kuv-3G-Pm3"/>
-                                                <constraint firstAttribute="bottom" secondItem="4Gz-qy-huz" secondAttribute="bottom" id="pIf-rY-gkK"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fCA-lB-fma" secondAttribute="trailing" constant="37" id="pdD-D3-2lX"/>
+                                                <constraint firstAttribute="trailing" secondItem="gyu-AA-ojH" secondAttribute="trailing" constant="35" id="nxj-Xf-MxX"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fCA-lB-fma" secondAttribute="trailing" constant="34" id="pdD-D3-2lX"/>
                                                 <constraint firstItem="mIS-eT-QNp" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="topMargin" constant="9" id="wmf-Ua-Q1b"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="containerView" destination="4Gz-qy-huz" id="9v0-Lz-gBd"/>
                                             <outlet property="distanceLabel" destination="bRa-Bv-VC8" id="FhS-NK-0j9"/>
                                             <outlet property="enabledSwitch" destination="fCA-lB-fma" id="QQe-va-wur"/>
                                             <outlet property="titleLabel" destination="mIS-eT-QNp" id="b9e-7D-ISV"/>
@@ -508,20 +505,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7s-8K-USY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131" y="-736"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="TTv-T1-Aw3">
-            <objects>
-                <viewController id="TEJ-8Y-D9z" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xki-MK-Hsy">
-                        <rect key="frame" x="0.0" y="0.0" width="314" height="95"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TuK-o0-W7H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2113" y="-1044"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
