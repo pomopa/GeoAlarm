@@ -224,10 +224,10 @@
             </objects>
             <point key="canvasLocation" x="2398" y="186"/>
         </scene>
-        <!--View Controller-->
+        <!--Alarm List View Controller-->
         <scene sceneID="Okw-BL-gbN">
             <objects>
-                <viewController id="DZY-Jf-qKJ" sceneMemberID="viewController">
+                <viewController id="DZY-Jf-qKJ" customClass="AlarmListViewController" customModule="GeoAlarm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fK8-UG-tet">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,10 +325,10 @@
             </objects>
             <point key="canvasLocation" x="2397.709923664122" y="-622.53521126760563"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="n1o-qK-y1I">
             <objects>
-                <viewController id="VNI-A8-OJB" sceneMemberID="viewController">
+                <viewController id="VNI-A8-OJB" customClass="MapViewController" customModule="GeoAlarm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="084-9z-ELL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -348,15 +348,18 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="map" catalog="system" selectedImage="map.fill" id="haX-xP-ui9"/>
+                    <connections>
+                        <outlet property="mapView" destination="42J-9T-pVw" id="XUz-qV-5Uj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXi-my-dNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2397.709923664122" y="-1471.1267605633805"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="EK9-Mb-JXt">
             <objects>
-                <viewController id="sUP-t4-E5b" sceneMemberID="viewController">
+                <viewController id="sUP-t4-E5b" customClass="SearchViewController" customModule="GeoAlarm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pln-Tq-NeA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -416,6 +419,9 @@
                                     <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" red="0.8627929688" green="0.4016113281" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="sUP-t4-E5b" eventType="touchUpInside" id="kEp-t9-Fzc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4pC-gU-5YI"/>
@@ -438,6 +444,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="WbJ-O1-YTU"/>
+                    <connections>
+                        <outlet property="radiusTextField" destination="umv-tL-ujH" id="lZP-e6-vcI"/>
+                        <outlet property="searchBar" destination="Ku4-VT-C0O" id="T6a-xd-jjw"/>
+                        <outlet property="tableView" destination="bgw-1O-5Tq" id="2Yx-UM-pS7"/>
+                        <outlet property="unitButton" destination="1e0-jJ-JWH" id="Dby-kM-RZY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1C9-YW-goq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
