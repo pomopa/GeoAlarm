@@ -23,7 +23,7 @@ class AlarmTableViewCell: UITableViewCell {
         selectionStyle = .none
 
         containerView.layer.cornerRadius = 20
-        containerView.clipsToBounds = false
+        containerView.clipsToBounds = false	
 
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 0.12
