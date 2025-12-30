@@ -199,4 +199,33 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         present(alert, animated: true)
     }
+    
+    //--------------------------------------------
+    // Logout
+    //--------------------------------------------
+    @IBAction func logoutUser(_ sender: Any) {
+        let alert = UIAlertController(
+            title: "Log out",
+            message: "Are you sure you want to log out?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Log out", style: .destructive) { _ in
+            do {
+                try Auth.auth().signOut()
+
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "profileToLogin", sender: nil)
+                }
+
+            } catch {
+                self.showSimpleAlert("Error", error.localizedDescription)
+            }
+        })
+        
+        present(alert, animated: true)
+    }
+    
 }

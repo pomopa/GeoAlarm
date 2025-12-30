@@ -135,7 +135,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="changePassword:" destination="Apa-rY-ILn" eventType="touchUpInside" id="ocO-7r-8ru"/>
-                                    <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MQA-bZ-4bR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brO-OW-8hr">
@@ -149,7 +148,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="deleteAccount:" destination="Apa-rY-ILn" eventType="touchUpInside" id="k4n-5z-Clq"/>
-                                    <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mbj-00-SfZ"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xmm-tO-0iG">
@@ -195,16 +193,32 @@
                                 <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9f-Wj-tP3">
+                                <rect key="frame" x="51" y="595" width="291" height="35"/>
+                                <color key="backgroundColor" red="0.8608398438" green="0.3977050781" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.8618164062" green="0.3999023438" blue="0.3039550781" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Logout">
+                                    <color key="baseForegroundColor" red="0.1062011719" green="0.1684570312" blue="0.2590332031" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.8608398438" green="0.3977050781" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="logoutUser:" destination="Apa-rY-ILn" eventType="touchUpInside" id="ZHL-V9-cAG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ghi-c7-4Db"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="g9f-Wj-tP3" firstAttribute="top" secondItem="brO-OW-8hr" secondAttribute="bottom" constant="46" id="1gC-y1-fRa"/>
                             <constraint firstItem="Ghi-c7-4Db" firstAttribute="trailing" secondItem="jyA-hW-dEB" secondAttribute="trailing" constant="51" id="3iH-CT-AHU"/>
                             <constraint firstItem="jyA-hW-dEB" firstAttribute="top" secondItem="xmm-tO-0iG" secondAttribute="bottom" constant="42" id="BdT-cd-31q"/>
                             <constraint firstItem="xmm-tO-0iG" firstAttribute="leading" secondItem="Ghi-c7-4Db" secondAttribute="leading" constant="116" id="EZ2-6V-03V"/>
+                            <constraint firstItem="Ghi-c7-4Db" firstAttribute="trailing" secondItem="g9f-Wj-tP3" secondAttribute="trailing" constant="51" id="JMx-gd-yI8"/>
                             <constraint firstItem="jyA-hW-dEB" firstAttribute="leading" secondItem="Ghi-c7-4Db" secondAttribute="leading" constant="51" id="NDx-Vz-C1H"/>
                             <constraint firstItem="xmm-tO-0iG" firstAttribute="top" secondItem="Ghi-c7-4Db" secondAttribute="top" constant="80" id="OTI-8j-7iZ"/>
                             <constraint firstItem="brO-OW-8hr" firstAttribute="top" secondItem="To9-8B-oqK" secondAttribute="bottom" constant="46" id="YZy-r6-nEZ"/>
+                            <constraint firstItem="g9f-Wj-tP3" firstAttribute="leading" secondItem="Ghi-c7-4Db" secondAttribute="leading" constant="51" id="ZLu-ty-hfa"/>
                             <constraint firstItem="brO-OW-8hr" firstAttribute="leading" secondItem="Ghi-c7-4Db" secondAttribute="leading" constant="51" id="ZVZ-Q3-Bmr"/>
                             <constraint firstItem="Ghi-c7-4Db" firstAttribute="trailing" secondItem="xmm-tO-0iG" secondAttribute="trailing" constant="117" id="aNo-Vu-M9j"/>
                             <constraint firstItem="To9-8B-oqK" firstAttribute="leading" secondItem="Ghi-c7-4Db" secondAttribute="leading" constant="51" id="br0-1B-fZF"/>
@@ -349,7 +363,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="map" catalog="system" selectedImage="map.fill" id="haX-xP-ui9"/>
                     <connections>
-                        <outlet property="mapView" destination="42J-9T-pVw" id="XUz-qV-5Uj"/>
+                        <outlet property="mapView" destination="42J-9T-pVw" id="kPR-Ey-FXl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXi-my-dNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -594,7 +608,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yBE-Lu-zSb"/>
+        <segue reference="Fad-Vo-9C4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="1024" height="1024"/>
