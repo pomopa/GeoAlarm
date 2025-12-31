@@ -7,6 +7,8 @@
 
 import UIKit
 import MapKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
@@ -16,6 +18,7 @@ class SearchViewController: UIViewController {
     
     private let searchCompleter = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
+    private var selectedCompletion: MKLocalSearchCompletion?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,16 +55,116 @@ class SearchViewController: UIViewController {
         unitButton.showsMenuAsPrimaryAction = true
     }
     
-    @IBAction func addButtonTapped(_ sender: UIButton) {
-        let location = searchBar.text ?? ""
-        let radius = radiusTextField.text ?? ""
-        let unit = unitButton.title(for: .normal) ?? ""
+    // --------------------------------------------
+    // Helpers
+    // --------------------------------------------
+    private func showAlert(_ title: String, _ message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func resolveLocation(
+        completion: MKLocalSearchCompletion,
+        completionHandler: @escaping (CLLocationCoordinate2D?) -> Void
+    ) {
+        let request = MKLocalSearch.Request(completion: completion)
+        let search = MKLocalSearch(request: request)
 
-        print("Location: \(location), Radius: \(radius) \(unit)")
+        search.start { response, error in
+            guard let coordinate = response?
+                .mapItems.first?
+                .location
+                .coordinate else {
+                completionHandler(nil)
+                return
+            }
+
+            completionHandler(coordinate)
+        }
+    }
+
+
+    private func saveAlarm(
+        locationName: String,
+        coordinate: CLLocationCoordinate2D,
+        radius: Double,
+        unit: String
+    ) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            showAlert("Error", "User not logged in")
+            return
+        }
+
+        let db = Firestore.firestore()
+
+        let alarmData: [String: Any] = [
+            "locationName": locationName,
+            "latitude": coordinate.latitude,
+            "longitude": coordinate.longitude,
+            "radius": radius,
+            "unit": unit,
+            "createdAt": Timestamp(date: Date())
+        ]
+
+        db.collection("users")
+            .document(userId)
+            .collection("alarms")
+            .addDocument(data: alarmData) { error in
+
+                if let error = error {
+                    self.showAlert("Error", error.localizedDescription)
+                } else {
+                    self.showAlert("Success", "Alarm saved")
+                }
+            }
+    }
+    
+    // --------------------------------------------
+    // Add alarm
+    // --------------------------------------------
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        // Validate location selection
+        guard let selectedCompletion = selectedCompletion else {
+            showAlert("Missing location", "Please select a location from the list")
+            return
+        }
+
+        // Validate radius
+        guard let radiusText = radiusTextField.text,
+                let radius = Double(radiusText),
+                radius > 0 else {
+            showAlert("Invalid radius", "Please enter a valid radius")
+            return
+            }
+
+        let unit = unitButton.title(for: .normal) ?? "km"
+
+        // Resolve coordinates
+        resolveLocation(completion: selectedCompletion) { coordinate in
+            guard let coordinate = coordinate else {
+                self.showAlert("Error", "Unable to resolve location")
+                return
+            }
+
+            // Save to Firebase
+            self.saveAlarm(
+                locationName: selectedCompletion.title,
+                coordinate: coordinate,
+                radius: radius,
+                unit: unit
+            )
+        }
     }
     
 }
 
+
+// --------------------------------------------
+// Delegates and Data Sources
+// --------------------------------------------
 extension SearchViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -111,6 +214,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                    didSelectRowAt indexPath: IndexPath) {
 
         let result = searchResults[indexPath.row]
+        selectedCompletion = result
+        
         searchBar.text = result.title
         tableView.isHidden = true
         searchBar.resignFirstResponder()
