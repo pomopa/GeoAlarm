@@ -106,7 +106,8 @@ class SearchViewController: UIViewController {
             "longitude": coordinate.longitude,
             "radius": radius,
             "unit": unit,
-            "createdAt": Timestamp(date: Date())
+            "createdAt": Timestamp(date: Date()),
+            "isActive": true
         ]
 
         db.collection("users")
