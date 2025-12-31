@@ -16,6 +16,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var radiusTextField: UITextField!
     @IBOutlet weak var unitButton: UIButton!
     
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     private let searchCompleter = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
     private var selectedCompletion: MKLocalSearchCompletion?
@@ -25,6 +26,7 @@ class SearchViewController: UIViewController {
         configureDropdownButtons()
         configureSearch()
         configureTableView()
+        tableViewHeightConstraint.constant = 0
     }
     
     // --------------------------------------------
@@ -35,7 +37,15 @@ class SearchViewController: UIViewController {
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
     }
-
+    private func updateTableViewHeight() {
+        let test = min(tableView.contentSize.height, 200)
+        print("value height is \(test)")
+        tableViewHeightConstraint.constant = min(tableView.contentSize.height, 200)
+               
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -106,8 +116,7 @@ class SearchViewController: UIViewController {
             "longitude": coordinate.longitude,
             "radius": radius,
             "unit": unit,
-            "createdAt": Timestamp(date: Date()),
-            "isActive": true
+            "createdAt": Timestamp(date: Date())
         ]
 
         db.collection("users")
@@ -173,8 +182,10 @@ extension SearchViewController: UISearchBarDelegate {
             tableView.isHidden = true
             searchResults.removeAll()
             tableView.reloadData()
+            updateTableViewHeight()
         } else {
             searchCompleter.queryFragment = searchText
+            updateTableViewHeight()
         }
     }
 }
