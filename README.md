@@ -28,7 +28,9 @@ that will activate based on their geographical coordinates.
 3. Download `GoogleService-Info.plist`
 4. Add it to the Xcode project root
 
-You should set up Firebase Auth and Storgae on the Firebase console and set add them through the XCode dependencies manager. The rules for Firebase Storage are:
+You should set up Firebase Auth, Firestore and Storgae on the Firebase console and add them through the XCode dependencies manager. 
+
+The rules you must configure through the Firebase console for Firebase Storage are:
 
 ```
 rules_version = '2';
@@ -38,6 +40,26 @@ service firebase.storage {
         allow read, write: if request.auth != null;
       }
     }
+}
+```
+
+The rules you must configure through the Firebase console for Firebase Firestore are:
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Each user can access only their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == userId;
+
+      match /alarms/{alarmId} {
+        allow read, write: if request.auth != null
+                           && request.auth.uid == userId;
+      }
+    }
+  }
 }
 ```
 
