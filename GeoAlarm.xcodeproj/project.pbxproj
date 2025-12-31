@@ -178,7 +178,9 @@
 				DEVELOPMENT_TEAM = AYJWB5MDCC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GeoAlarm/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We want to access the camera to take photos for your profile picture.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to access your location in order to provide you with the possibility of setting and accessing GeoAlarms.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -212,7 +214,9 @@
 				DEVELOPMENT_TEAM = AYJWB5MDCC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GeoAlarm/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We want to access the camera to take photos for your profile picture.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to access your location in order to provide you with the possibility of setting and accessing GeoAlarms.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
