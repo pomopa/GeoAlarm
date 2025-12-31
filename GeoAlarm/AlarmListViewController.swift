@@ -60,6 +60,30 @@ class AlarmListViewController: UIViewController {
             tabBarController.selectedIndex = 2
         }
     }
+    
+    private func updateAlarmActiveState(
+        alarmID: String,
+        isActive: Bool
+    ) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("User not logged in")
+            return
+        }
+
+        db.collection("users")
+            .document(userId)
+            .collection("alarms")
+            .document(alarmID)
+            .updateData([
+                "isActive": isActive
+            ]) { error in
+                if let error = error {
+                    print("Firestore update failed:", error)
+                }
+            }
+    }
+
+    
 }
 
 extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -79,7 +103,6 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         let alarm = alarms[indexPath.row]
-
         let distanceText = "\(alarm.radius) \(alarm.unit)"
 
         cell.configure(
@@ -88,10 +111,25 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
             isEnabled: alarm.isActive
         )
 
+        cell.onSwitchToggled = nil
+
+        cell.onSwitchToggled = { [weak self] isOn in
+            guard let self = self else { return }
+
+            self.alarms[indexPath.row].isActive = isOn
+
+            self.updateAlarmActiveState(
+                alarmID: alarm.id,
+                isActive: isOn
+            )
+        }
+
         return cell
     }
+
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
 }
+
