@@ -250,11 +250,11 @@
                                 <rect key="frame" x="0.0" y="212" width="393" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmCell" rowHeight="95" id="Zq2-3s-sKJ" customClass="AlarmTableViewCell" customModule="GeoAlarm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="95"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmTableViewCell" rowHeight="113" id="Zq2-3s-sKJ" customClass="AlarmTableViewCell" customModule="GeoAlarm" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zq2-3s-sKJ" id="UDv-M0-Nku">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyu-AA-ojH">
@@ -275,17 +275,17 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCA-lB-fma">
-                                                    <rect key="frame" x="278" y="33" width="63" height="28"/>
+                                                    <rect key="frame" x="278" y="33" width="63" height="27"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="fCA-lB-fma" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="topMargin" constant="18" id="27b-qD-Zbl"/>
                                                 <constraint firstItem="bRa-Bv-VC8" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leadingMargin" constant="34" id="GLX-bc-pNR"/>
-                                                <constraint firstAttribute="bottom" secondItem="gyu-AA-ojH" secondAttribute="bottom" id="GaO-mj-TIq"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="bRa-Bv-VC8" secondAttribute="bottom" constant="6" id="I9g-he-D4o"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="fCA-lB-fma" secondAttribute="bottom" constant="19" id="RDg-iz-TMR"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bRa-Bv-VC8" secondAttribute="bottom" constant="24" id="I9g-he-D4o"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fCA-lB-fma" secondAttribute="bottom" constant="38" id="RDg-iz-TMR"/>
                                                 <constraint firstItem="gyu-AA-ojH" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leading" constant="34" id="bQ5-JO-DBh"/>
                                                 <constraint firstItem="gyu-AA-ojH" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="top" id="d85-m1-p1v"/>
+                                                <constraint firstAttribute="bottom" secondItem="gyu-AA-ojH" secondAttribute="bottom" constant="18" id="e2P-Dh-Mxq"/>
                                                 <constraint firstItem="mIS-eT-QNp" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leadingMargin" constant="34" id="e7g-3W-zjU"/>
                                                 <constraint firstAttribute="trailing" secondItem="gyu-AA-ojH" secondAttribute="trailing" constant="35" id="nxj-Xf-MxX"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="fCA-lB-fma" secondAttribute="trailing" constant="34" id="pdD-D3-2lX"/>
@@ -293,12 +293,17 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="containerView" destination="gyu-AA-ojH" id="E8s-bT-Guu"/>
                                             <outlet property="distanceLabel" destination="bRa-Bv-VC8" id="FhS-NK-0j9"/>
                                             <outlet property="enabledSwitch" destination="fCA-lB-fma" id="QQe-va-wur"/>
                                             <outlet property="titleLabel" destination="mIS-eT-QNp" id="b9e-7D-ISV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="DZY-Jf-qKJ" id="8bu-NJ-DEy"/>
+                                    <outlet property="delegate" destination="DZY-Jf-qKJ" id="7Mf-nu-wyO"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Px-ao-PCh">
                                 <rect key="frame" x="320" y="87" width="36" height="36"/>
@@ -311,6 +316,9 @@
                                     <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" red="0.8627929688" green="0.4016113281" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addAlarm:" destination="DZY-Jf-qKJ" eventType="touchUpInside" id="xZs-uf-LNX"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALARM LIST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgZ-sB-NlN">
                                 <rect key="frame" x="93" y="148" width="207" height="41"/>
@@ -323,17 +331,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HB8-id-CjT" firstAttribute="top" secondItem="MgZ-sB-NlN" secondAttribute="bottom" constant="23" id="6JE-31-HbQ"/>
+                            <constraint firstItem="MgZ-sB-NlN" firstAttribute="centerX" secondItem="fK8-UG-tet" secondAttribute="centerX" id="IDd-Wp-h91"/>
                             <constraint firstItem="7Px-ao-PCh" firstAttribute="leading" secondItem="TXI-PE-Isk" secondAttribute="leading" constant="320" id="L3h-KN-nwX"/>
                             <constraint firstAttribute="bottom" secondItem="HB8-id-CjT" secondAttribute="bottom" id="Lx1-hy-Dcp"/>
-                            <constraint firstItem="MgZ-sB-NlN" firstAttribute="leading" secondItem="TXI-PE-Isk" secondAttribute="leading" constant="93" id="UaX-w6-4yl"/>
                             <constraint firstItem="HB8-id-CjT" firstAttribute="trailing" secondItem="TXI-PE-Isk" secondAttribute="trailing" id="gnh-lN-Fjx"/>
                             <constraint firstItem="7Px-ao-PCh" firstAttribute="top" secondItem="TXI-PE-Isk" secondAttribute="top" constant="28" id="ih4-uI-yK7"/>
                             <constraint firstItem="HB8-id-CjT" firstAttribute="leading" secondItem="TXI-PE-Isk" secondAttribute="leading" id="jLR-aY-cHv"/>
                             <constraint firstItem="MgZ-sB-NlN" firstAttribute="top" secondItem="TXI-PE-Isk" secondAttribute="top" constant="89" id="rQe-jV-dP1"/>
-                            <constraint firstItem="TXI-PE-Isk" firstAttribute="trailing" secondItem="MgZ-sB-NlN" secondAttribute="trailing" constant="93" id="sHs-Yj-gEx"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="alarm" catalog="system" selectedImage="alarm.fill" id="SA9-HY-yKa"/>
+                    <connections>
+                        <outlet property="tableView" destination="HB8-id-CjT" id="R7A-5P-aQI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPt-45-rIO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -449,6 +459,7 @@
                             <constraint firstItem="bgw-1O-5Tq" firstAttribute="trailing" secondItem="4pC-gU-5YI" secondAttribute="trailing" id="WRr-fy-sGF"/>
                             <constraint firstItem="Ku4-VT-C0O" firstAttribute="trailing" secondItem="4pC-gU-5YI" secondAttribute="trailing" id="X5c-Aa-wvR"/>
                             <constraint firstItem="Ku4-VT-C0O" firstAttribute="top" secondItem="4pC-gU-5YI" secondAttribute="top" constant="36" id="Z3e-JJ-w3M"/>
+                            <constraint firstItem="4pC-gU-5YI" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dau-yW-YO3" secondAttribute="trailing" symbolic="YES" id="aYl-Fm-HIG"/>
                             <constraint firstItem="4pC-gU-5YI" firstAttribute="trailing" secondItem="8LS-Cu-6Uz" secondAttribute="trailing" constant="16" id="fWJ-CF-iEm"/>
                             <constraint firstItem="8LS-Cu-6Uz" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" constant="16" id="iUo-Qf-KvR"/>
                             <constraint firstItem="Dau-yW-YO3" firstAttribute="top" secondItem="bgw-1O-5Tq" secondAttribute="bottom" constant="16" id="plx-i1-aFk"/>
