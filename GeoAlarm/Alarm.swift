@@ -14,7 +14,7 @@ struct Alarm {
     let longitude: Double
     let radius: Double
     let unit: String
-    let isActive: Bool
+    var isActive: Bool
     let createdAt: Timestamp
 
     init?(id: String, data: [String: Any]) {

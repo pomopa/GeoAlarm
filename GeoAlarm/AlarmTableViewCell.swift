@@ -13,6 +13,8 @@ class AlarmTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var enabledSwitch: UISwitch!
+    
+    var onSwitchToggled: ((Bool) -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,9 +44,14 @@ class AlarmTableViewCell: UITableViewCell {
     }
     
     private func updateEnabledState(_ enabled: Bool) {
-        let alpha: CGFloat = enabled ? 1.0 : 0.6
-        titleLabel.alpha = alpha
-        distanceLabel.alpha = alpha
+        let textColor: UIColor = enabled ? .label : .secondaryLabel
+        titleLabel.textColor = textColor
+        distanceLabel.textColor = textColor
+    }
+    
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        updateEnabledState(sender.isOn)
+        onSwitchToggled?(sender.isOn)
     }
     
 }
