@@ -12,6 +12,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var repeatPsswdField: UITextField!
+    @IBOutlet weak var passwordStrengthLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
@@ -20,6 +21,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         setupTextFields()
         hideKeyboardWhenTappedAround()
         configureTextFields()
+        
+        passwordField.addTarget(
+            self,
+            action: #selector(passwordChanged),
+            for: .editingChanged
+        )
+        
+        passwordStrengthLabel.text = "Weak password"
+        passwordStrengthLabel.textColor = .systemRed
     }
     
     private func configureTextFields() {
@@ -161,5 +171,30 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
         textField.rightView = button
         textField.rightViewMode = .always
+    }
+    
+    private func updatePasswordStrength(_ password: String) {
+        var score = 0
+
+        if password.count >= 6 { score += 1 }
+        if password.rangeOfCharacter(from: .lowercaseLetters) != nil { score += 1 }
+        if password.rangeOfCharacter(from: .uppercaseLetters) != nil { score += 1 }
+        if password.rangeOfCharacter(from: .decimalDigits) != nil { score += 1 }
+
+        switch score {
+        case 0...1:
+            passwordStrengthLabel.text = "Weak password"
+            passwordStrengthLabel.textColor = .systemRed
+        case 2:
+            passwordStrengthLabel.text = "Medium password"
+            passwordStrengthLabel.textColor = .systemOrange
+        default:
+            passwordStrengthLabel.text = "Strong password"
+            passwordStrengthLabel.textColor = .systemGreen
+        }
+    }
+
+    @objc private func passwordChanged() {
+        updatePasswordStrength(passwordField.text ?? "")
     }
 }
