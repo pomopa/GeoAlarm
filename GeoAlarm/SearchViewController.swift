@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
         configureSearch()
         configureTableView()
         tableViewHeightConstraint.constant = 0
+        hideKeyboardWhenTappedAround()
     }
     
     // --------------------------------------------

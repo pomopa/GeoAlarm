@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupRegisterButton()
         setupTextFields()
+        hideKeyboardWhenTappedAround()
     }
 
     private func setupRegisterButton() {
