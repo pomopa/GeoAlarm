@@ -174,9 +174,20 @@ class SearchViewController: UIViewController {
     private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
         selectedCompletion = result
         searchBar.text = result.title
+
+        searchResults.removeAll()
+        tableView.reloadData()
+
         tableView.isHidden = true
+        tableViewHeightConstraint.constant = 0
+
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+
         searchBar.resignFirstResponder()
     }
+
 }
 
 
