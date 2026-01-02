@@ -50,8 +50,13 @@ class AlarmListViewController: UIViewController {
                 self?.alarms = documents.compactMap {
                     Alarm(id: $0.documentID, data: $0.data())
                 }
+                
+                self?.alarms = documents.compactMap {
+                    Alarm(id: $0.documentID, data: $0.data())
+                }
 
                 self?.tableView.reloadData()
+                self?.updateEmptyState()
             }
     }
     
@@ -83,7 +88,46 @@ class AlarmListViewController: UIViewController {
             }
     }
 
-    
+    private func updateEmptyState() {
+        if alarms.isEmpty {
+            let container = UIView(frame: tableView.bounds)
+
+            let label = UILabel()
+            label.text = """
+            No alarms yet ⏰
+            """
+            label.textColor = .secondaryLabel
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 17)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(label)
+
+            let button = UIButton(type: .system)
+            button.setTitle("Create Alarm", for: .normal)
+            button.titleLabel?.font = .boldSystemFont(ofSize: 17)
+            button.addTarget(self, action: #selector(addAlarm(_:)), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(button)
+
+            NSLayoutConstraint.activate([
+                label.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: container.centerYAnchor, constant: -100),
+                label.leadingAnchor.constraint(greaterThanOrEqualTo: container.leadingAnchor, constant: 24),
+                label.trailingAnchor.constraint(lessThanOrEqualTo: container.trailingAnchor, constant: -24),
+
+                button.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+                button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16)
+            ])
+
+            tableView.backgroundView = container
+            tableView.separatorStyle = .none
+        } else {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .none
+        }
+    }
+
 }
 
 extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
