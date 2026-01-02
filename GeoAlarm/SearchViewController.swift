@@ -38,10 +38,13 @@ class SearchViewController: UIViewController {
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
     }
-    private func updateTableViewHeight() {
-        let test = min(tableView.contentSize.height, 200)
-        print("value height is \(test)")
-        tableViewHeightConstraint.constant = min(tableView.contentSize.height, 200)
+    private func updateTableViewHeight(rows: Int ) {
+        let height = min(
+            60 * CGFloat(rows),
+            200
+        )
+        print("value height is \(height), 22  \(rows) 22  \(tableView.rowHeight)")
+        tableViewHeightConstraint.constant = min(height, 200)
                
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -200,10 +203,10 @@ extension SearchViewController: UISearchBarDelegate {
             tableView.isHidden = true
             searchResults.removeAll()
             tableView.reloadData()
-            updateTableViewHeight()
+            updateTableViewHeight(rows: 0)
         } else {
             searchCompleter.queryFragment = searchText
-            updateTableViewHeight()
+            //updateTableViewHeight()
         }
     }
     
@@ -222,6 +225,7 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
 
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
+        updateTableViewHeight(rows: searchResults.count)
         tableView.isHidden = searchResults.isEmpty
         tableView.reloadData()
     }
