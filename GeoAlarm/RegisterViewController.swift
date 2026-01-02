@@ -169,7 +169,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }, for: .touchUpInside)
 
-        textField.rightView = button
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
+        button.center = container.center
+        container.addSubview(button)
+        
+        textField.rightView = container
         textField.rightViewMode = .always
     }
     
@@ -185,7 +189,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         case 0...1:
             passwordStrengthLabel.text = "Weak password"
             passwordStrengthLabel.textColor = .systemRed
-        case 2:
+        case 2...3:
             passwordStrengthLabel.text = "Medium password"
             passwordStrengthLabel.textColor = .systemOrange
         default:

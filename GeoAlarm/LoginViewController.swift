@@ -111,7 +111,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }, for: .touchUpInside)
 
-        textField.rightView = button
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
+        button.center = container.center
+        container.addSubview(button)
+        
+        textField.rightView = container
         textField.rightViewMode = .always
     }
 }
