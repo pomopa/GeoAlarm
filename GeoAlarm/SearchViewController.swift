@@ -171,6 +171,12 @@ class SearchViewController: UIViewController {
         }
     }
     
+    private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
+        selectedCompletion = result
+        searchBar.text = result.title
+        tableView.isHidden = true
+        searchBar.resignFirstResponder()
+    }
 }
 
 
@@ -178,7 +184,6 @@ class SearchViewController: UIViewController {
 // Delegates and Data Sources
 // --------------------------------------------
 extension SearchViewController: UISearchBarDelegate {
-
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             tableView.isHidden = true
@@ -189,6 +194,16 @@ extension SearchViewController: UISearchBarDelegate {
             searchCompleter.queryFragment = searchText
             updateTableViewHeight()
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+
+        guard let firstResult = searchResults.first else {
+            return
+        }
+
+        didSelectSearchResult(firstResult)
     }
 }
 
@@ -228,11 +243,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                    didSelectRowAt indexPath: IndexPath) {
 
         let result = searchResults[indexPath.row]
-        selectedCompletion = result
-        
-        searchBar.text = result.title
-        tableView.isHidden = true
-        searchBar.resignFirstResponder()
+        didSelectSearchResult(result)
     }
 }
-
