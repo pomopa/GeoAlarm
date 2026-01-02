@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var repeatPsswdField: UITextField!
@@ -19,6 +19,27 @@ class RegisterViewController: UIViewController {
         setupLoginButton()
         setupTextFields()
         hideKeyboardWhenTappedAround()
+        configureTextFields()
+    }
+    
+    private func configureTextFields() {
+        emailField.delegate = self
+        passwordField.delegate = self
+        repeatPsswdField.delegate = self
+        emailField.returnKeyType = .next
+        passwordField.returnKeyType = .next
+        repeatPsswdField.returnKeyType = .done
+        
+        emailField.textContentType = .emailAddress
+        emailField.keyboardType = .emailAddress
+        emailField.autocapitalizationType = .none
+        emailField.autocorrectionType = .no
+
+        passwordField.textContentType = .newPassword
+        passwordField.isSecureTextEntry = true
+
+        repeatPsswdField.textContentType = .password
+        repeatPsswdField.isSecureTextEntry = true
     }
     
     private func setupLoginButton() {
@@ -110,4 +131,16 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        DispatchQueue.main.async {
+            if textField == self.emailField {
+                self.passwordField.becomeFirstResponder()
+            } else if textField == self.passwordField {
+                self.repeatPsswdField.becomeFirstResponder()
+            } else {
+                textField.resignFirstResponder()
+            }
+        }
+        return true
+    }
 }

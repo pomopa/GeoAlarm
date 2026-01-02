@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
@@ -18,6 +18,11 @@ class LoginViewController: UIViewController {
         setupRegisterButton()
         setupTextFields()
         hideKeyboardWhenTappedAround()
+        
+        emailField.delegate = self
+        passwordField.delegate = self
+        emailField.returnKeyType = .next
+        passwordField.returnKeyType = .done
     }
 
     private func setupRegisterButton() {
@@ -83,5 +88,13 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
 }
 
