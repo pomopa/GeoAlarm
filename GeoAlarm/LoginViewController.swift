@@ -23,6 +23,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordField.delegate = self
         emailField.returnKeyType = .next
         passwordField.returnKeyType = .done
+        
+        addPasswordToggle(to: passwordField)
     }
 
     private func setupRegisterButton() {
@@ -95,6 +97,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         return true
+    }
+    
+    private func addPasswordToggle(to textField: UITextField) {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = .gray
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+
+        button.addAction(UIAction { _ in
+            textField.isSecureTextEntry.toggle()
+            let imageName = textField.isSecureTextEntry ? "eye.slash" : "eye"
+            button.setImage(UIImage(systemName: imageName), for: .normal)
+        }, for: .touchUpInside)
+
+        textField.rightView = button
+        textField.rightViewMode = .always
     }
 }
 
