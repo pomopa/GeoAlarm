@@ -8,16 +8,51 @@
 import UIKit
 import FirebaseAuth
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var repeatPsswdField: UITextField!
+    @IBOutlet weak var passwordStrengthLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLoginButton()
         setupTextFields()
+        hideKeyboardWhenTappedAround()
+        configureTextFields()
+        
+        passwordField.addTarget(
+            self,
+            action: #selector(passwordChanged),
+            for: .editingChanged
+        )
+        
+        passwordStrengthLabel.text = "Weak password"
+        passwordStrengthLabel.textColor = .systemRed
+    }
+    
+    private func configureTextFields() {
+        emailField.delegate = self
+        passwordField.delegate = self
+        repeatPsswdField.delegate = self
+        emailField.returnKeyType = .next
+        passwordField.returnKeyType = .next
+        repeatPsswdField.returnKeyType = .done
+        
+        emailField.textContentType = .emailAddress
+        emailField.keyboardType = .emailAddress
+        emailField.autocapitalizationType = .none
+        emailField.autocorrectionType = .no
+
+        passwordField.textContentType = .newPassword
+        passwordField.isSecureTextEntry = true
+
+        repeatPsswdField.textContentType = .password
+        repeatPsswdField.isSecureTextEntry = true
+        
+        addPasswordToggle(to: passwordField)
+        addPasswordToggle(to: repeatPsswdField)
     }
     
     private func setupLoginButton() {
@@ -109,4 +144,61 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        DispatchQueue.main.async {
+            if textField == self.emailField {
+                self.passwordField.becomeFirstResponder()
+            } else if textField == self.passwordField {
+                self.repeatPsswdField.becomeFirstResponder()
+            } else {
+                textField.resignFirstResponder()
+            }
+        }
+        return true
+    }
+    
+    private func addPasswordToggle(to textField: UITextField) {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = .gray
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+
+        button.addAction(UIAction { _ in
+            textField.isSecureTextEntry.toggle()
+            let imageName = textField.isSecureTextEntry ? "eye.slash" : "eye"
+            button.setImage(UIImage(systemName: imageName), for: .normal)
+        }, for: .touchUpInside)
+
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
+        button.center = container.center
+        container.addSubview(button)
+        
+        textField.rightView = container
+        textField.rightViewMode = .always
+    }
+    
+    private func updatePasswordStrength(_ password: String) {
+        var score = 0
+
+        if password.count >= 6 { score += 1 }
+        if password.rangeOfCharacter(from: .lowercaseLetters) != nil { score += 1 }
+        if password.rangeOfCharacter(from: .uppercaseLetters) != nil { score += 1 }
+        if password.rangeOfCharacter(from: .decimalDigits) != nil { score += 1 }
+
+        switch score {
+        case 0...1:
+            passwordStrengthLabel.text = "Weak password"
+            passwordStrengthLabel.textColor = .systemRed
+        case 2...3:
+            passwordStrengthLabel.text = "Medium password"
+            passwordStrengthLabel.textColor = .systemOrange
+        default:
+            passwordStrengthLabel.text = "Strong password"
+            passwordStrengthLabel.textColor = .systemGreen
+        }
+    }
+
+    @objc private func passwordChanged() {
+        updatePasswordStrength(passwordField.text ?? "")
+    }
 }

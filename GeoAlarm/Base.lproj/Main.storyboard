@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="160" id="xcQ-M8-KsQ"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="PauPau" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXa-X3-iUK">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="PauPau" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXa-X3-iUK" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
                                 <rect key="frame" x="51" y="384" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078431372544" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,7 +75,7 @@
                                     <segue destination="GHG-Cx-wYN" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="8Bm-Ex-XYS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pau@pau.pau" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DTo-JE-8nQ">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pau@pau.pau" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DTo-JE-8nQ" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
                                 <rect key="frame" x="51" y="320" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078431372544" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
@@ -414,7 +414,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8LS-Cu-6Uz">
                                 <rect key="frame" x="16" y="403.33333333333331" width="361" height="44"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Radius" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umv-tL-ujH">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Radius" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umv-tL-ujH" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="216.66666666666666" height="44"/>
                                         <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -519,21 +519,21 @@
                                     <constraint firstAttribute="height" constant="160" id="UVN-Js-9c8"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yj5-Qo-WFi">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yj5-Qo-WFi" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
                                 <rect key="frame" x="51" y="299" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078429999997" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igN-4x-eBu">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igN-4x-eBu" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
                                 <rect key="frame" x="51" y="363" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078429999997" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MSP-kR-8lp">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MSP-kR-8lp" customClass="NoPasteTextField" customModule="GeoAlarm" customModuleProvider="target">
                                 <rect key="frame" x="51" y="427" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078429999997" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -541,7 +541,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKv-tc-JCa">
-                                <rect key="frame" x="51" y="501" width="291" height="35"/>
+                                <rect key="frame" x="51" y="547" width="291" height="35"/>
                                 <color key="tintColor" red="0.8618164062" green="0.3999023438" blue="0.3039550781" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Register">
@@ -553,7 +553,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ex-j6-wja">
-                                <rect key="frame" x="51" y="566" width="290" height="33"/>
+                                <rect key="frame" x="51" y="607" width="290" height="33"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -583,30 +583,39 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsX-mG-GKF">
+                                <rect key="frame" x="51" y="491" width="290" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="k4G-AB-f20"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3Ex-j6-wja" firstAttribute="top" secondItem="uKv-tc-JCa" secondAttribute="bottom" constant="30" id="1Tw-MI-7l6"/>
-                            <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="uKv-tc-JCa" secondAttribute="trailing" constant="51" id="27w-gh-YfT"/>
                             <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="yj5-Qo-WFi" secondAttribute="trailing" constant="51" id="8TD-Qr-ZmA"/>
-                            <constraint firstItem="uKv-tc-JCa" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="CUv-UL-5dH"/>
                             <constraint firstItem="3Ex-j6-wja" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="Kqb-tu-6QQ"/>
                             <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="3Ex-j6-wja" secondAttribute="trailing" constant="52" id="MsY-wp-RZL"/>
+                            <constraint firstItem="uKv-tc-JCa" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="NAf-yD-Tem"/>
+                            <constraint firstItem="xsX-mG-GKF" firstAttribute="top" secondItem="MSP-kR-8lp" secondAttribute="bottom" constant="30" id="P0G-If-NMx"/>
                             <constraint firstItem="igN-4x-eBu" firstAttribute="top" secondItem="yj5-Qo-WFi" secondAttribute="bottom" constant="30" id="PYa-1j-Fdv"/>
                             <constraint firstItem="MSP-kR-8lp" firstAttribute="top" secondItem="igN-4x-eBu" secondAttribute="bottom" constant="30" id="PaG-k4-vbR"/>
+                            <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="xsX-mG-GKF" secondAttribute="trailing" constant="52" id="QgV-Vh-Jd5"/>
                             <constraint firstItem="yj5-Qo-WFi" firstAttribute="top" secondItem="jjg-I7-TOC" secondAttribute="bottom" constant="30" id="Uaq-2H-Weu"/>
                             <constraint firstItem="HLS-Nu-IIN" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="98" id="Vew-qc-ii9"/>
+                            <constraint firstItem="3Ex-j6-wja" firstAttribute="top" secondItem="uKv-tc-JCa" secondAttribute="bottom" constant="25" id="YXQ-Ba-Afz"/>
                             <constraint firstItem="igN-4x-eBu" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="cfG-7B-hmH"/>
                             <constraint firstItem="MSP-kR-8lp" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="cna-r1-8wB"/>
+                            <constraint firstItem="xsX-mG-GKF" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="e5j-xA-ijA"/>
                             <constraint firstItem="jjg-I7-TOC" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="117" id="er7-T0-nAI"/>
                             <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="HLS-Nu-IIN" secondAttribute="trailing" constant="98" id="hPO-9E-fa1"/>
                             <constraint firstItem="jjg-I7-TOC" firstAttribute="top" secondItem="k4G-AB-f20" secondAttribute="top" constant="50" id="hwh-ZZ-fSH"/>
-                            <constraint firstItem="uKv-tc-JCa" firstAttribute="top" secondItem="MSP-kR-8lp" secondAttribute="bottom" constant="40" id="ieB-86-Ma4"/>
                             <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="MSP-kR-8lp" secondAttribute="trailing" constant="51" id="jse-iX-2re"/>
                             <constraint firstItem="yj5-Qo-WFi" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="lT1-Y5-mhP"/>
                             <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="igN-4x-eBu" secondAttribute="trailing" constant="51" id="oq9-rE-XHJ"/>
+                            <constraint firstItem="uKv-tc-JCa" firstAttribute="top" secondItem="xsX-mG-GKF" secondAttribute="bottom" constant="35" id="uZM-YJ-08d"/>
                             <constraint firstItem="k4G-AB-f20" firstAttribute="bottom" secondItem="HLS-Nu-IIN" secondAttribute="bottom" constant="25" id="vyj-3i-aHR"/>
+                            <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="uKv-tc-JCa" secondAttribute="trailing" constant="51" id="ya7-Ou-iKE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="COI-mt-Zo0"/>
@@ -614,12 +623,13 @@
                         <outlet property="emailField" destination="yj5-Qo-WFi" id="Wb9-F2-Vph"/>
                         <outlet property="loginButton" destination="3Ex-j6-wja" id="emJ-EQ-294"/>
                         <outlet property="passwordField" destination="igN-4x-eBu" id="e8N-C9-fC4"/>
+                        <outlet property="passwordStrengthLabel" destination="xsX-mG-GKF" id="A0S-p0-4hH"/>
                         <outlet property="repeatPsswdField" destination="MSP-kR-8lp" id="HXF-C3-4PR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7s-8K-USY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131" y="-736"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-736.61971830985919"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

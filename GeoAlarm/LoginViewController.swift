@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
@@ -17,6 +17,14 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupRegisterButton()
         setupTextFields()
+        hideKeyboardWhenTappedAround()
+        
+        emailField.delegate = self
+        passwordField.delegate = self
+        emailField.returnKeyType = .next
+        passwordField.returnKeyType = .done
+        
+        addPasswordToggle(to: passwordField)
     }
 
     private func setupRegisterButton() {
@@ -82,5 +90,33 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    private func addPasswordToggle(to textField: UITextField) {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = .gray
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+
+        button.addAction(UIAction { _ in
+            textField.isSecureTextEntry.toggle()
+            let imageName = textField.isSecureTextEntry ? "eye.slash" : "eye"
+            button.setImage(UIImage(systemName: imageName), for: .normal)
+        }, for: .touchUpInside)
+
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
+        button.center = container.center
+        container.addSubview(button)
+        
+        textField.rightView = container
+        textField.rightViewMode = .always
+    }
 }
 
