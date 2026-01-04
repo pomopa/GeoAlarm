@@ -31,19 +31,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
 
         userEmailLabel.text = user.email
-        
-        let storageRef = Storage.storage().reference().child("profile_images/\(user.uid).jpg")
+
+        if let cachedImage = ProfileImageCache.shared.load() {
+            profileImageView.image = cachedImage
+        }
+
+        let storageRef = Storage.storage()
+            .reference()
+            .child("profile_images/\(user.uid).jpg")
 
         storageRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-            if let error = error {
-                print("Error downloading the profile picture:", error)
-                return
-            }
+            guard let data = data,
+                  let image = UIImage(data: data) else { return }
 
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.profileImageView.image = image
-                }
+            DispatchQueue.main.async {
+                self.profileImageView.image = image
+                ProfileImageCache.shared.save(image)
             }
         }
     }
@@ -94,12 +97,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
               let imageData = image.jpegData(compressionQuality: 0.8),
               let user = Auth.auth().currentUser else { return }
 
-        let storageRef = Storage.storage().reference()
+        profileImageView.image = image
+        ProfileImageCache.shared.save(image)
+
+        let storageRef = Storage.storage()
+            .reference()
             .child("profile_images/\(user.uid).jpg")
 
         storageRef.putData(imageData) { _, error in
             if let error = error {
-                print("Upload failed:", error)
+                DispatchQueue.main.async {
+                    self.showSimpleAlert(
+                        "Upload failed",
+                        "Your profile picture was updated locally, but couldn't be uploaded to the cloud. Please try again later."
+                    )
+                }
                 return
             }
 
@@ -108,14 +120,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
                 let changeRequest = user.createProfileChangeRequest()
                 changeRequest.photoURL = url
-                changeRequest.commitChanges { _ in
-                    DispatchQueue.main.async {
-                        self.profileImageView.image = image
-                    }
-                }
+                changeRequest.commitChanges(completion: nil)
             }
         }
     }
+
 
     
     //--------------------------------------------
@@ -181,6 +190,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
 
             DispatchQueue.main.async {
+                ProfileImageCache.shared.delete()
                 self.performSegue(withIdentifier: "profileToLogin", sender: nil)
             }
         }
@@ -215,6 +225,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         alert.addAction(UIAlertAction(title: "Log out", style: .destructive) { _ in
             do {
                 try Auth.auth().signOut()
+                ProfileImageCache.shared.delete()
 
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "profileToLogin", sender: nil)
