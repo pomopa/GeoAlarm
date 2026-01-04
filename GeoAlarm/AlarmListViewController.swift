@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
+
 class AlarmListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
@@ -20,6 +21,11 @@ class AlarmListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         loadAlarms()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        ProfileImageCache.shared.prefetchIfNeeded()
     }
     
     private func setupTableView() {
@@ -46,10 +52,6 @@ class AlarmListViewController: UIViewController {
                 }
 
                 guard let documents = snapshot?.documents else { return }
-                
-                self?.alarms = documents.compactMap {
-                    Alarm(id: $0.documentID, data: $0.data())
-                }
                 
                 self?.alarms = documents.compactMap {
                     Alarm(id: $0.documentID, data: $0.data())
