@@ -41,8 +41,8 @@ class EditAlarmViewController: UIViewController {
         let units = ["km", "m", "mi", "ft"]
 
         let actions = units.map { unit in
-            UIAction(title: unit) { _ in
-                self.unitButton.setTitle(unit, for: .normal)
+            UIAction(title: unit) { [weak self] _ in
+                self?.unitButton.setTitle(unit, for: .normal)
             }
         }
 
@@ -52,7 +52,8 @@ class EditAlarmViewController: UIViewController {
 
     private func populateUI() {
         nameSearchBar.text = alarm.locationName
-        radiusTextField.text = "\(alarm.radius)"
+        radiusTextField.text = "\(Int(alarm.radius))"
+        unitButton.setTitle(alarm.unit, for: .normal)
     }
     
     private func configureSearch() {
