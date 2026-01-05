@@ -9,18 +9,23 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import CoreLocation
 
 
-class AlarmListViewController: UIViewController {
+class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     private var alarms: [Alarm] = []
     private let db = Firestore.firestore()
-    
+    let locationManager = CLLocationManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         loadAlarms()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

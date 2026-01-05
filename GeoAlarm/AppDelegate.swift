@@ -8,15 +8,22 @@
 import UIKit
 import FirebaseCore
 import IQKeyboardManagerSwift
+import CoreLocation
+import UserNotifications
+
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
 
-
+    var locationManager: CLLocationManager!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         IQKeyboardManager.shared.isEnabled = true
+  //      locationManager = CLLocationManager()
+//        locationManager.delegate = self
+
         return true
     }
     

@@ -164,7 +164,7 @@ class SearchViewController: UIViewController {
                 self.showAlert("Error", "Unable to resolve location")
                 return
             }
-
+            
             // Save to Firebase
             self.saveAlarm(
                 locationName: selectedCompletion.title,
