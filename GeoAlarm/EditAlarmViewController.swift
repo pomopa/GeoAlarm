@@ -212,13 +212,12 @@ class EditAlarmViewController: UIViewController {
         }
         
         DispatchQueue.main.async {
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
         }
     }
-
     
     @IBAction func cancelTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
 
     @IBAction func deleteTapped(_ sender: Any) {
@@ -237,8 +236,27 @@ class EditAlarmViewController: UIViewController {
     }
 
     private func deleteAlarm() {
-        // Firestore delete
-        navigationController?.popViewController(animated: true)
+        guard let userId = Auth.auth().currentUser?.uid else {
+            showAlert("Error", "User not logged in")
+            return
+        }
+
+        let db = Firestore.firestore()
+        
+        db.collection("users")
+            .document(userId)
+            .collection("alarms")
+            .document(alarm.id)
+            .delete { error in
+                if let error = error {
+                    self.showAlert("Error", error.localizedDescription)
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
+            }
     }
 }
 
