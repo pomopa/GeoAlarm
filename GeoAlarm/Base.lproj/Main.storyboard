@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -247,7 +247,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HB8-id-CjT">
-                                <rect key="frame" x="0.0" y="212" width="393" height="640"/>
+                                <rect key="frame" x="0.0" y="211.66666666666669" width="393" height="640.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmTableViewCell" rowHeight="113" id="Zq2-3s-sKJ" customClass="AlarmTableViewCell" customModule="GeoAlarm" customModuleProvider="target">
@@ -259,40 +259,51 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyu-AA-ojH">
                                                     <rect key="frame" x="34" y="0.0" width="324" height="95"/>
+                                                    <subviews>
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCA-lB-fma">
+                                                            <rect key="frame" x="240" y="33.666666666666664" width="63" height="28"/>
+                                                            <connections>
+                                                                <action selector="switchValueChanged:" destination="Zq2-3s-sKJ" eventType="valueChanged" id="2OC-sf-LBp"/>
+                                                            </connections>
+                                                        </switch>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="W8a-cM-26D">
+                                                            <rect key="frame" x="20" y="25" width="125" height="45"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="24.666666666666668"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
+                                                                    <rect key="frame" x="0.0" y="24.666666666666664" width="125" height="20.333333333333336"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="bRa-Bv-VC8" secondAttribute="bottom" id="TfS-oa-wBY"/>
+                                                                <constraint firstAttribute="height" constant="45" id="fxa-TE-lBq"/>
+                                                                <constraint firstItem="mIS-eT-QNp" firstAttribute="top" secondItem="W8a-cM-26D" secondAttribute="top" id="wax-bB-IIz"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
                                                     <color key="backgroundColor" red="0.85882352941176465" green="0.3979492188" blue="0.3029785156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <color key="tintColor" red="0.8588867188" green="0.3979492188" blue="0.3029785156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstItem="fCA-lB-fma" firstAttribute="centerY" secondItem="gyu-AA-ojH" secondAttribute="centerY" id="Ghx-3d-vck"/>
+                                                        <constraint firstItem="W8a-cM-26D" firstAttribute="centerY" secondItem="gyu-AA-ojH" secondAttribute="centerY" id="NVl-5h-KpJ"/>
+                                                        <constraint firstItem="W8a-cM-26D" firstAttribute="leading" secondItem="gyu-AA-ojH" secondAttribute="leading" constant="20" symbolic="YES" id="RDH-AF-CMB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fCA-lB-fma" secondAttribute="trailing" constant="23" id="WA6-6Q-xGf"/>
+                                                    </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
-                                                    <rect key="frame" x="54" y="24" width="125" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
-                                                    <rect key="frame" x="54" y="53" width="76" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCA-lB-fma">
-                                                    <rect key="frame" x="278" y="33" width="63" height="27"/>
-                                                    <connections>
-                                                        <action selector="switchValueChanged:" destination="Zq2-3s-sKJ" eventType="valueChanged" id="2OC-sf-LBp"/>
-                                                    </connections>
-                                                </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fCA-lB-fma" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="topMargin" constant="18" id="27b-qD-Zbl"/>
-                                                <constraint firstItem="bRa-Bv-VC8" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leadingMargin" constant="34" id="GLX-bc-pNR"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="bRa-Bv-VC8" secondAttribute="bottom" constant="24" id="I9g-he-D4o"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="fCA-lB-fma" secondAttribute="bottom" constant="38" id="RDg-iz-TMR"/>
                                                 <constraint firstItem="gyu-AA-ojH" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leading" constant="34" id="bQ5-JO-DBh"/>
                                                 <constraint firstItem="gyu-AA-ojH" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="top" id="d85-m1-p1v"/>
                                                 <constraint firstAttribute="bottom" secondItem="gyu-AA-ojH" secondAttribute="bottom" constant="18" id="e2P-Dh-Mxq"/>
-                                                <constraint firstItem="mIS-eT-QNp" firstAttribute="leading" secondItem="UDv-M0-Nku" secondAttribute="leadingMargin" constant="34" id="e7g-3W-zjU"/>
                                                 <constraint firstAttribute="trailing" secondItem="gyu-AA-ojH" secondAttribute="trailing" constant="35" id="nxj-Xf-MxX"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fCA-lB-fma" secondAttribute="trailing" constant="34" id="pdD-D3-2lX"/>
-                                                <constraint firstItem="mIS-eT-QNp" firstAttribute="top" secondItem="UDv-M0-Nku" secondAttribute="topMargin" constant="9" id="wmf-Ua-Q1b"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -324,7 +335,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALARM LIST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgZ-sB-NlN">
-                                <rect key="frame" x="93" y="148" width="207" height="41"/>
+                                <rect key="frame" x="93.333333333333329" y="148" width="206.66666666666669" height="40.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="34"/>
                                 <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>

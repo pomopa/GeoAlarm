@@ -105,7 +105,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             .child("profile_images/\(user.uid).jpg")
 
         storageRef.putData(imageData) { _, error in
-            if let error = error {
+            if error != nil {
                 DispatchQueue.main.async {
                     self.showSimpleAlert(
                         "Upload failed",
