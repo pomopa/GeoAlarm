@@ -23,6 +23,7 @@ class EditAlarmViewController: UIViewController {
     private let searchCompleter = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
     private var selectedCompletion: MKLocalSearchCompletion?
+    private var currentCoordinate: CLLocationCoordinate2D?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,8 @@ class EditAlarmViewController: UIViewController {
         nameSearchBar.text = alarm.locationName
         radiusTextField.text = "\(Int(alarm.radius))"
         unitButton.setTitle(alarm.unit, for: .normal)
+        currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
+                                                   longitude: alarm.longitude)
     }
     
     private func configureSearch() {
@@ -87,9 +90,12 @@ class EditAlarmViewController: UIViewController {
         selectedCompletion = result
         nameSearchBar.text = result.title
 
+        resolveLocation(completion: result) { coordinate in
+            self.currentCoordinate = coordinate
+        }
+
         searchResults.removeAll()
         tableView.reloadData()
-
         tableView.isHidden = true
         tableViewHeightConstraint.constant = 0
 
@@ -99,6 +105,7 @@ class EditAlarmViewController: UIViewController {
 
         nameSearchBar.resignFirstResponder()
     }
+
     
     private func resolveLocation(
         completion: MKLocalSearchCompletion,
@@ -125,20 +132,6 @@ class EditAlarmViewController: UIViewController {
                                       message: message,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
-    private func showSuccessAndClose(_ message: String) {
-        let alert = UIAlertController(
-            title: "Success",
-            message: message,
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            self.dismiss(animated: true)
-        })
-
         present(alert, animated: true)
     }
     
@@ -172,7 +165,9 @@ class EditAlarmViewController: UIViewController {
                 if let error = error {
                     self.showAlert("Error", error.localizedDescription)
                 } else {
-                    self.showSuccessAndClose("Alarm edited")
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
+                    }
                 }
             }
     }
@@ -182,39 +177,34 @@ class EditAlarmViewController: UIViewController {
     // Button Actions
     // --------------------------------------------
     @IBAction func saveTapped(_ sender: Any) {
-        guard let selectedCompletion = selectedCompletion else {
+        guard let radiusText = radiusTextField.text,
+              let radius = Double(radiusText),
+              radius > 0 else {
+            showAlert("Invalid radius", "Please enter a valid radius")
+            return
+        }
+
+        let unit = unitButton.title(for: .normal) ?? "km"
+        let locationName = nameSearchBar.text ?? alarm.locationName
+        guard let coordinate = currentCoordinate else {
             showAlert("Missing location", "Please select a location from the list")
             return
         }
 
-        guard let radiusText = radiusTextField.text,
-                let radius = Double(radiusText),
-                radius > 0 else {
-            showAlert("Invalid radius", "Please enter a valid radius")
-            return
-            }
+        let locationChanged = (coordinate.latitude != alarm.latitude) || (coordinate.longitude != alarm.longitude)
+        let nameChanged = locationName != alarm.locationName
+        let radiusChanged = radius != alarm.radius
+        let unitChanged = unit != alarm.unit
 
-        let unit = unitButton.title(for: .normal) ?? "km"
-
-        // Resolve coordinates
-        resolveLocation(completion: selectedCompletion) { coordinate in
-            guard let coordinate = coordinate else {
-                self.showAlert("Error", "Unable to resolve location")
-                return
-            }
-
-            // Save to Firebase
-            self.editAlarm(
-                locationName: selectedCompletion.title,
-                coordinate: coordinate,
-                radius: radius,
-                unit: unit
-            )
-        }
-        
-        DispatchQueue.main.async {
+        if !locationChanged && !nameChanged && !radiusChanged && !unitChanged {
             self.dismiss(animated: true)
+            return
         }
+
+        editAlarm(locationName: locationName,
+                  coordinate: coordinate,
+                  radius: radius,
+                  unit: unit)
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
