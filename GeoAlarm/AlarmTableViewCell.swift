@@ -44,7 +44,7 @@ class AlarmTableViewCell: UITableViewCell {
     }
     
     private func updateEnabledState(_ enabled: Bool) {
-        let textColor: UIColor = enabled ? .label : .secondaryLabel
+        let textColor: UIColor = enabled ? UIColor(red: 0x1B/255, green: 0x2B/255, blue: 0x42/255, alpha: 1) : .secondaryLabel
         titleLabel.textColor = textColor
         distanceLabel.textColor = textColor
     }

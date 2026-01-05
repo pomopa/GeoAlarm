@@ -1,28 +1,33 @@
 //
-//  SearchViewController.swift
+//  EditAlarmViewController.swift
 //  GeoAlarm
 //
-//  Created by Pol Monne Parera on 30/12/25.
+//  Created by Pol Monne Parera on 5/1/26.
 //
-
 import UIKit
 import MapKit
-import FirebaseFirestore
 import FirebaseAuth
+import FirebaseFirestore
 
-class SearchViewController: UIViewController {
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
+class EditAlarmViewController: UIViewController {
+
+    var alarm: Alarm!
+
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nameSearchBar: UISearchBar!
     @IBOutlet weak var radiusTextField: UITextField!
     @IBOutlet weak var unitButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var deleteButton: UIButton!
     
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     private let searchCompleter = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
     private var selectedCompletion: MKLocalSearchCompletion?
-    
+    private var currentCoordinate: CLLocationCoordinate2D?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        populateUI()
         configureDropdownButtons()
         configureSearch()
         configureTableView()
@@ -33,8 +38,29 @@ class SearchViewController: UIViewController {
     // --------------------------------------------
     // Configurations
     // --------------------------------------------
+    func configureDropdownButtons() {
+        let units = ["km", "m", "mi", "ft"]
+
+        let actions = units.map { unit in
+            UIAction(title: unit) { [weak self] _ in
+                self?.unitButton.setTitle(unit, for: .normal)
+            }
+        }
+
+        unitButton.menu = UIMenu(title: "Units", children: actions)
+        unitButton.showsMenuAsPrimaryAction = true
+    }
+
+    private func populateUI() {
+        nameSearchBar.text = alarm.locationName
+        radiusTextField.text = "\(Int(alarm.radius))"
+        unitButton.setTitle(alarm.unit, for: .normal)
+        currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
+                                                   longitude: alarm.longitude)
+    }
+    
     private func configureSearch() {
-        searchBar.delegate = self
+        nameSearchBar.delegate = self
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
     }
@@ -43,19 +69,6 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isHidden = true
-    }
-    
-    func configureDropdownButtons() {
-        let units = ["km", "m", "mi", "ft"]
-
-        let actions = units.map { unit in
-            UIAction(title: unit) { _ in
-                self.unitButton.setTitle(unit, for: .normal)
-            }
-        }
-
-        unitButton.menu = UIMenu(title: "Units", children: actions)
-        unitButton.showsMenuAsPrimaryAction = true
     }
     
     // --------------------------------------------
@@ -73,13 +86,26 @@ class SearchViewController: UIViewController {
         }
     }
     
-    private func showAlert(_ title: String, _ message: String) {
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+    private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
+        selectedCompletion = result
+        nameSearchBar.text = result.title
+
+        resolveLocation(completion: result) { coordinate in
+            self.currentCoordinate = coordinate
+        }
+
+        searchResults.removeAll()
+        tableView.reloadData()
+        tableView.isHidden = true
+        tableViewHeightConstraint.constant = 0
+
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+
+        nameSearchBar.resignFirstResponder()
     }
+
     
     private func resolveLocation(
         completion: MKLocalSearchCompletion,
@@ -100,9 +126,16 @@ class SearchViewController: UIViewController {
             completionHandler(coordinate)
         }
     }
-
-
-    private func saveAlarm(
+    
+    private func showAlert(_ title: String, _ message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func editAlarm(
         locationName: String,
         coordinate: CLLocationCoordinate2D,
         radius: Double,
@@ -120,85 +153,108 @@ class SearchViewController: UIViewController {
             "latitude": coordinate.latitude,
             "longitude": coordinate.longitude,
             "radius": radius,
-            "unit": unit,
-            "isActive": true,
-            "createdAt": Timestamp(date: Date())
+            "unit": unit
         ]
 
         db.collection("users")
             .document(userId)
             .collection("alarms")
-            .addDocument(data: alarmData) { error in
+            .document(alarm.id)
+            .updateData(alarmData) { error in
 
                 if let error = error {
                     self.showAlert("Error", error.localizedDescription)
                 } else {
-                    self.showAlert("Success", "Alarm saved")
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
+                    }
                 }
             }
     }
-    
+
+
     // --------------------------------------------
-    // Add alarm
+    // Button Actions
     // --------------------------------------------
-    @IBAction func addButtonTapped(_ sender: UIButton) {
-        // Validate location selection
-        guard let selectedCompletion = selectedCompletion else {
+    @IBAction func saveTapped(_ sender: Any) {
+        guard let radiusText = radiusTextField.text,
+              let radius = Double(radiusText),
+              radius > 0 else {
+            showAlert("Invalid radius", "Please enter a valid radius")
+            return
+        }
+
+        let unit = unitButton.title(for: .normal) ?? "km"
+        let locationName = nameSearchBar.text ?? alarm.locationName
+        guard let coordinate = currentCoordinate else {
             showAlert("Missing location", "Please select a location from the list")
             return
         }
 
-        // Validate radius
-        guard let radiusText = radiusTextField.text,
-                let radius = Double(radiusText),
-                radius > 0 else {
-            showAlert("Invalid radius", "Please enter a valid radius")
+        let locationChanged = (coordinate.latitude != alarm.latitude) || (coordinate.longitude != alarm.longitude)
+        let nameChanged = locationName != alarm.locationName
+        let radiusChanged = radius != alarm.radius
+        let unitChanged = unit != alarm.unit
+
+        if !locationChanged && !nameChanged && !radiusChanged && !unitChanged {
+            self.dismiss(animated: true)
             return
-            }
-
-        let unit = unitButton.title(for: .normal) ?? "km"
-
-        // Resolve coordinates
-        resolveLocation(completion: selectedCompletion) { coordinate in
-            guard let coordinate = coordinate else {
-                self.showAlert("Error", "Unable to resolve location")
-                return
-            }
-
-            // Save to Firebase
-            self.saveAlarm(
-                locationName: selectedCompletion.title,
-                coordinate: coordinate,
-                radius: radius,
-                unit: unit
-            )
         }
+
+        editAlarm(locationName: locationName,
+                  coordinate: coordinate,
+                  radius: radius,
+                  unit: unit)
     }
     
-    private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
-        selectedCompletion = result
-        searchBar.text = result.title
-
-        searchResults.removeAll()
-        tableView.reloadData()
-
-        tableView.isHidden = true
-        tableViewHeightConstraint.constant = 0
-
-        UIView.animate(withDuration: 0.25) {
-            self.view.layoutIfNeeded()
-        }
-
-        searchBar.resignFirstResponder()
+    @IBAction func cancelTapped(_ sender: Any) {
+        self.dismiss(animated: true)
     }
 
-}
+    @IBAction func deleteTapped(_ sender: Any) {
+        let alert = UIAlertController(
+            title: "Delete Alarm",
+            message: "This action cannot be undone",
+            preferredStyle: .alert
+        )
 
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.deleteAlarm()
+        })
+
+        present(alert, animated: true)
+    }
+
+    private func deleteAlarm() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            showAlert("Error", "User not logged in")
+            return
+        }
+
+        let db = Firestore.firestore()
+        
+        db.collection("users")
+            .document(userId)
+            .collection("alarms")
+            .document(alarm.id)
+            .delete { error in
+                if let error = error {
+                    self.showAlert("Error", error.localizedDescription)
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
+            }
+    }
+}
 
 // --------------------------------------------
 // Delegates and Data Sources
 // --------------------------------------------
-extension SearchViewController: UISearchBarDelegate {
+extension EditAlarmViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             tableView.isHidden = true
@@ -221,8 +277,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: MKLocalSearchCompleterDelegate {
-
+extension EditAlarmViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
         updateTableViewHeight(rows: searchResults.count)
@@ -235,7 +290,7 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
     }
 }
 
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+extension EditAlarmViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         searchResults.count
