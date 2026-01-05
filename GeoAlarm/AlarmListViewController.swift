@@ -130,12 +130,24 @@ class AlarmListViewController: UIViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "alarmListToEditAlarm",
+           let vc = segue.destination as? EditAlarmViewController,
+           let alarm = sender as? Alarm {
+            vc.alarm = alarm
+        }
+    }
 }
 
 extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         alarms.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alarm = alarms[indexPath.row]
+        performSegue(withIdentifier: "alarmListToEditAlarm", sender: alarm)
     }
 
     func tableView(_ tableView: UITableView,

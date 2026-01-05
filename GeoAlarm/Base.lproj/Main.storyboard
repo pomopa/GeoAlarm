@@ -327,6 +327,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="medium"/>
                                     <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" red="0.8627929688" green="0.4016113281" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
@@ -357,11 +358,146 @@
                     <tabBarItem key="tabBarItem" title="" image="alarm" catalog="system" selectedImage="alarm.fill" id="SA9-HY-yKa"/>
                     <connections>
                         <outlet property="tableView" destination="HB8-id-CjT" id="R7A-5P-aQI"/>
+                        <segue destination="qdH-86-5Zz" kind="show" identifier="alarmListToEditAlarm" id="z3j-AH-SMh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPt-45-rIO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2397.709923664122" y="-622.53521126760563"/>
+        </scene>
+        <!--Edit Alarm View Controller-->
+        <scene sceneID="jU6-ik-8TK">
+            <objects>
+                <viewController id="qdH-86-5Zz" customClass="EditAlarmViewController" customModule="GeoAlarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sLV-S2-rc8">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Luj-rZ-IGO">
+                                <rect key="frame" x="0.0" y="91" width="393" height="64"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="qdH-86-5Zz" id="G7s-Ux-vc8"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bvg-k8-5gu">
+                                <rect key="frame" x="0.0" y="155" width="393" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Lna-iS-Byo"/>
+                                </constraints>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reT-Kd-zex">
+                                <rect key="frame" x="16" y="676" width="361" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="D4h-gn-zyR"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="trash.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="heavy"/>
+                                    <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.8627929688" green="0.4016113281" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="deleteTapped:" destination="qdH-86-5Zz" eventType="touchUpInside" id="dVl-eR-5Fl"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change the radius:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EzL-Ac-zhY">
+                                <rect key="frame" x="16" y="371" width="147.33333333333334" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SE-oC-bs6">
+                                <rect key="frame" x="327" y="30" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="XFl-FI-Gwb"/>
+                                    <constraint firstAttribute="height" constant="36" id="ffF-3Z-Dw8"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="checkmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="medium"/>
+                                    <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.8608398438" green="0.3977050781" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="saveTapped:" destination="qdH-86-5Zz" eventType="touchUpInside" id="Jnd-0L-9VH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ko6-0o-kzp">
+                                <rect key="frame" x="30" y="30" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="Fqj-Kh-ZxV"/>
+                                    <constraint firstAttribute="height" constant="36" id="vlG-Yq-rF7"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="xmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="medium"/>
+                                    <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" red="0.8608398438" green="0.3977050781" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="qdH-86-5Zz" eventType="touchUpInside" id="BX9-aX-pkI"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9I8-u6-AbB">
+                                <rect key="frame" x="16" y="399.33333333333331" width="361" height="44"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Radius" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDo-kO-6oO" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="226.66666666666666" height="44"/>
+                                        <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCZ-B0-Btn">
+                                        <rect key="frame" x="234.66666666666666" y="0.0" width="126.33333333333334" height="44"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="km">
+                                            <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="baseBackgroundColor" red="0.8588867188" green="0.3979492188" blue="0.3029785156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="BCZ-B0-Btn" firstAttribute="width" secondItem="9I8-u6-AbB" secondAttribute="width" multiplier="0.35" id="7bW-ck-GvI"/>
+                                    <constraint firstAttribute="height" constant="44" id="ncL-vq-BgH"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9GQ-PP-0RV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9GQ-PP-0RV" firstAttribute="bottom" secondItem="reT-Kd-zex" secondAttribute="bottom" constant="57" id="D1j-HR-Cwv"/>
+                            <constraint firstItem="ko6-0o-kzp" firstAttribute="top" secondItem="sLV-S2-rc8" secondAttribute="top" constant="30" id="ET6-zl-QBD"/>
+                            <constraint firstItem="bvg-k8-5gu" firstAttribute="top" secondItem="Luj-rZ-IGO" secondAttribute="bottom" id="FcH-xc-B6Q"/>
+                            <constraint firstItem="9SE-oC-bs6" firstAttribute="top" secondItem="sLV-S2-rc8" secondAttribute="top" constant="30" id="GMy-K6-dvE"/>
+                            <constraint firstItem="9GQ-PP-0RV" firstAttribute="trailing" secondItem="9I8-u6-AbB" secondAttribute="trailing" constant="16" id="IlZ-xe-2KZ"/>
+                            <constraint firstItem="9I8-u6-AbB" firstAttribute="top" secondItem="EzL-Ac-zhY" secondAttribute="bottom" constant="8" id="Krg-si-BQf"/>
+                            <constraint firstItem="EzL-Ac-zhY" firstAttribute="top" secondItem="bvg-k8-5gu" secondAttribute="bottom" constant="16" id="Lwx-hZ-P78"/>
+                            <constraint firstItem="reT-Kd-zex" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" constant="16" id="Vmo-cd-yBN"/>
+                            <constraint firstItem="ko6-0o-kzp" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" constant="30" id="W68-4l-OZk"/>
+                            <constraint firstItem="9GQ-PP-0RV" firstAttribute="trailing" secondItem="9SE-oC-bs6" secondAttribute="trailing" constant="30" id="YGs-de-6ID"/>
+                            <constraint firstItem="9GQ-PP-0RV" firstAttribute="trailing" secondItem="reT-Kd-zex" secondAttribute="trailing" constant="16" id="Z50-2A-1dg"/>
+                            <constraint firstItem="9I8-u6-AbB" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" constant="16" id="dj2-2o-jOi"/>
+                            <constraint firstItem="EzL-Ac-zhY" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" constant="16" id="feF-1J-dF0"/>
+                            <constraint firstItem="bvg-k8-5gu" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" id="kvN-WO-wtp"/>
+                            <constraint firstItem="Luj-rZ-IGO" firstAttribute="trailing" secondItem="9GQ-PP-0RV" secondAttribute="trailing" id="lZI-KV-J0D"/>
+                            <constraint firstItem="bvg-k8-5gu" firstAttribute="trailing" secondItem="9GQ-PP-0RV" secondAttribute="trailing" id="rA7-gz-HBp"/>
+                            <constraint firstItem="Luj-rZ-IGO" firstAttribute="top" secondItem="9SE-oC-bs6" secondAttribute="bottom" constant="25" id="uZR-eX-1pc"/>
+                            <constraint firstItem="Luj-rZ-IGO" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" id="yTg-3s-yim"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Sgr-Vi-bZ0"/>
+                    <connections>
+                        <outlet property="deleteButton" destination="reT-Kd-zex" id="1C5-Pk-UbG"/>
+                        <outlet property="nameSearchBar" destination="Luj-rZ-IGO" id="b3a-Jw-hPN"/>
+                        <outlet property="radiusTextField" destination="cDo-kO-6oO" id="Jlx-ub-2on"/>
+                        <outlet property="tableView" destination="bvg-k8-5gu" id="85f-Os-ECp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gqi-I6-cnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3336.6412213740455" y="-623.23943661971839"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="n1o-qK-y1I">
@@ -647,12 +783,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Fad-Vo-9C4"/>
+        <segue reference="yBE-Lu-zSb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="1024" height="1024"/>
         <image name="alarm" catalog="system" width="123" height="128"/>
         <image name="alarm.fill" catalog="system" width="123" height="128"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="magnifyingglass.circle" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="123"/>
         <image name="map" catalog="system" width="128" height="112"/>
@@ -661,6 +798,8 @@
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="trash.fill" catalog="system" width="117" height="128"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
