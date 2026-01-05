@@ -36,10 +36,12 @@ The rules you must configure through the Firebase console for Firebase Storage a
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-      match /{allPaths=**} {
-        allow read, write: if request.auth != null;
-      }
+
+    match /profile_images/{fileName} {
+      allow read, write: if request.auth != null
+                         && fileName.matches(request.auth.uid + "\\..+");
     }
+  }
 }
 ```
 
