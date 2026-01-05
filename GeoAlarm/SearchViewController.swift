@@ -38,18 +38,7 @@ class SearchViewController: UIViewController {
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
     }
-    private func updateTableViewHeight(rows: Int ) {
-        let height = min(
-            60 * CGFloat(rows),
-            200
-        )
-        print("value height is \(height), 22  \(rows) 22  \(tableView.rowHeight)")
-        tableViewHeightConstraint.constant = min(height, 200)
-               
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
+    
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -72,6 +61,18 @@ class SearchViewController: UIViewController {
     // --------------------------------------------
     // Helpers
     // --------------------------------------------
+    private func updateTableViewHeight(rows: Int ) {
+        let height = min(
+            60 * CGFloat(rows),
+            200
+        )
+        tableViewHeightConstraint.constant = min(height, 200)
+               
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     private func showAlert(_ title: String, _ message: String) {
         let alert = UIAlertController(title: title,
                                       message: message,
@@ -206,7 +207,6 @@ extension SearchViewController: UISearchBarDelegate {
             updateTableViewHeight(rows: 0)
         } else {
             searchCompleter.queryFragment = searchText
-            //updateTableViewHeight()
         }
     }
     

@@ -493,6 +493,8 @@
                         <outlet property="nameSearchBar" destination="Luj-rZ-IGO" id="b3a-Jw-hPN"/>
                         <outlet property="radiusTextField" destination="cDo-kO-6oO" id="Jlx-ub-2on"/>
                         <outlet property="tableView" destination="bvg-k8-5gu" id="85f-Os-ECp"/>
+                        <outlet property="tableViewHeightConstraint" destination="Lna-iS-Byo" id="kti-8j-uP0"/>
+                        <outlet property="unitButton" destination="BCZ-B0-Btn" id="j4m-55-EjY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gqi-I6-cnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
