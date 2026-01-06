@@ -136,6 +136,36 @@ class SearchViewController: UIViewController {
                     self.showAlert("Success", "Alarm saved")
                 }
             }
+        let regions = LocationManager.shared.getFences()
+
+        print("Hi ha \(regions.count) geofences actius:")
+
+        for region in regions {
+            print("• \(region.identifier)")
+        }
+
+        print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")
+        
+        var radiusInMeters: Double
+
+        if unit == "m" {
+            radiusInMeters = radius
+        } else if unit == "km" {
+            radiusInMeters = radius * 1000
+        } else if unit == "mi" {
+            radiusInMeters = radius * 1609.34
+        } else if unit == "ft" {
+            radiusInMeters = radius * 0.3048
+        } else {
+            radiusInMeters = radius
+        }
+        
+        LocationManager.shared.addGeofence(
+            id: "Alarm \(locationName) at \(Timestamp(date: Date()))",
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude,
+                radius: radius
+            )
     }
     
     // --------------------------------------------
