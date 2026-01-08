@@ -24,6 +24,7 @@ class EditAlarmViewController: UIViewController {
     private var searchResults: [MKLocalSearchCompletion] = []
     private var selectedCompletion: MKLocalSearchCompletion?
     private var currentCoordinate: CLLocationCoordinate2D?
+    private let locationSearchService = LocationSearchService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,8 +67,8 @@ class EditAlarmViewController: UIViewController {
     private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
         selectedCompletion = result
         nameSearchBar.text = result.title
-
-        resolveLocation(completion: result) { coordinate in
+        
+        locationSearchService.resolve(completion: result) { coordinate in
             self.currentCoordinate = coordinate
         }
 
@@ -81,27 +82,6 @@ class EditAlarmViewController: UIViewController {
         }
 
         nameSearchBar.resignFirstResponder()
-    }
-
-    
-    private func resolveLocation(
-        completion: MKLocalSearchCompletion,
-        completionHandler: @escaping (CLLocationCoordinate2D?) -> Void
-    ) {
-        let request = MKLocalSearch.Request(completion: completion)
-        let search = MKLocalSearch(request: request)
-
-        search.start { response, error in
-            guard let coordinate = response?
-                .mapItems.first?
-                .location
-                .coordinate else {
-                completionHandler(nil)
-                return
-            }
-
-            completionHandler(coordinate)
-        }
     }
     
     private func editAlarm(

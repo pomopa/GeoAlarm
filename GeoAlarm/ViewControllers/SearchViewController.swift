@@ -20,6 +20,7 @@ class SearchViewController: UIViewController {
     private let searchCompleter = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
     private var selectedCompletion: MKLocalSearchCompletion?
+    private let locationSearchService = LocationSearchService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,26 +51,6 @@ class SearchViewController: UIViewController {
     // --------------------------------------------
     // Helpers
     // --------------------------------------------
-    private func resolveLocation(
-        completion: MKLocalSearchCompletion,
-        completionHandler: @escaping (CLLocationCoordinate2D?) -> Void
-    ) {
-        let request = MKLocalSearch.Request(completion: completion)
-        let search = MKLocalSearch(request: request)
-
-        search.start { response, error in
-            guard let coordinate = response?
-                .mapItems.first?
-                .location
-                .coordinate else {
-                completionHandler(nil)
-                return
-            }
-
-            completionHandler(coordinate)
-        }
-    }
-
     private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
         selectedCompletion = result
         searchBar.text = result.title
@@ -174,13 +155,14 @@ class SearchViewController: UIViewController {
         let unit = unitButton.title(for: .normal) ?? "km"
 
         // Resolve coordinates
-        resolveLocation(completion: selectedCompletion) { coordinate in
-            guard let coordinate = coordinate else {
+        locationSearchService.resolve(completion: selectedCompletion) { [weak self] coordinate in
+            guard let self else { return }
+
+            guard let coordinate else {
                 self.showAlert(title: "Error", message: "Unable to resolve location")
                 return
             }
-            
-            // Save to Firebase
+
             self.saveAlarm(
                 locationName: selectedCompletion.title,
                 coordinate: coordinate,
