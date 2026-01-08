@@ -80,21 +80,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     private func setupTextFields() {
         let textColor = UIColor(red: 0x1B/255, green: 0x2B/255, blue: 0x42/255, alpha: 1)
-
+        
         emailField.textColor = textColor
         passwordField.textColor = textColor
         repeatPsswdField.textColor = textColor
     }
-    
-    private func showAlert(title: String, message: String,
-                           completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            completion?()
-        })
-        present(alert, animated: true)
-    }
-
 
     @IBAction func registerUser(_ sender: Any) {
         guard let email = emailField.text,
@@ -137,10 +127,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 return
             }
 
-            self?.showAlert(title: "Success",
-                            message: "Account created successfully") {
+            let alert = UIAlertController(title: "Success",
+                                          message: "Account created successfully",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
                 self?.dismiss(animated: true)
-            }
+            })
+            self?.present(alert, animated: true)
         }
     }
     

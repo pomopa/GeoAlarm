@@ -73,14 +73,6 @@ class SearchViewController: UIViewController {
         }
     }
     
-    private func showAlert(_ title: String, _ message: String) {
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
     private func resolveLocation(
         completion: MKLocalSearchCompletion,
         completionHandler: @escaping (CLLocationCoordinate2D?) -> Void
@@ -109,7 +101,7 @@ class SearchViewController: UIViewController {
         unit: String
     ) {
         guard let userId = Auth.auth().currentUser?.uid else {
-            showAlert("Error", "User not logged in")
+            showAlert(title: "Error", message: "User not logged in")
             return
         }
 
@@ -131,9 +123,9 @@ class SearchViewController: UIViewController {
             .addDocument(data: alarmData) { error in
 
                 if let error = error {
-                    self.showAlert("Error", error.localizedDescription)
+                    self.showAlert(title: "Error", message: error.localizedDescription)
                 } else {
-                    self.showAlert("Success", "Alarm saved")
+                    self.showAlert(title: "Success", message: "Alarm saved")
                 }
             }
         let regions = LocationManager.shared.getFences()
@@ -164,7 +156,7 @@ class SearchViewController: UIViewController {
             id: "Alarm \(locationName) at \(Timestamp(date: Date()))",
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude,
-                radius: radius
+                radius: radiusInMeters
             )
     }
     
@@ -174,7 +166,7 @@ class SearchViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         // Validate location selection
         guard let selectedCompletion = selectedCompletion else {
-            showAlert("Missing location", "Please select a location from the list")
+            showAlert(title: "Missing location", message: "Please select a location from the list")
             return
         }
 
@@ -182,7 +174,7 @@ class SearchViewController: UIViewController {
         guard let radiusText = radiusTextField.text,
                 let radius = Double(radiusText),
                 radius > 0 else {
-            showAlert("Invalid radius", "Please enter a valid radius")
+            showAlert(title: "Invalid radius", message: "Please enter a valid radius")
             return
             }
 
@@ -191,7 +183,7 @@ class SearchViewController: UIViewController {
         // Resolve coordinates
         resolveLocation(completion: selectedCompletion) { coordinate in
             guard let coordinate = coordinate else {
-                self.showAlert("Error", "Unable to resolve location")
+                self.showAlert(title: "Error", message: "Unable to resolve location")
                 return
             }
             

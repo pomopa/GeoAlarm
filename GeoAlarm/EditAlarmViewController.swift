@@ -127,14 +127,6 @@ class EditAlarmViewController: UIViewController {
         }
     }
     
-    private func showAlert(_ title: String, _ message: String) {
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
     private func editAlarm(
         locationName: String,
         coordinate: CLLocationCoordinate2D,
@@ -142,7 +134,7 @@ class EditAlarmViewController: UIViewController {
         unit: String
     ) {
         guard let userId = Auth.auth().currentUser?.uid else {
-            showAlert("Error", "User not logged in")
+            showAlert(title: "Error", message: "User not logged in")
             return
         }
 
@@ -163,7 +155,7 @@ class EditAlarmViewController: UIViewController {
             .updateData(alarmData) { error in
 
                 if let error = error {
-                    self.showAlert("Error", error.localizedDescription)
+                    self.showAlert(title: "Error", message: error.localizedDescription)
                 } else {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
@@ -180,14 +172,14 @@ class EditAlarmViewController: UIViewController {
         guard let radiusText = radiusTextField.text,
               let radius = Double(radiusText),
               radius > 0 else {
-            showAlert("Invalid radius", "Please enter a valid radius")
+            showAlert(title: "Invalid radius", message: "Please enter a valid radius")
             return
         }
 
         let unit = unitButton.title(for: .normal) ?? "km"
         let locationName = nameSearchBar.text ?? alarm.locationName
         guard let coordinate = currentCoordinate else {
-            showAlert("Missing location", "Please select a location from the list")
+            showAlert(title: "Missing location", message: "Please select a location from the list")
             return
         }
 
@@ -228,7 +220,7 @@ class EditAlarmViewController: UIViewController {
 
     private func deleteAlarm() {
         guard let userId = Auth.auth().currentUser?.uid else {
-            showAlert("Error", "User not logged in")
+            showAlert(title: "Error", message: "User not logged in")
             return
         }
 
@@ -240,7 +232,7 @@ class EditAlarmViewController: UIViewController {
             .document(alarm.id)
             .delete { error in
                 if let error = error {
-                    self.showAlert("Error", error.localizedDescription)
+                    self.showAlert(title: "Error", message: error.localizedDescription)
                     return
                 }
 
