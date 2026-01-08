@@ -28,7 +28,9 @@ class EditAlarmViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         populateUI()
-        configureDropdownButtons()
+        unitButton.configureDropdown(
+            options: ["km", "m", "mi", "ft"]
+        )
         configureSearch()
         configureTableView()
         tableViewHeightConstraint.constant = 0
@@ -38,19 +40,6 @@ class EditAlarmViewController: UIViewController {
     // --------------------------------------------
     // Configurations
     // --------------------------------------------
-    func configureDropdownButtons() {
-        let units = ["km", "m", "mi", "ft"]
-
-        let actions = units.map { unit in
-            UIAction(title: unit) { [weak self] _ in
-                self?.unitButton.setTitle(unit, for: .normal)
-            }
-        }
-
-        unitButton.menu = UIMenu(title: "Units", children: actions)
-        unitButton.showsMenuAsPrimaryAction = true
-    }
-
     private func populateUI() {
         nameSearchBar.text = alarm.locationName
         radiusTextField.text = "\(Int(alarm.radius))"

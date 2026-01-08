@@ -23,7 +23,9 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureDropdownButtons()
+        unitButton.configureDropdown(
+            options: ["km", "m", "mi", "ft"]
+        )
         configureSearch()
         configureTableView()
         tableViewHeightConstraint.constant = 0
@@ -43,19 +45,6 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isHidden = true
-    }
-    
-    func configureDropdownButtons() {
-        let units = ["km", "m", "mi", "ft"]
-
-        let actions = units.map { unit in
-            UIAction(title: unit) { _ in
-                self.unitButton.setTitle(unit, for: .normal)
-            }
-        }
-
-        unitButton.menu = UIMenu(title: "Units", children: actions)
-        unitButton.showsMenuAsPrimaryAction = true
     }
     
     // --------------------------------------------
