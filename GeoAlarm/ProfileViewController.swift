@@ -51,12 +51,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    private func showSimpleAlert(_ title: String, _ message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
     //--------------------------------------------
     // IMAGE EDIT
     //--------------------------------------------
@@ -107,9 +101,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         storageRef.putData(imageData) { _, error in
             if error != nil {
                 DispatchQueue.main.async {
-                    self.showSimpleAlert(
-                        "Upload failed",
-                        "Your profile picture was updated locally, but couldn't be uploaded to the cloud. Please try again later."
+                    self.showAlert(
+                        title: "Upload failed",
+                        message: "Your profile picture was updated locally, but couldn't be uploaded to the cloud. Please try again later."
                     )
                 }
                 return
@@ -139,15 +133,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         user.reauthenticate(with: credential) { _, error in
             if let error = error {
-                self.showSimpleAlert("Error", error.localizedDescription)
+                self.showAlert(title: "Error", message: error.localizedDescription)
                 return
             }
 
             user.updatePassword(to: newPassword) { error in
                 if let error = error {
-                    self.showSimpleAlert("Error", error.localizedDescription)
+                    self.showAlert(title: "Error", message: error.localizedDescription)
                 } else {
-                    self.showSimpleAlert("Success", "Password updated")
+                    self.showAlert(title: "Success", message: "Password updated")
                 }
             }
         }
@@ -185,7 +179,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         user.delete { error in
             if let error = error {
-                self.showSimpleAlert("Error", error.localizedDescription)
+                self.showAlert(title: "Error", message: error.localizedDescription)
                 return
             }
 
@@ -232,7 +226,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 }
 
             } catch {
-                self.showSimpleAlert("Error", error.localizedDescription)
+                self.showAlert(title: "Error", message: error.localizedDescription)
             }
         })
         
