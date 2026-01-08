@@ -46,13 +46,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         emailField.autocorrectionType = .no
 
         passwordField.textContentType = .newPassword
-        passwordField.isSecureTextEntry = true
-
         repeatPsswdField.textContentType = .password
-        repeatPsswdField.isSecureTextEntry = true
         
-        addPasswordToggle(to: passwordField)
-        addPasswordToggle(to: repeatPsswdField)
+        passwordField.isSecureTextEntry = true
+        passwordField.addPasswordToggle()
+        repeatPsswdField.isSecureTextEntry = true
+        repeatPsswdField.addPasswordToggle()
+
     }
     
     private func setupLoginButton() {
@@ -148,26 +148,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             }
         }
         return true
-    }
-    
-    private func addPasswordToggle(to textField: UITextField) {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-        button.tintColor = .gray
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-
-        button.addAction(UIAction { _ in
-            textField.isSecureTextEntry.toggle()
-            let imageName = textField.isSecureTextEntry ? "eye.slash" : "eye"
-            button.setImage(UIImage(systemName: imageName), for: .normal)
-        }, for: .touchUpInside)
-
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-        button.center = container.center
-        container.addSubview(button)
-        
-        textField.rightView = container
-        textField.rightViewMode = .always
     }
     
     private func updatePasswordStrength(_ password: String) {
