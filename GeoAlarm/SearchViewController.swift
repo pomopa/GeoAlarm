@@ -50,18 +50,6 @@ class SearchViewController: UIViewController {
     // --------------------------------------------
     // Helpers
     // --------------------------------------------
-    private func updateTableViewHeight(rows: Int ) {
-        let height = min(
-            60 * CGFloat(rows),
-            200
-        )
-        tableViewHeightConstraint.constant = min(height, 200)
-               
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
     private func resolveLocation(
         completion: MKLocalSearchCompletion,
         completionHandler: @escaping (CLLocationCoordinate2D?) -> Void
@@ -215,7 +203,10 @@ extension SearchViewController: UISearchBarDelegate {
             tableView.isHidden = true
             searchResults.removeAll()
             tableView.reloadData()
-            updateTableViewHeight(rows: 0)
+            updateTableViewHeight(
+                rows: 0,
+                constraint: tableViewHeightConstraint
+            )
         } else {
             searchCompleter.queryFragment = searchText
         }
@@ -236,7 +227,10 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
 
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
-        updateTableViewHeight(rows: searchResults.count)
+        updateTableViewHeight(
+            rows: searchResults.count,
+            constraint: tableViewHeightConstraint
+        )
         tableView.isHidden = searchResults.isEmpty
         tableView.reloadData()
     }

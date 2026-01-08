@@ -63,18 +63,6 @@ class EditAlarmViewController: UIViewController {
     // --------------------------------------------
     // Helpers
     // --------------------------------------------
-    private func updateTableViewHeight(rows: Int ) {
-        let height = min(
-            60 * CGFloat(rows),
-            200
-        )
-        tableViewHeightConstraint.constant = min(height, 200)
-               
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
     private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
         selectedCompletion = result
         nameSearchBar.text = result.title
@@ -241,7 +229,10 @@ extension EditAlarmViewController: UISearchBarDelegate {
             tableView.isHidden = true
             searchResults.removeAll()
             tableView.reloadData()
-            updateTableViewHeight(rows: 0)
+            updateTableViewHeight(
+                rows: 0,
+                constraint: tableViewHeightConstraint
+            )
         } else {
             searchCompleter.queryFragment = searchText
         }
@@ -261,7 +252,10 @@ extension EditAlarmViewController: UISearchBarDelegate {
 extension EditAlarmViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
-        updateTableViewHeight(rows: searchResults.count)
+        updateTableViewHeight(
+            rows: searchResults.count,
+            constraint: tableViewHeightConstraint
+        )
         tableView.isHidden = searchResults.isEmpty
         tableView.reloadData()
     }
