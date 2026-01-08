@@ -46,13 +46,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         emailField.autocorrectionType = .no
 
         passwordField.textContentType = .newPassword
-        passwordField.isSecureTextEntry = true
-
         repeatPsswdField.textContentType = .password
-        repeatPsswdField.isSecureTextEntry = true
         
-        addPasswordToggle(to: passwordField)
-        addPasswordToggle(to: repeatPsswdField)
+        passwordField.isSecureTextEntry = true
+        passwordField.addPasswordToggle()
+        repeatPsswdField.isSecureTextEntry = true
+        repeatPsswdField.addPasswordToggle()
+
     }
     
     private func setupLoginButton() {
@@ -80,21 +80,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     private func setupTextFields() {
         let textColor = UIColor(red: 0x1B/255, green: 0x2B/255, blue: 0x42/255, alpha: 1)
-
+        
         emailField.textColor = textColor
         passwordField.textColor = textColor
         repeatPsswdField.textColor = textColor
     }
-    
-    private func showAlert(title: String, message: String,
-                           completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            completion?()
-        })
-        present(alert, animated: true)
-    }
-
 
     @IBAction func registerUser(_ sender: Any) {
         guard let email = emailField.text,
@@ -137,10 +127,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 return
             }
 
-            self?.showAlert(title: "Success",
-                            message: "Account created successfully") {
+            let alert = UIAlertController(title: "Success",
+                                          message: "Account created successfully",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
                 self?.dismiss(animated: true)
-            }
+            })
+            self?.present(alert, animated: true)
         }
     }
     
@@ -155,26 +148,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             }
         }
         return true
-    }
-    
-    private func addPasswordToggle(to textField: UITextField) {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-        button.tintColor = .gray
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-
-        button.addAction(UIAction { _ in
-            textField.isSecureTextEntry.toggle()
-            let imageName = textField.isSecureTextEntry ? "eye.slash" : "eye"
-            button.setImage(UIImage(systemName: imageName), for: .normal)
-        }, for: .touchUpInside)
-
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-        button.center = container.center
-        container.addSubview(button)
-        
-        textField.rightView = container
-        textField.rightViewMode = .always
     }
     
     private func updatePasswordStrength(_ password: String) {

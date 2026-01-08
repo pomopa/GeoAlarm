@@ -24,7 +24,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailField.returnKeyType = .next
         passwordField.returnKeyType = .done
         
-        addPasswordToggle(to: passwordField)
+        passwordField.isSecureTextEntry = true
+        passwordField.addPasswordToggle()
+
     }
 
     private func setupRegisterButton() {
@@ -55,12 +57,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         emailField.textColor = textColor
         passwordField.textColor = textColor
-    }
-
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
     }
     
     @IBAction func loginUser(_ sender: Any) {
@@ -97,26 +93,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         return true
-    }
-    
-    private func addPasswordToggle(to textField: UITextField) {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-        button.tintColor = .gray
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-
-        button.addAction(UIAction { _ in
-            textField.isSecureTextEntry.toggle()
-            let imageName = textField.isSecureTextEntry ? "eye.slash" : "eye"
-            button.setImage(UIImage(systemName: imageName), for: .normal)
-        }, for: .touchUpInside)
-
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-        button.center = container.center
-        container.addSubview(button)
-        
-        textField.rightView = container
-        textField.rightViewMode = .always
     }
 }
 
