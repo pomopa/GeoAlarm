@@ -140,6 +140,9 @@ class SearchViewController: UIViewController {
 
         print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")*/
         
+        searchBar.text = ""
+        radiusTextField.text = ""
+        
         guard isActive else { return }
         
         LocationManager.shared.addGeofence(
