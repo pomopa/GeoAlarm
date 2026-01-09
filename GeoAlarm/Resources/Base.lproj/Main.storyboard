@@ -471,6 +471,12 @@
                                     <constraint firstAttribute="height" constant="44" id="ncL-vq-BgH"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The max radius value is 1km" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnY-m2-7JS">
+                                <rect key="frame" x="90.333333333333329" y="455.33333333333331" width="212.66666666666669" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9GQ-PP-0RV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -482,6 +488,7 @@
                             <constraint firstItem="9GQ-PP-0RV" firstAttribute="trailing" secondItem="9I8-u6-AbB" secondAttribute="trailing" constant="16" id="IlZ-xe-2KZ"/>
                             <constraint firstItem="9I8-u6-AbB" firstAttribute="top" secondItem="EzL-Ac-zhY" secondAttribute="bottom" constant="8" id="Krg-si-BQf"/>
                             <constraint firstItem="EzL-Ac-zhY" firstAttribute="top" secondItem="bvg-k8-5gu" secondAttribute="bottom" constant="16" id="Lwx-hZ-P78"/>
+                            <constraint firstItem="pnY-m2-7JS" firstAttribute="top" secondItem="9I8-u6-AbB" secondAttribute="bottom" constant="12" id="UEE-LQ-fpD"/>
                             <constraint firstItem="reT-Kd-zex" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" constant="16" id="Vmo-cd-yBN"/>
                             <constraint firstItem="ko6-0o-kzp" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" constant="30" id="W68-4l-OZk"/>
                             <constraint firstItem="9GQ-PP-0RV" firstAttribute="trailing" secondItem="9SE-oC-bs6" secondAttribute="trailing" constant="30" id="YGs-de-6ID"/>
@@ -492,12 +499,14 @@
                             <constraint firstItem="Luj-rZ-IGO" firstAttribute="trailing" secondItem="9GQ-PP-0RV" secondAttribute="trailing" id="lZI-KV-J0D"/>
                             <constraint firstItem="bvg-k8-5gu" firstAttribute="trailing" secondItem="9GQ-PP-0RV" secondAttribute="trailing" id="rA7-gz-HBp"/>
                             <constraint firstItem="Luj-rZ-IGO" firstAttribute="top" secondItem="9SE-oC-bs6" secondAttribute="bottom" constant="25" id="uZR-eX-1pc"/>
+                            <constraint firstItem="pnY-m2-7JS" firstAttribute="centerX" secondItem="sLV-S2-rc8" secondAttribute="centerX" id="xsq-MN-Mvi"/>
                             <constraint firstItem="Luj-rZ-IGO" firstAttribute="leading" secondItem="9GQ-PP-0RV" secondAttribute="leading" id="yTg-3s-yim"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Sgr-Vi-bZ0"/>
                     <connections>
                         <outlet property="deleteButton" destination="reT-Kd-zex" id="1C5-Pk-UbG"/>
+                        <outlet property="maxRadiusLabel" destination="pnY-m2-7JS" id="8hr-YY-ndC"/>
                         <outlet property="nameSearchBar" destination="Luj-rZ-IGO" id="b3a-Jw-hPN"/>
                         <outlet property="radiusTextField" destination="cDo-kO-6oO" id="Jlx-ub-2on"/>
                         <outlet property="tableView" destination="bvg-k8-5gu" id="85f-Os-ECp"/>

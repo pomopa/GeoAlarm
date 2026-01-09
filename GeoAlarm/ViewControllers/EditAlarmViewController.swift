@@ -18,6 +18,7 @@ class EditAlarmViewController: UIViewController {
     @IBOutlet weak var radiusTextField: UITextField!
     @IBOutlet weak var unitButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var maxRadiusLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     
     private let searchCompleter = MKLocalSearchCompleter()
@@ -29,9 +30,10 @@ class EditAlarmViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         populateUI()
-        unitButton.configureDropdown(
-            options: ["km", "m", "mi", "ft"]
-        )
+        unitButton.configureDropdown(options: ["km", "m", "mi", "ft"]) { [weak self] selectedUnit in
+            self?.unitButton.setTitle(selectedUnit, for: .normal)
+            self?.maxRadiusLabel.text = RadiusHelper.maxRadiusText(for: selectedUnit)
+        }
         configureSearch()
         configureTableView()
         tableViewHeightConstraint.constant = 0
@@ -47,6 +49,7 @@ class EditAlarmViewController: UIViewController {
         unitButton.setTitle(alarm.unit, for: .normal)
         currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
                                                    longitude: alarm.longitude)
+        maxRadiusLabel.text = RadiusHelper.maxRadiusText(for: alarm.unit)
     }
     
     private func configureSearch() {
@@ -95,6 +98,14 @@ class EditAlarmViewController: UIViewController {
             return
         }
 
+        let radiusInMeters = RadiusHelper.calculateRadiusInMeters(unit: unit, value: radius)
+        let maxRadius = RadiusHelper.maxRadius(for: unit)
+        guard radiusInMeters <= 1000 else {
+            let message = String(format: "The maximum allowed radius for %@ is %.2f %@", unit, maxRadius, unit)
+            showAlert(title: "Invalid radius", message: message)
+            return
+        }
+        
         let db = Firestore.firestore()
 
         let alarmData: [String: Any] = [
