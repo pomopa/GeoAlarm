@@ -610,12 +610,20 @@
                                     <action selector="addButtonTapped:" destination="sUP-t4-E5b" eventType="touchUpInside" id="kEp-t9-Fzc"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The max radius value is 1km" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuy-i4-0wf">
+                                <rect key="frame" x="90.333333333333329" y="459.33333333333331" width="212.66666666666669" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4pC-gU-5YI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bgw-1O-5Tq" firstAttribute="top" secondItem="Ku4-VT-C0O" secondAttribute="bottom" id="0SG-ut-Zqu"/>
                             <constraint firstItem="Dau-yW-YO3" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" constant="16" id="0sI-rs-C4I"/>
+                            <constraint firstItem="wuy-i4-0wf" firstAttribute="top" secondItem="8LS-Cu-6Uz" secondAttribute="bottom" constant="12" id="1QV-2O-OTJ"/>
+                            <constraint firstItem="wuy-i4-0wf" firstAttribute="centerX" secondItem="Pln-Tq-NeA" secondAttribute="centerX" id="F9Q-8U-AkK"/>
                             <constraint firstItem="bgw-1O-5Tq" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" id="SOh-nP-Wnf"/>
                             <constraint firstItem="Ku4-VT-C0O" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" id="VWI-yD-jSA"/>
                             <constraint firstItem="rhK-8h-XGA" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" constant="16" id="W7Q-jZ-rsI"/>
@@ -633,6 +641,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="WbJ-O1-YTU"/>
                     <connections>
+                        <outlet property="maxRadiusLabel" destination="wuy-i4-0wf" id="QOO-Yd-WJE"/>
                         <outlet property="radiusTextField" destination="umv-tL-ujH" id="lZP-e6-vcI"/>
                         <outlet property="searchBar" destination="Ku4-VT-C0O" id="T6a-xd-jjw"/>
                         <outlet property="tableView" destination="bgw-1O-5Tq" id="2Yx-UM-pS7"/>
@@ -810,6 +819,9 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="trash.fill" catalog="system" width="117" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var radiusTextField: UITextField!
+    @IBOutlet weak var maxRadiusLabel: UILabel!
     @IBOutlet weak var unitButton: UIButton!
     
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
@@ -24,9 +25,10 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        unitButton.configureDropdown(
-            options: ["km", "m", "mi", "ft"]
-        )
+        unitButton.configureDropdown(options: ["km", "m", "mi", "ft"]) { [weak self] selectedUnit in
+            self?.unitButton.setTitle(selectedUnit, for: .normal)
+            self?.maxRadiusLabel.text = RadiusHelper.maxRadiusText(for: selectedUnit)
+        }
         configureSearch()
         configureTableView()
         tableViewHeightConstraint.constant = 0
@@ -99,8 +101,15 @@ class SearchViewController: UIViewController {
             return
         }
 
+        let radiusInMeters = RadiusHelper.calculateRadiusInMeters(unit: unit, value: radius)
+        let maxRadius = RadiusHelper.maxRadius(for: unit)
+        guard radiusInMeters <= 1000 else {
+            let message = String(format: "The maximum allowed radius for %@ is %.2f %@", unit, maxRadius, unit)
+            showAlert(title: "Invalid radius", message: message)
+            return
+        }
+        
         let db = Firestore.firestore()
-
         let alarmData: [String: Any] = [
             "locationName": locationName,
             "latitude": coordinate.latitude,
@@ -130,20 +139,6 @@ class SearchViewController: UIViewController {
         }
 
         print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")*/
-       
-        var radiusInMeters: Double
-
-        if unit == "m" {
-            radiusInMeters = radius
-        } else if unit == "km" {
-            radiusInMeters = radius * 1000
-        } else if unit == "mi" {
-            radiusInMeters = radius * 1609.34
-        } else if unit == "ft" {
-            radiusInMeters = radius * 0.3048
-        } else {
-            radiusInMeters = radius
-        }
         
         guard isActive else { return }
         
