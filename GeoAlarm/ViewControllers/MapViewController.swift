@@ -40,6 +40,7 @@ class MapViewController: UIViewController {
                 
                 // Clear existing annotations
                 self.mapView.removeAnnotations(self.mapView.annotations)
+                self.mapView.removeOverlays(self.mapView.overlays)
                 
                 // Parse alarms and add to map
                 self.alarms = documents.compactMap { doc in
