@@ -67,12 +67,32 @@ class SearchViewController: UIViewController {
 
         searchBar.resignFirstResponder()
     }
+    
+    private func fetchActiveAlarmCount(
+        completion: @escaping (Int) -> Void
+    ) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            completion(0)
+            return
+        }
+
+        Firestore.firestore()
+            .collection("users")
+            .document(userId)
+            .collection("alarms")
+            .whereField("isActive", isEqualTo: true)
+            .getDocuments { snapshot, _ in
+                completion(snapshot?.documents.count ?? 0)
+            }
+    }
 
     private func saveAlarm(
         locationName: String,
         coordinate: CLLocationCoordinate2D,
         radius: Double,
-        unit: String
+        unit: String,
+        isActive: Bool,
+        completion: @escaping (Result<Void, Error>) -> Void
     ) {
         guard let userId = Auth.auth().currentUser?.uid else {
             showAlert(title: "Error", message: "User not logged in")
@@ -87,7 +107,7 @@ class SearchViewController: UIViewController {
             "longitude": coordinate.longitude,
             "radius": radius,
             "unit": unit,
-            "isActive": true,
+            "isActive": isActive,
             "createdAt": Timestamp(date: Date())
         ]
 
@@ -95,14 +115,13 @@ class SearchViewController: UIViewController {
             .document(userId)
             .collection("alarms")
             .addDocument(data: alarmData) { error in
-
-                if let error = error {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
+                if let error {
+                    completion(.failure(error))
                 } else {
-                    self.showAlert(title: "Success", message: "Alarm saved")
+                    completion(.success(()))
                 }
             }
-        let regions = LocationManager.shared.getFences()
+        /*let regions = LocationManager.shared.getFences()
 
         print("Hi ha \(regions.count) geofences actius:")
 
@@ -110,8 +129,8 @@ class SearchViewController: UIViewController {
             print("• \(region.identifier)")
         }
 
-        print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")
-        
+        print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")*/
+       
         var radiusInMeters: Double
 
         if unit == "m" {
@@ -125,6 +144,8 @@ class SearchViewController: UIViewController {
         } else {
             radiusInMeters = radius
         }
+        
+        guard isActive else { return }
         
         LocationManager.shared.addGeofence(
             id: "Alarm \(locationName) at \(Timestamp(date: Date()))",
@@ -163,12 +184,43 @@ class SearchViewController: UIViewController {
                 return
             }
 
-            self.saveAlarm(
-                locationName: selectedCompletion.title,
-                coordinate: coordinate,
-                radius: radius,
-                unit: unit
-            )
+            self.fetchActiveAlarmCount { activeCount in
+                let canActivate = activeCount < 20
+
+                self.saveAlarm(
+                    locationName: selectedCompletion.title,
+                    coordinate: coordinate,
+                    radius: radius,
+                    unit: unit,
+                    isActive: canActivate
+                ) { result in
+
+                    switch result {
+                    case .failure(let error):
+                        self.showAlert(
+                            title: "Error",
+                            message: error.localizedDescription
+                        )
+
+                    case .success:
+                        if canActivate {
+                            self.showAlert(
+                                title: "Success",
+                                message: "Alarm saved and activated"
+                            )
+                        } else {
+                            self.showAlert(
+                                title: "Alarm created but inactive",
+                                message: """
+                                Apple enforces a limit of 20 active simultaneous alarms.
+                                This alarm was saved but is inactive.
+                                Disable another alarm to activate it.
+                                """
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
