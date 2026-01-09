@@ -33,6 +33,11 @@ class AlarmTableViewCell: UITableViewCell {
         containerView.layer.shadowRadius = 6
 
         enabledSwitch.onTintColor = .systemGreen
+        
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
+        distanceLabel.numberOfLines = 0
+        distanceLabel.lineBreakMode = .byWordWrapping
     }
     
     func configure(title: String, distance: String, isEnabled: Bool) {
