@@ -18,6 +18,11 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
     private var alarms: [Alarm] = []
     private let db = Firestore.firestore()
     let locationManager = CLLocationManager()
+    
+    private lazy var sizingCell: AlarmTableViewCell = {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AlarmTableViewCell") as! AlarmTableViewCell
+        return cell
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -210,9 +215,18 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
 
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-}
+        let alarm = alarms[indexPath.row]
 
+        sizingCell.configure(title: alarm.locationName,
+                             distance: "\(alarm.radius) \(alarm.unit)",
+                             isEnabled: alarm.isActive)
+        sizingCell.layoutIfNeeded()
+
+        let lines = sizingCell.titleLabel.numberOfTextLines
+
+        return CGFloat(100 + ((lines - 1) * 20))
+    }
+
+}
