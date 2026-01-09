@@ -67,6 +67,12 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
             }
     }
     
+    private func activeAlarmCount(excluding alarmID: String? = nil) -> Int {
+        alarms.filter {
+            $0.isActive && $0.id != alarmID
+        }.count
+    }
+    
     @IBAction func addAlarm(_ sender: Any) {
         if let tabBarController = self.tabBarController {
             tabBarController.selectedIndex = 2
@@ -176,8 +182,23 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.onSwitchToggled = nil
 
-        cell.onSwitchToggled = { [weak self] isOn in
+        cell.onSwitchToggled = { [weak self, weak cell] isOn in
             guard let self = self else { return }
+
+            let alarm = self.alarms[indexPath.row]
+
+            // User is trying to ENABLE the alarm
+            if isOn {
+                let activeCount = self.activeAlarmCount(excluding: alarm.id)
+
+                if activeCount >= 20 {
+                    self.showAlert(title: "Maximum Active Alarms", message:  "You can only have up to 20 active alarms at the same time. Please deactivate one before enabling another.")
+
+                    // Revert switch visually
+                    cell?.setSwitchOn(false, animated: true)
+                    return
+                }
+            }
 
             self.alarms[indexPath.row].isActive = isOn
 

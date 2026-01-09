@@ -104,14 +104,14 @@ class SearchViewController: UIViewController {
             }
         let regions = LocationManager.shared.getFences()
 
-        print("Hi ha \(regions.count) geofences actius:")
+        /*print("Hi ha \(regions.count) geofences actius:")
 
         for region in regions {
             print("• \(region.identifier)")
         }
 
-        print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")
-        
+        print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")*/
+       
         var radiusInMeters: Double
 
         if unit == "m" {

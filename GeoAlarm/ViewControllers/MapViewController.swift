@@ -116,7 +116,7 @@ extension MapViewController: MKMapViewDelegate {
         
         if let circle = overlay as? MKCircle {
             let renderer = MKCircleRenderer(circle: circle)
-            print(circle.subtitle)
+            //print(circle.subtitle)
             if circle.subtitle == "Active" {
                 renderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
                 renderer.strokeColor = UIColor.green

@@ -54,4 +54,7 @@ class AlarmTableViewCell: UITableViewCell {
         onSwitchToggled?(sender.isOn)
     }
     
+    func setSwitchOn(_ on: Bool, animated: Bool) {
+        enabledSwitch.setOn(on, animated: animated)
+    }
 }
