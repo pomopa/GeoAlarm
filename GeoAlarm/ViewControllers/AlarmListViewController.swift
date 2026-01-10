@@ -67,6 +67,7 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
                     Alarm(id: $0.documentID, data: $0.data())
                 }
 
+                LocationManager.shared.syncActiveAlarms(self!.alarms)
                 self?.tableView.reloadData()
                 self?.updateEmptyState()
             }
@@ -207,6 +208,12 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
 
             self.alarms[indexPath.row].isActive = isOn
 
+            if isOn {
+                LocationManager.shared.enableGeofence(for: alarm)
+            } else {
+                LocationManager.shared.disableGeofence(id: alarm.id)
+            }
+            
             self.updateAlarmActiveState(
                 alarmID: alarm.id,
                 isActive: isOn

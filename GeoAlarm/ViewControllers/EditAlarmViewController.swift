@@ -205,6 +205,7 @@ class EditAlarmViewController: UIViewController {
                 }
 
                 DispatchQueue.main.async {
+                    LocationManager.shared.disableGeofence(id: self.alarm.id)
                     self.dismiss(animated: true)
                 }
             }
