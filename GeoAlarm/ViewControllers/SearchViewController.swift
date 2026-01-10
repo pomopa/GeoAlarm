@@ -110,6 +110,15 @@ class SearchViewController: UIViewController {
         }
         
         let db = Firestore.firestore()
+        
+        let alarmRef = db
+            .collection("users")
+            .document(userId)
+            .collection("alarms")
+            .document()
+        
+        let alarmID = alarmRef.documentID
+        
         let alarmData: [String: Any] = [
             "locationName": locationName,
             "latitude": coordinate.latitude,
@@ -120,16 +129,26 @@ class SearchViewController: UIViewController {
             "createdAt": Timestamp(date: Date())
         ]
 
-        db.collection("users")
-            .document(userId)
-            .collection("alarms")
-            .addDocument(data: alarmData) { error in
-                if let error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
-                }
+        alarmRef.setData(alarmData) { error in
+            if let error {
+                completion(.failure(error))
+                return
             }
+
+            if isActive {
+                LocationManager.shared.addGeofence(
+                    id: alarmID,
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude,
+                    radius: radiusInMeters
+                )
+            }
+            
+            completion(.success(()))
+        }
+        
+        searchBar.text = ""
+        radiusTextField.text = ""
         /*let regions = LocationManager.shared.getFences()
 
         print("Hi ha \(regions.count) geofences actius:")
@@ -139,18 +158,6 @@ class SearchViewController: UIViewController {
         }
 
         print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")*/
-        
-        searchBar.text = ""
-        radiusTextField.text = ""
-        
-        guard isActive else { return }
-        
-        LocationManager.shared.addGeofence(
-            id: "Alarm \(locationName) at \(Timestamp(date: Date()))",
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude,
-                radius: radiusInMeters
-            )
     }
     
     // --------------------------------------------
