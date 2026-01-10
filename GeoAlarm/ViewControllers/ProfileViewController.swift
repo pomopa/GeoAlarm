@@ -185,6 +185,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
             DispatchQueue.main.async {
                 ProfileImageCache.shared.delete()
+                LocationManager.shared.removeAllGeofences()
                 self.performSegue(withIdentifier: "profileToLogin", sender: nil)
             }
         }
@@ -222,6 +223,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 ProfileImageCache.shared.delete()
 
                 DispatchQueue.main.async {
+                    LocationManager.shared.removeAllGeofences()
                     self.performSegue(withIdentifier: "profileToLogin", sender: nil)
                 }
 

@@ -15,8 +15,9 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.requestAlwaysAuthorization()
         
     }
-    func getFences () -> Set<CLRegion> {
-        return manager.monitoredRegions
+    
+    func currentGeofenceIDs() -> Set<String> {
+        Set(manager.monitoredRegions.map { $0.identifier })
     }
 
     func addGeofence(
@@ -36,8 +37,8 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
 
         region.notifyOnEntry = true
         region.notifyOnExit = false
-        print(region.center)
-        print(region.radius)
+        //print(region.center)
+        //print(region.radius)
         manager.startMonitoring(for: region)
     }
 
@@ -47,9 +48,8 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         let content = UNMutableNotificationContent()
         content.title = "Geofence activat"
         content.body = "Has entrat a \(region.identifier)"
-        print(content.title)
-        print(content.body)
-        print("ASDfasf")
+        //print(content.title)
+        //print(content.body)
         let request = UNNotificationRequest(
             identifier: region.identifier,
             content: content,
@@ -57,5 +57,60 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         )
 
         UNUserNotificationCenter.current().add(request)
+    }
+    
+    func syncActiveAlarms(_ alarms: [Alarm]) {
+        let activeAlarms = alarms.filter { $0.isActive }
+
+        let registeredIDs = currentGeofenceIDs()
+
+        for alarm in activeAlarms.prefix(20) {
+            guard !registeredIDs.contains(alarm.id) else { continue }
+
+            let radiusInMeters = RadiusHelper.calculateRadiusInMeters(
+                unit: alarm.unit,
+                value: alarm.radius
+            )
+
+            addGeofence(
+                id: alarm.id,
+                latitude: alarm.latitude,
+                longitude: alarm.longitude,
+                radius: radiusInMeters
+            )
+        }
+    }
+
+    func enableGeofence(for alarm: Alarm) {
+        let registeredIDs = currentGeofenceIDs()
+        guard !registeredIDs.contains(alarm.id) else { return }
+
+        let radiusInMeters = RadiusHelper.calculateRadiusInMeters(
+            unit: alarm.unit,
+            value: alarm.radius
+        )
+
+        addGeofence(
+            id: alarm.id,
+            latitude: alarm.latitude,
+            longitude: alarm.longitude,
+            radius: radiusInMeters
+        )
+    }
+    
+    func disableGeofence(id: String) {
+        let regionsToRemove = manager.monitoredRegions.filter {
+            $0.identifier == id
+        }
+        
+        for region in regionsToRemove {
+            manager.stopMonitoring(for: region)
+        }
+    }
+    
+    func removeAllGeofences() {
+        for region in manager.monitoredRegions {
+            manager.stopMonitoring(for: region)
+        }
     }
 }

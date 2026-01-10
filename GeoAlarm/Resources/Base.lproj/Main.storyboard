@@ -266,13 +266,13 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W8a-cM-26D">
                                                                     <rect key="frame" x="0.0" y="11.333333333333332" width="219" height="48.666666666666671"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
                                                                             <rect key="frame" x="0.0" y="0.0" width="219" height="20.333333333333332"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
                                                                             <rect key="frame" x="0.0" y="28.333333333333336" width="219" height="20.333333333333336"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -328,7 +328,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Px-ao-PCh">
-                                <rect key="frame" x="320" y="87" width="36" height="36"/>
+                                <rect key="frame" x="322" y="87" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="0Gb-3c-rz1"/>
                                     <constraint firstAttribute="height" constant="36" id="CNJ-Yd-qn4"/>
@@ -355,12 +355,12 @@
                         <constraints>
                             <constraint firstItem="HB8-id-CjT" firstAttribute="top" secondItem="MgZ-sB-NlN" secondAttribute="bottom" constant="23" id="6JE-31-HbQ"/>
                             <constraint firstItem="MgZ-sB-NlN" firstAttribute="centerX" secondItem="fK8-UG-tet" secondAttribute="centerX" id="IDd-Wp-h91"/>
-                            <constraint firstItem="7Px-ao-PCh" firstAttribute="leading" secondItem="TXI-PE-Isk" secondAttribute="leading" constant="320" id="L3h-KN-nwX"/>
                             <constraint firstAttribute="bottom" secondItem="HB8-id-CjT" secondAttribute="bottom" id="Lx1-hy-Dcp"/>
                             <constraint firstItem="HB8-id-CjT" firstAttribute="trailing" secondItem="TXI-PE-Isk" secondAttribute="trailing" id="gnh-lN-Fjx"/>
                             <constraint firstItem="7Px-ao-PCh" firstAttribute="top" secondItem="TXI-PE-Isk" secondAttribute="top" constant="28" id="ih4-uI-yK7"/>
                             <constraint firstItem="HB8-id-CjT" firstAttribute="leading" secondItem="TXI-PE-Isk" secondAttribute="leading" id="jLR-aY-cHv"/>
                             <constraint firstItem="MgZ-sB-NlN" firstAttribute="top" secondItem="TXI-PE-Isk" secondAttribute="top" constant="89" id="rQe-jV-dP1"/>
+                            <constraint firstItem="TXI-PE-Isk" firstAttribute="trailing" secondItem="7Px-ao-PCh" secondAttribute="trailing" constant="35" id="u1I-yf-gGD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="alarm" catalog="system" selectedImage="alarm.fill" id="SA9-HY-yKa"/>

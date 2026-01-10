@@ -149,7 +149,7 @@ class SearchViewController: UIViewController {
         
         searchBar.text = ""
         radiusTextField.text = ""
-        /*let regions = LocationManager.shared.getFences()
+        /*let regions = LocationManager.shared.currentGeofenceIDs()
 
         print("Hi ha \(regions.count) geofences actius:")
 
