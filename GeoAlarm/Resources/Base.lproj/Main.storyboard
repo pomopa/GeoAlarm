@@ -186,9 +186,6 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user@email.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyA-hW-dEB">
                                 <rect key="frame" x="51" y="341" width="291" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="291" id="Pt3-uN-CVk"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -266,13 +263,13 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W8a-cM-26D">
                                                                     <rect key="frame" x="0.0" y="11.333333333333332" width="219" height="48.666666666666671"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
                                                                             <rect key="frame" x="0.0" y="0.0" width="219" height="20.333333333333332"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
                                                                             <rect key="frame" x="0.0" y="28.333333333333336" width="219" height="20.333333333333336"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -330,8 +327,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Px-ao-PCh">
                                 <rect key="frame" x="322" y="87" width="36" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="0Gb-3c-rz1"/>
                                     <constraint firstAttribute="height" constant="36" id="CNJ-Yd-qn4"/>
+                                    <constraint firstAttribute="width" secondItem="7Px-ao-PCh" secondAttribute="height" multiplier="1:1" id="Ndi-Rq-p55"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system">
@@ -448,26 +445,27 @@
                                     <action selector="cancelTapped:" destination="qdH-86-5Zz" eventType="touchUpInside" id="BX9-aX-pkI"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9I8-u6-AbB">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9I8-u6-AbB">
                                 <rect key="frame" x="16" y="399.33333333333331" width="361" height="44"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Radius" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDo-kO-6oO" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="226.66666666666666" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="203.66666666666666" height="44"/>
                                         <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCZ-B0-Btn">
-                                        <rect key="frame" x="234.66666666666666" y="0.0" width="126.33333333333334" height="44"/>
+                                        <rect key="frame" x="211.66666666666663" y="0.0" width="149.33333333333337" height="44"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="km">
+                                            <directionalEdgeInsets key="contentInsets" top="8" leading="12" bottom="8" trailing="12"/>
                                             <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <color key="baseBackgroundColor" red="0.8588867188" green="0.3979492188" blue="0.3029785156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </buttonConfiguration>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="BCZ-B0-Btn" firstAttribute="width" secondItem="9I8-u6-AbB" secondAttribute="width" multiplier="0.35" id="7bW-ck-GvI"/>
+                                    <constraint firstAttribute="width" constant="361" id="jnn-VE-K1X"/>
                                     <constraint firstAttribute="height" constant="44" id="ncL-vq-BgH"/>
                                 </constraints>
                             </stackView>
@@ -481,6 +479,7 @@
                         <viewLayoutGuide key="safeArea" id="9GQ-PP-0RV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9GQ-PP-0RV" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EzL-Ac-zhY" secondAttribute="trailing" symbolic="YES" id="4PR-gM-Q4m"/>
                             <constraint firstItem="9GQ-PP-0RV" firstAttribute="bottom" secondItem="reT-Kd-zex" secondAttribute="bottom" constant="57" id="D1j-HR-Cwv"/>
                             <constraint firstItem="ko6-0o-kzp" firstAttribute="top" secondItem="sLV-S2-rc8" secondAttribute="top" constant="30" id="ET6-zl-QBD"/>
                             <constraint firstItem="bvg-k8-5gu" firstAttribute="top" secondItem="Luj-rZ-IGO" secondAttribute="bottom" id="FcH-xc-B6Q"/>
@@ -584,15 +583,16 @@
                                 <rect key="frame" x="16" y="403.33333333333331" width="361" height="44"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Radius" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umv-tL-ujH" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="216.66666666666666" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="203.66666666666666" height="44"/>
                                         <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1e0-jJ-JWH">
-                                        <rect key="frame" x="224.66666666666663" y="0.0" width="136.33333333333337" height="44"/>
+                                        <rect key="frame" x="211.66666666666663" y="0.0" width="149.33333333333337" height="44"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="km">
+                                            <directionalEdgeInsets key="contentInsets" top="8" leading="12" bottom="8" trailing="12"/>
                                             <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <color key="baseBackgroundColor" red="0.8588867188" green="0.3979492188" blue="0.3029785156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </buttonConfiguration>
@@ -600,8 +600,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="IAY-Sd-8VJ"/>
-                                    <constraint firstItem="1e0-jJ-JWH" firstAttribute="width" secondItem="8LS-Cu-6Uz" secondAttribute="width" multiplier="0.35" id="aHB-pn-iok"/>
-                                    <constraint firstItem="umv-tL-ujH" firstAttribute="width" secondItem="8LS-Cu-6Uz" secondAttribute="width" multiplier="0.6" id="bYK-KK-75T"/>
+                                    <constraint firstAttribute="width" constant="361" id="g9a-xn-Iis"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhK-8h-XGA">
@@ -633,6 +632,7 @@
                             <constraint firstItem="Dau-yW-YO3" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" constant="16" id="0sI-rs-C4I"/>
                             <constraint firstItem="wuy-i4-0wf" firstAttribute="top" secondItem="8LS-Cu-6Uz" secondAttribute="bottom" constant="12" id="1QV-2O-OTJ"/>
                             <constraint firstItem="wuy-i4-0wf" firstAttribute="centerX" secondItem="Pln-Tq-NeA" secondAttribute="centerX" id="F9Q-8U-AkK"/>
+                            <constraint firstItem="8LS-Cu-6Uz" firstAttribute="centerX" secondItem="Pln-Tq-NeA" secondAttribute="centerX" id="GgH-hH-LGO"/>
                             <constraint firstItem="bgw-1O-5Tq" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" id="SOh-nP-Wnf"/>
                             <constraint firstItem="Ku4-VT-C0O" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" id="VWI-yD-jSA"/>
                             <constraint firstItem="rhK-8h-XGA" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" constant="16" id="W7Q-jZ-rsI"/>
@@ -640,8 +640,6 @@
                             <constraint firstItem="Ku4-VT-C0O" firstAttribute="trailing" secondItem="4pC-gU-5YI" secondAttribute="trailing" id="X5c-Aa-wvR"/>
                             <constraint firstItem="Ku4-VT-C0O" firstAttribute="top" secondItem="4pC-gU-5YI" secondAttribute="top" constant="36" id="Z3e-JJ-w3M"/>
                             <constraint firstItem="4pC-gU-5YI" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dau-yW-YO3" secondAttribute="trailing" symbolic="YES" id="aYl-Fm-HIG"/>
-                            <constraint firstItem="4pC-gU-5YI" firstAttribute="trailing" secondItem="8LS-Cu-6Uz" secondAttribute="trailing" constant="16" id="fWJ-CF-iEm"/>
-                            <constraint firstItem="8LS-Cu-6Uz" firstAttribute="leading" secondItem="4pC-gU-5YI" secondAttribute="leading" constant="16" id="iUo-Qf-KvR"/>
                             <constraint firstItem="Dau-yW-YO3" firstAttribute="top" secondItem="bgw-1O-5Tq" secondAttribute="bottom" constant="16" id="plx-i1-aFk"/>
                             <constraint firstItem="8LS-Cu-6Uz" firstAttribute="top" secondItem="Dau-yW-YO3" secondAttribute="bottom" constant="8" id="pzC-lr-2J7"/>
                             <constraint firstItem="4pC-gU-5YI" firstAttribute="bottom" secondItem="rhK-8h-XGA" secondAttribute="bottom" constant="16" id="uX0-rx-xCN"/>
