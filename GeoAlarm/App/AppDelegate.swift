@@ -26,9 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         UNUserNotificationCenter.current().requestAuthorization(
                 options: [.alert, .sound]
             ) { _, _ in }
-//        locationManager = CLLocationManager()
-//        locationManager.delegate = self
-
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
     }
     
@@ -64,3 +63,14 @@ struct YourApp: App {
   }
 }
 */
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler:
+            @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound, .badge])
+    }
+}
