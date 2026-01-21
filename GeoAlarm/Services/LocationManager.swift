@@ -3,6 +3,7 @@ import UIKit
 import UserNotifications
 import AlarmKit
 import Foundation
+import Alamofire
 
 final class LocationManager: NSObject, CLLocationManagerDelegate {
 
@@ -43,19 +44,29 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.startMonitoring(for: region)
     }
     
-    private func triggerGeofenceNotification(for region: CLRegion) {
+    private func triggerGeofenceNotification(
+        for region: CLRegion,
+        temperature: Double?
+    ) {
         let content = UNMutableNotificationContent()
         let locationName = alarms[region.identifier]?.locationName ?? "your location"
-        
+
         content.title = "⚠️⏰ GEOFENCE ACTIVE ⏰⚠️"
-        content.body = "The alarm you set in \(locationName) has been activated"
-        
+
+        if let temperature = temperature {
+            content.body = """
+            The alarm you set in \(locationName) has been activated.
+            Current temperature: \(Int(temperature))°C
+            """
+        } else {
+            content.body = "The alarm you set in \(locationName) has been activated"
+        }
+
         content.sound = UNNotificationSound(
             named: UNNotificationSoundName("alarm.caf")
         )
-        
+
         content.interruptionLevel = .timeSensitive
-        
         content.badge = 1
         content.categoryIdentifier = "GEOFENCE_ALARM"
 
@@ -69,18 +80,73 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     }
 
     
-    func locationManager(_ manager: CLLocationManager,
-                         didDetermineState state: CLRegionState,
-                         for region: CLRegion) {
-        if state == .inside {
-            triggerGeofenceNotification(for: region)
+    private func fetchTemperature(
+        latitude: Double,
+        longitude: Double,
+        completion: @escaping (Double?) -> Void
+    ) {
+        let apiKey = "ede6407d43b670a03fb1c07d2e934dad"
+        let url = "https://api.openweathermap.org/data/2.5/weather"
+
+        let parameters: Parameters = [
+            "lat": latitude,
+            "lon": longitude,
+            "appid": apiKey,
+            "units": "metric"
+        ]
+
+        AF.request(url, parameters: parameters).responseJSON { response in
+            guard
+                let json = response.value as? [String: Any],
+                let main = json["main"] as? [String: Any],
+                let temp = main["temp"] as? Double
+            else {
+                completion(nil)
+                return
+            }
+
+            completion(temp)
         }
     }
 
-    func locationManager(_ manager: CLLocationManager,
-                         didEnterRegion region: CLRegion) {
-        triggerGeofenceNotification(for: region)
+    
+    func locationManager(
+        _ manager: CLLocationManager,
+        didDetermineState state: CLRegionState,
+        for region: CLRegion
+    ) {
+        guard state == .inside else { return }
+
+        if let circularRegion = region as? CLCircularRegion {
+            fetchTemperature(
+                latitude: circularRegion.center.latitude,
+                longitude: circularRegion.center.longitude
+            ) { temperature in
+                self.triggerGeofenceNotification(
+                    for: region,
+                    temperature: temperature
+                )
+            }
+        }
     }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didEnterRegion region: CLRegion
+    ) {
+        if let circularRegion = region as? CLCircularRegion {
+            fetchTemperature(
+                latitude: circularRegion.center.latitude,
+                longitude: circularRegion.center.longitude
+            ) { temperature in
+                self.triggerGeofenceNotification(
+                    for: region,
+                    temperature: temperature
+                )
+            }
+        }
+    }
+
     
     func syncActiveAlarms(_ alarms: [Alarm]) {
         removeAllGeofences()

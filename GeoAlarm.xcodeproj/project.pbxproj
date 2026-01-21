@@ -11,6 +11,7 @@
 		251C86672F01C9B100E59965 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 251C86662F01C9B100E59965 /* FirebaseStorage */; };
 		2599E6C22F0545FB00068C30 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2599E6C12F0545FB00068C30 /* FirebaseFirestore */; };
 		9C55601A2F0551070072D035 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5560192F0551070072D035 /* IQKeyboardManagerSwift */; };
+		9CB312802F2062AC00F6A267 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9CB3127F2F2062AC00F6A267 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CB312802F2062AC00F6A267 /* Alamofire in Frameworks */,
 				251C862D2F00604C00E59965 /* FirebaseAuth in Frameworks */,
 				9C55601A2F0551070072D035 /* IQKeyboardManagerSwift in Frameworks */,
 				251C86672F01C9B100E59965 /* FirebaseStorage in Frameworks */,
@@ -101,6 +103,7 @@
 				251C86662F01C9B100E59965 /* FirebaseStorage */,
 				2599E6C12F0545FB00068C30 /* FirebaseFirestore */,
 				9C5560192F0551070072D035 /* IQKeyboardManagerSwift */,
+				9CB3127F2F2062AC00F6A267 /* Alamofire */,
 			);
 			productName = GeoAlarm;
 			productReference = 251C85B72F0009B000E59965 /* GeoAlarm.app */;
@@ -136,6 +139,7 @@
 			packageReferences = (
 				251C862B2F00604C00E59965 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9C5560182F0551070072D035 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				9CB3127E2F2062AC00F6A267 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 251C85B82F0009B000E59965 /* Products */;
@@ -401,6 +405,14 @@
 				minimumVersion = 8.0.2;
 			};
 		};
+		9CB3127E2F2062AC00F6A267 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -423,6 +435,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C5560182F0551070072D035 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		9CB3127F2F2062AC00F6A267 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CB3127E2F2062AC00F6A267 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
