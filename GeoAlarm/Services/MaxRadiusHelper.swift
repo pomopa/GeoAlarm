@@ -9,6 +9,7 @@ import UIKit
 
 struct RadiusHelper {
     static let maxMeters: Double = 1000
+    static let minMeters: Double = 100
     
     static func calculateRadiusInMeters(unit: String, value: Double) -> Double{
         switch unit {
@@ -35,22 +36,36 @@ struct RadiusHelper {
         }
     }
     
-    static func maxRadiusText(for unit: String) -> String {
+    static func minRadius(for unit: String) -> Double {
         switch unit {
-        case "km":
-            let kmValue = 1
-            return "The maximum radius value is \(kmValue) km"
-        case "m":
-            let mValue = 1000
-            return "The maximum radius value is \(mValue) m"
-        case "mi":
-            let miValue = 0.62
-            return String(format: "The maximum radius value is \(miValue) mi")
-        case "ft":
-            let ftValue = 3281
-            return String(format: "The maximum radius value is \(ftValue) ft")
-        default:
-            return "The maximum radius value is 1 km"
+        case "km": return minMeters / 1000
+        case "m": return minMeters
+        case "mi": return minMeters / 1609.34
+        case "ft": return minMeters / 0.3048
+        default: return minMeters / 1000
         }
     }
+    
+    static func radiusText(for unit: String) -> String {
+        let maxValue = maxRadius(for: unit)
+        let minValue = minRadius(for: unit)
+
+        let minStr: String
+        let maxStr: String
+
+        switch unit {
+        case "km", "mi":
+            minStr = String(format: "%.2f", minValue)
+            maxStr = String(format: "%.2f", maxValue)
+        case "m", "ft":
+            minStr = String(format: "%.0f", minValue)
+            maxStr = String(format: "%.0f", maxValue)
+        default:
+            return "TThe radius must be in the range 0.1-1km."
+        }
+
+        return "The radius must be in the range \(minStr)-\(maxStr) \(unit)."
+    }
+
+
 }

@@ -1,5 +1,6 @@
 # Firebase plist
-*.GoogleService-Info.plist
+GoogleService-Info.plist
+Info.plist
 
 # Xcode
 DerivedData/
