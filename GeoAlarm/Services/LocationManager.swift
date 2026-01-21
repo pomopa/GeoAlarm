@@ -51,11 +51,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         let content = UNMutableNotificationContent()
         let locationName = alarms[region.identifier]?.locationName ?? "your location"
 
-        content.title = "⚠️⏰ GEOFENCE ACTIVE ⏰⚠️"
+        content.title = "⏰ Alarm Active in \(locationName)"
 
         if let temperature = temperature {
             content.body = """
-            The alarm you set in \(locationName) has been activated.
             Current temperature: \(Int(temperature))°C
             """
         } else {
