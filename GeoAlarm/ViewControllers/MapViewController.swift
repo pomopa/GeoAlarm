@@ -8,11 +8,20 @@ class MapViewController: UIViewController {
     
     private var alarms: [Alarm] = []
     private let db = Firestore.firestore()
+    private var selectedCoordinate: CLLocationCoordinate2D?
+    private var addAlarmButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         fetchAlarms()
+        
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleMapTap(_:))
+        )
+        tapGesture.cancelsTouchesInView = false
+        mapView.addGestureRecognizer(tapGesture)
     }
     
     // Fetch all alarms for the current user
@@ -132,6 +141,56 @@ class MapViewController: UIViewController {
            let alarm = sender as? Alarm {
             vc.alarm = alarm
         }
+
+        /*if segue.identifier == "MapToCreateAlarm",
+           let vc = segue.destination as? CreateAlarmViewController,
+           let coordinate = sender as? CLLocationCoordinate2D {
+            vc.initialCoordinate = coordinate
+        }*/
+    }
+    
+    // Add alarm by pressing the map
+
+    @objc private func addAlarmButtonTapped() {
+        guard let coordinate = selectedCoordinate else { return }
+        performSegue(withIdentifier: "MapToCreateAlarm", sender: coordinate)
+    }
+    
+    private func showAddAlarmButton(at point: CGPoint) {
+        // Remove existing button
+        addAlarmButton?.removeFromSuperview()
+
+        let buttonSize: CGFloat = 44
+        let button = UIButton(type: .system)
+        button.frame = CGRect(
+            x: point.x - buttonSize / 2,
+            y: point.y - buttonSize / 2,
+            width: buttonSize,
+            height: buttonSize
+        )
+
+        button.backgroundColor = .systemGreen
+        button.tintColor = .white
+        button.layer.cornerRadius = buttonSize / 2
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+
+        button.addTarget(
+            self,
+            action: #selector(addAlarmButtonTapped),
+            for: .touchUpInside
+        )
+
+        mapView.addSubview(button)
+        addAlarmButton = button
+    }
+
+    
+    @objc private func handleMapTap(_ gesture: UITapGestureRecognizer) {
+        let point = gesture.location(in: mapView)
+        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+
+        selectedCoordinate = coordinate
+        showAddAlarmButton(at: point)
     }
 }
 
