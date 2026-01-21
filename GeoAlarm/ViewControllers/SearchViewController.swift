@@ -149,15 +149,6 @@ class SearchViewController: UIViewController {
         
         searchBar.text = ""
         radiusTextField.text = ""
-        /*let regions = LocationManager.shared.currentGeofenceIDs()
-
-        print("Hi ha \(regions.count) geofences actius:")
-
-        for region in regions {
-            print("• \(region.identifier)")
-        }
-
-        print("addedd Alarm \(locationName) at \(Timestamp(date: Date()))")*/
     }
     
     // --------------------------------------------
@@ -211,7 +202,10 @@ class SearchViewController: UIViewController {
                         if canActivate {
                             self.showAlert(
                                 title: "Success",
-                                message: "Alarm saved and activated"
+                                message: """
+                                Alarm saved and activated
+                                ⚠️ Will play only when silent mode is off ⚠️
+                                """
                             )
                         } else {
                             self.showAlert(
