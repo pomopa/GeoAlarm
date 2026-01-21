@@ -125,6 +125,14 @@ class MapViewController: UIViewController {
         
         return MKCoordinateRegion(center: center, span: span)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MapToEditAlarm",
+           let vc = segue.destination as? EditAlarmViewController,
+           let alarm = sender as? Alarm {
+            vc.alarm = alarm
+        }
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -169,6 +177,21 @@ extension MapViewController: MKMapViewDelegate {
             ? .systemGreen
             : .systemGray
         
+        markerView.canShowCallout = true
+        markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
         return markerView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let annotation = view.annotation else { return }
+            
+        // Find the alarm that matches this annotation's coordinate
+        if let alarm = alarms.first(where: {
+            $0.latitude == annotation.coordinate.latitude &&
+            $0.longitude == annotation.coordinate.longitude
+        }) {
+            performSegue(withIdentifier: "MapToEditAlarm", sender: alarm)
+        }
     }
 }

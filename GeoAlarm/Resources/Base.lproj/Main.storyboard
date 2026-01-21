@@ -545,6 +545,7 @@
                     <tabBarItem key="tabBarItem" title="" image="map" catalog="system" selectedImage="map.fill" id="haX-xP-ui9"/>
                     <connections>
                         <outlet property="mapView" destination="42J-9T-pVw" id="kPR-Ey-FXl"/>
+                        <segue destination="qdH-86-5Zz" kind="show" identifier="MapToEditAlarm" id="uQz-3A-hgm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXi-my-dNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -809,6 +810,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="uQz-3A-hgm"/>
         <segue reference="yBE-Lu-zSb"/>
     </inferredMetricsTieBreakers>
     <resources>
