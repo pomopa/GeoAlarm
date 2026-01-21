@@ -1,7 +1,6 @@
 import CoreLocation
 import UIKit
 import UserNotifications
-import AlarmKit
 import Foundation
 import Alamofire
 
@@ -168,10 +167,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
                 longitude: alarm.longitude,
                 radius: radiusInMeters
             )
-        }
-        
-        for region in manager.monitoredRegions {
-            print(region.identifier)
         }
     }
 

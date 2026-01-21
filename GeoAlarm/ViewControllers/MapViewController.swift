@@ -60,12 +60,22 @@ class MapViewController: UIViewController {
                 longitude: alarm.longitude
             )
             annotation.title = alarm.locationName
-            annotation.subtitle = "Radius: \(alarm.radius) \(alarm.unit)"
+            annotation.subtitle = alarm.isActive ? "Active" : "Inactive"
             mapView.addAnnotation(annotation)
             
             let active = alarm.isActive
-            // need to review - km vs m,  missing mi...
-            let radiusInMeters = alarm.unit == "km" ? alarm.radius * 1000 : alarm.radius
+
+            let radiusInMeters: Double
+            switch alarm.unit.lowercased() {
+            case "km":
+                radiusInMeters = alarm.radius * 1000
+            case "mi":
+                radiusInMeters = alarm.radius * 1609.34
+            case "ft":
+                radiusInMeters = alarm.radius * 0.3048
+            default: // "m"
+                radiusInMeters = alarm.radius
+            }
             let circle = MKCircle(
                 center: annotation.coordinate,
                 radius: radiusInMeters
@@ -113,39 +123,45 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
     // Customize the circle overlay appearance
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        if let circle = overlay as? MKCircle {
-            let renderer = MKCircleRenderer(circle: circle)
-            //print(circle.subtitle)
-            if circle.subtitle == "Active" {
-                renderer.fillColor = UIColor.blue.withAlphaComponent(0.2)
-                renderer.strokeColor = UIColor.green
-            } else {
-                renderer.fillColor = UIColor.black.withAlphaComponent(0.01)
-                renderer.strokeColor = UIColor.red
-            }
-            renderer.lineWidth = 2
-            return renderer
+
+        guard let circle = overlay as? MKCircle else {
+            return MKOverlayRenderer(overlay: overlay)
         }
-        return MKOverlayRenderer(overlay: overlay)
+
+        let renderer = MKCircleRenderer(circle: circle)
+
+        if circle.subtitle == "Active" {
+            renderer.fillColor = UIColor.systemBlue.withAlphaComponent(0.2)
+            renderer.strokeColor = UIColor.systemGreen
+            renderer.lineWidth = 2
+        } else {
+            renderer.fillColor = .clear
+            renderer.strokeColor = .clear
+            renderer.lineWidth = 0
+        }
+
+        return renderer
     }
     
     // Customize pin appearance
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !(annotation is MKUserLocation) else { return nil }
-        
-        let identifier = "AlarmPin"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
-        
-        if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
-            annotationView?.markerTintColor = .systemRed
-            
-        } else {
-            annotationView?.annotation = annotation
+        if annotation is MKUserLocation {
+            return nil
         }
         
-        return annotationView
+        let identifier = "AlarmPin"
+        let markerView = (mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView) ?? MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        
+        markerView.annotation = annotation
+        
+        markerView.glyphText = nil
+        markerView.glyphImage = UIImage(systemName: "alarm")
+        markerView.glyphTintColor = .white
+        
+        markerView.markerTintColor = annotation.subtitle == "Active"
+            ? .systemGreen
+            : .systemGray
+        
+        return markerView
     }
 }
