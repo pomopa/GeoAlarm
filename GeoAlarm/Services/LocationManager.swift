@@ -83,7 +83,11 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         longitude: Double,
         completion: @escaping (Double?) -> Void
     ) {
-        let apiKey = "ede6407d43b670a03fb1c07d2e934dad"
+        guard let apiKey = Bundle.main.object(
+            forInfoDictionaryKey: "OPENWEATHER_API_KEY"
+        ) as? String else {
+            fatalError("API key not found")
+        }
         let url = "https://api.openweathermap.org/data/2.5/weather"
 
         let parameters: Parameters = [

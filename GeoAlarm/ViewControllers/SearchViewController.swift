@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         unitButton.configureDropdown(options: ["km", "m", "mi", "ft"]) { [weak self] selectedUnit in
             self?.unitButton.setTitle(selectedUnit, for: .normal)
-            self?.maxRadiusLabel.text = RadiusHelper.maxRadiusText(for: selectedUnit)
+            self?.maxRadiusLabel.text = RadiusHelper.radiusText(for: selectedUnit)
         }
         configureSearch()
         configureTableView()
@@ -109,6 +109,13 @@ class SearchViewController: UIViewController {
             return
         }
         
+        let minRadius = RadiusHelper.minRadius(for: unit)
+        guard radiusInMeters >= 100 else {
+            let message = String(format: "The minimum allowed radius for %@ is %.2f %@", unit, minRadius, unit)
+            showAlert(title: "Invalid radius", message: message)
+            return
+        }
+        
         let db = Firestore.firestore()
         
         let alarmRef = db
@@ -167,7 +174,7 @@ class SearchViewController: UIViewController {
                 radius > 0 else {
             showAlert(title: "Invalid radius", message: "Please enter a valid radius")
             return
-            }
+        }
 
         let unit = unitButton.title(for: .normal) ?? "km"
 

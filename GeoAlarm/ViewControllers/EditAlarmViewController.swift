@@ -32,7 +32,7 @@ class EditAlarmViewController: UIViewController {
         populateUI()
         unitButton.configureDropdown(options: ["km", "m", "mi", "ft"]) { [weak self] selectedUnit in
             self?.unitButton.setTitle(selectedUnit, for: .normal)
-            self?.maxRadiusLabel.text = RadiusHelper.maxRadiusText(for: selectedUnit)
+            self?.maxRadiusLabel.text = RadiusHelper.radiusText(for: selectedUnit)
         }
         configureSearch()
         configureTableView()
@@ -49,7 +49,7 @@ class EditAlarmViewController: UIViewController {
         unitButton.setTitle(alarm.unit, for: .normal)
         currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
                                                    longitude: alarm.longitude)
-        maxRadiusLabel.text = RadiusHelper.maxRadiusText(for: alarm.unit)
+        maxRadiusLabel.text = RadiusHelper.radiusText(for: alarm.unit)
     }
     
     private func configureSearch() {
@@ -102,6 +102,13 @@ class EditAlarmViewController: UIViewController {
         let maxRadius = RadiusHelper.maxRadius(for: unit)
         guard radiusInMeters <= 1000 else {
             let message = String(format: "The maximum allowed radius for %@ is %.2f %@", unit, maxRadius, unit)
+            showAlert(title: "Invalid radius", message: message)
+            return
+        }
+        
+        let minRadius = RadiusHelper.minRadius(for: unit)
+        guard radiusInMeters >= 100 else {
+            let message = String(format: "The minimum allowed radius for %@ is %.2f %@", unit, minRadius, unit)
             showAlert(title: "Invalid radius", message: message)
             return
         }
