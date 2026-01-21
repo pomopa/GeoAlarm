@@ -85,8 +85,15 @@ class MapViewController: UIViewController {
         }
         
         // Zoom to show all alarms
-        if !alarms.isEmpty {
-            let coordinates = alarms.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
+        let activeAlarms = alarms.filter { $0.isActive }
+        let alarmsToShow = activeAlarms.isEmpty ? alarms : activeAlarms
+        var coordinates = alarmsToShow.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
+
+        if let userLocation = mapView.userLocation.location?.coordinate {
+            coordinates.append(userLocation)
+        }
+                
+        if !coordinates.isEmpty {
             let region = mapRegion(for: coordinates)
             mapView.setRegion(region, animated: true)
         }
