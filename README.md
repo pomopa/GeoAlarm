@@ -65,6 +65,9 @@ service cloud.firestore {
 }
 ```
 
+### API keys setup
+For the project you will need your own API key from openweather, once obtained create a `APIs.plist` file and insert the key-value pair for the correct functioning of the project. The key must be "OPENWEATHER_API_KEY".
+
 ---
 
 ## 📸 Demo Screenshots

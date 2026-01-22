@@ -83,12 +83,19 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         longitude: Double,
         completion: @escaping (Double?) -> Void
     ) {
-        guard let apiKey = Bundle.main.object(
-            forInfoDictionaryKey: "OPENWEATHER_API_KEY"
-        ) as? String else {
-            fatalError("API key not found")
+        guard
+            let url = Bundle.main.url(forResource: "APIs", withExtension: "plist"),
+            let data = try? Data(contentsOf: url),
+            let plist = try? PropertyListSerialization.propertyList(
+                from: data,
+                format: nil
+            ) as? [String: Any],
+            let apiKey = plist["OPENWEATHER_API_KEY"] as? String
+        else {
+            fatalError("API key not found in APIs.plist")
         }
-        let url = "https://api.openweathermap.org/data/2.5/weather"
+        
+        let api_url = "https://api.openweathermap.org/data/2.5/weather"
 
         let parameters: Parameters = [
             "lat": latitude,
@@ -97,7 +104,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
             "units": "metric"
         ]
 
-        AF.request(url, parameters: parameters).responseJSON { response in
+        AF.request(api_url, parameters: parameters).responseJSON { response in
             guard
                 let json = response.value as? [String: Any],
                 let main = json["main"] as? [String: Any],
