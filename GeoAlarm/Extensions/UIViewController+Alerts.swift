@@ -12,7 +12,8 @@ extension UIViewController {
     func showAlert(
         title: String,
         message: String,
-        buttonTitle: String = "OK"
+        buttonTitle: String = "OK",
+        onOk: (() -> Void)? = nil
     ) {
         let alert = UIAlertController(
             title: title,
@@ -21,10 +22,12 @@ extension UIViewController {
         )
 
         alert.addAction(
-            UIAlertAction(title: buttonTitle, style: .default)
+            UIAlertAction(title: buttonTitle, style: .default) { _ in
+                onOk?()
+            }
         )
 
         present(alert, animated: true)
     }
-    
 }
+

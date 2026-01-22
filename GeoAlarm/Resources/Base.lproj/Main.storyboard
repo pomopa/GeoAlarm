@@ -553,10 +553,10 @@
             </objects>
             <point key="canvasLocation" x="2424" y="-1471"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Alarm View Controller-->
         <scene sceneID="VbD-S6-SXc">
             <objects>
-                <viewController id="LLQ-hC-zEA" sceneMemberID="viewController">
+                <viewController id="LLQ-hC-zEA" customClass="CreateAlarmViewController" customModule="GeoAlarm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3vQ-KZ-Zeu">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -624,6 +624,7 @@
                                     <color key="baseBackgroundColor" red="0.8627929688" green="0.4016113281" blue="0.3034667969" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="addAlarm:" destination="LLQ-hC-zEA" eventType="touchUpInside" id="aei-iW-4GB"/>
                                     <action selector="addButtonTapped:" destination="sUP-t4-E5b" eventType="touchUpInside" id="pxW-YS-YlC"/>
                                 </connections>
                             </button>
@@ -639,6 +640,10 @@
                                     <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="discardView:" destination="nrd-IV-p7O" eventType="touchUpInside" id="EzA-yL-X14"/>
+                                    <action selector="discardView:" destination="LLQ-hC-zEA" eventType="touchUpInside" id="Qhn-gS-edH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aby-rQ-Gqf"/>
@@ -662,8 +667,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UtM-sP-CLu"/>
+                    <connections>
+                        <outlet property="maxRadiusLabel" destination="KmR-hh-RnT" id="nPr-H3-ghk"/>
+                        <outlet property="nameTextField" destination="znL-41-0zH" id="FvN-YA-rJp"/>
+                        <outlet property="radiusTextField" destination="MZO-Qx-8Qz" id="Pd2-NV-cQZ"/>
+                        <outlet property="unitButton" destination="3DS-Sb-nqV" id="axV-KY-hFh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e03-al-KsZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="nrd-IV-p7O" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3336.6412213740455" y="-1471.1267605633805"/>
         </scene>
@@ -925,7 +937,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uQz-3A-hgm"/>
+        <segue reference="z3j-AH-SMh"/>
         <segue reference="yBE-Lu-zSb"/>
     </inferredMetricsTieBreakers>
     <resources>

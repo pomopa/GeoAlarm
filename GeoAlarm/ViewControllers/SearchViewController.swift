@@ -211,7 +211,7 @@ class SearchViewController: UIViewController {
                                 title: "Success",
                                 message: """
                                 Alarm saved and activated
-                                ⚠️ Will play only when silent mode is off ⚠️
+                                Will play only when silent mode is off
                                 """
                             )
                         } else {
