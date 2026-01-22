@@ -26,17 +26,22 @@ class EditAlarmViewController: UIViewController {
     private var selectedCompletion: MKLocalSearchCompletion?
     private var currentCoordinate: CLLocationCoordinate2D?
     private let locationSearchService = LocationSearchService()
+    private let decimalDelegate = DecimalTextFieldDelegate(maxDecimals: 3)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         populateUI()
         unitButton.configureDropdown(options: ["km", "m", "mi", "ft"]) { [weak self] selectedUnit in
             self?.unitButton.setTitle(selectedUnit, for: .normal)
             self?.maxRadiusLabel.text = RadiusHelper.radiusText(for: selectedUnit)
         }
+        
         configureSearch()
         configureTableView()
         tableViewHeightConstraint.constant = 0
+        
+        radiusTextField.delegate = decimalDelegate
         hideKeyboardWhenTappedAround()
     }
     
@@ -45,7 +50,12 @@ class EditAlarmViewController: UIViewController {
     // --------------------------------------------
     private func populateUI() {
         nameSearchBar.text = alarm.locationName
-        radiusTextField.text = "\(Int(alarm.radius))"
+        let radius = alarm.radius
+        if floor(radius) == radius {
+            radiusTextField.text = String(format: "%.0f", radius)
+        } else {
+            radiusTextField.text = String(radius)
+        }
         unitButton.setTitle(alarm.unit, for: .normal)
         currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
                                                    longitude: alarm.longitude)

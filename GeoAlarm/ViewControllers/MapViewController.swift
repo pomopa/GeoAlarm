@@ -3,16 +3,28 @@ import MapKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     private var alarms: [Alarm] = []
     private let db = Firestore.firestore()
+    private var selectedCoordinate: CLLocationCoordinate2D?
+    private var addAlarmButton: UIButton?
+    private var mapTapGesture: UITapGestureRecognizer!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         fetchAlarms()
+        
+        mapTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleMapTap(_:))
+        )
+        mapTapGesture.cancelsTouchesInView = false
+        mapTapGesture.delegate = self
+        mapView.addGestureRecognizer(mapTapGesture)
     }
     
     // Fetch all alarms for the current user
@@ -132,6 +144,85 @@ class MapViewController: UIViewController {
            let alarm = sender as? Alarm {
             vc.alarm = alarm
         }
+
+        if segue.identifier == "MapToCreateAlarm",
+           let vc = segue.destination as? CreateAlarmViewController,
+           let coordinate = sender as? CLLocationCoordinate2D {
+            vc.initialCoordinate = coordinate
+        }
+    }
+    
+    // Add alarm by pressing the map
+
+    @objc private func addAlarmButtonTapped() {
+        guard let coordinate = selectedCoordinate else { return }
+        performSegue(withIdentifier: "MapToCreateAlarm", sender: coordinate)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.addAlarmButton?.removeFromSuperview()
+            self.addAlarmButton = nil
+        }
+    }
+    
+    private func showAddAlarmButton(at point: CGPoint) {
+        addAlarmButton?.removeFromSuperview()
+
+        let buttonSize: CGFloat = 44
+        let button = UIButton(type: .system)
+        button.frame = CGRect(
+            x: point.x - buttonSize / 2,
+            y: point.y - buttonSize / 2,
+            width: buttonSize,
+            height: buttonSize
+        )
+
+        button.backgroundColor = UIColor(red: 0xDB/255, green: 0x65/255, blue: 0x4D/255, alpha: 1)
+        button.tintColor = UIColor(red: 0x1B/255, green: 0x2B/255, blue: 0x42/255, alpha: 1)
+        button.layer.cornerRadius = buttonSize / 2
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+        button.setImage(UIImage(systemName: "plus", withConfiguration: config), for: .normal)
+
+        button.addTarget(
+            self,
+            action: #selector(addAlarmButtonTapped),
+            for: .touchUpInside
+        )
+        
+        mapView.addSubview(button)
+        addAlarmButton = button
+    }
+
+    
+    @objc private func handleMapTap(_ gesture: UITapGestureRecognizer) {
+        let point = gesture.location(in: mapView)
+        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+        
+        if !mapView.selectedAnnotations.isEmpty {
+            for annotation in mapView.selectedAnnotations {
+                mapView.deselectAnnotation(annotation, animated: true)
+            }
+            return
+        }
+        
+        selectedCoordinate = coordinate
+        showAddAlarmButton(at: point)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        var view = touch.view
+        
+        while let currentView = view {
+            if currentView is MKAnnotationView {
+                return false
+            }
+            view = currentView.superview
+        }
+            
+        if let view = touch.view, view == addAlarmButton {
+            return false
+        }
+            
+        return true
     }
 }
 
@@ -186,12 +277,15 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let annotation = view.annotation else { return }
             
-        // Find the alarm that matches this annotation's coordinate
         if let alarm = alarms.first(where: {
             $0.latitude == annotation.coordinate.latitude &&
             $0.longitude == annotation.coordinate.longitude
         }) {
             performSegue(withIdentifier: "MapToEditAlarm", sender: alarm)
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        addAlarmButton?.removeFromSuperview()
     }
 }
