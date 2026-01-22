@@ -6,8 +6,6 @@
 //
 import UIKit
 import MapKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class EditAlarmViewController: UIViewController {
 
@@ -158,37 +156,24 @@ class EditAlarmViewController: UIViewController {
         )
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
-            self.deleteAlarm()
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            guard let self else { return }
+
+            FirestoreHelper.deleteAlarm(alarmID: self.alarm.id) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self.dismiss(animated: true)
+                    case .failure(let error):
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                    }
+                }
+            }
         })
 
         present(alert, animated: true)
     }
-
-    private func deleteAlarm() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            showAlert(title: "Error", message: "User not logged in")
-            return
-        }
-
-        let db = Firestore.firestore()
-        
-        db.collection("users")
-            .document(userId)
-            .collection("alarms")
-            .document(alarm.id)
-            .delete { error in
-                if let error = error {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
-                    return
-                }
-
-                DispatchQueue.main.async {
-                    LocationManager.shared.disableGeofence(id: self.alarm.id)
-                    self.dismiss(animated: true)
-                }
-            }
-    }
+    
 }
 
 // --------------------------------------------

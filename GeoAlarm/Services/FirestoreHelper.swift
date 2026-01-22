@@ -111,7 +111,7 @@ final class FirestoreHelper {
     }
     
     //--------------------------
-    // Delete ALL alarms
+    // Delete alarms functions
     //--------------------------
     static func deleteAllAlarms(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -150,6 +150,35 @@ final class FirestoreHelper {
                 }
             }
         }
+    }
+    
+    static func deleteAlarm(
+        alarmID: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            completion(.failure(NSError(
+                domain: "FirestoreHelper",
+                code: 401,
+                userInfo: [NSLocalizedDescriptionKey: "User not logged in"]
+            )))
+            return
+        }
+
+        Firestore.firestore().collection("users")
+            .document(userId)
+            .collection("alarms")
+            .document(alarmID)
+            .delete { error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+
+                LocationManager.shared.disableGeofence(id: alarmID)
+                
+                completion(.success(()))
+            }
     }
         
     //--------------------------
