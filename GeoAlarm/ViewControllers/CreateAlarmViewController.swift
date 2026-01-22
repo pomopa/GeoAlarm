@@ -57,7 +57,7 @@ class CreateAlarmViewController: UIViewController {
         FirestoreHelper.fetchActiveAlarmCount { activeCount in
             let canActivate = activeCount < 20
 
-            FirestoreHelper.saveAlarm(
+            FirestoreHelper.saveOrUpdateAlarm(
                 locationName: nameText,
                 coordinate: self.initialCoordinate!,
                 radius: radius,

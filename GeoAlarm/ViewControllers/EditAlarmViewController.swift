@@ -96,59 +96,6 @@ class EditAlarmViewController: UIViewController {
 
         nameSearchBar.resignFirstResponder()
     }
-    
-    private func editAlarm(
-        locationName: String,
-        coordinate: CLLocationCoordinate2D,
-        radius: Double,
-        unit: String
-    ) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            showAlert(title: "Error", message: "User not logged in")
-            return
-        }
-
-        let radiusInMeters = RadiusHelper.calculateRadiusInMeters(unit: unit, value: radius)
-        let maxRadius = RadiusHelper.maxRadius(for: unit)
-        guard radiusInMeters <= 1000 else {
-            let message = String(format: "The maximum allowed radius for %@ is %.2f %@", unit, maxRadius, unit)
-            showAlert(title: "Invalid radius", message: message)
-            return
-        }
-        
-        let minRadius = RadiusHelper.minRadius(for: unit)
-        guard radiusInMeters >= 100 else {
-            let message = String(format: "The minimum allowed radius for %@ is %.2f %@", unit, minRadius, unit)
-            showAlert(title: "Invalid radius", message: message)
-            return
-        }
-        
-        let db = Firestore.firestore()
-
-        let alarmData: [String: Any] = [
-            "locationName": locationName,
-            "latitude": coordinate.latitude,
-            "longitude": coordinate.longitude,
-            "radius": radius,
-            "unit": unit
-        ]
-
-        db.collection("users")
-            .document(userId)
-            .collection("alarms")
-            .document(alarm.id)
-            .updateData(alarmData) { error in
-
-                if let error = error {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
-                } else {
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: true)
-                    }
-                }
-            }
-    }
-
 
     // --------------------------------------------
     // Button Actions
@@ -178,10 +125,25 @@ class EditAlarmViewController: UIViewController {
             return
         }
 
-        editAlarm(locationName: locationName,
-                  coordinate: coordinate,
-                  radius: radius,
-                  unit: unit)
+        FirestoreHelper.saveOrUpdateAlarm(
+            alarmID: alarm.id,
+            locationName: locationName,
+            coordinate: coordinate,
+            radius: radius,
+            unit: unit
+        ) { [weak self] result in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.dismiss(animated: true)
+                    
+                case .failure(let error):
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                }
+            }
+        }
     }
     
     @IBAction func cancelTapped(_ sender: Any) {

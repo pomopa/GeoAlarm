@@ -10,7 +10,9 @@ import FirebaseFirestore
 import CoreLocation
 
 final class FirestoreHelper {
-    
+    //--------------------------
+    // Fetch active alarm count
+    //--------------------------
     static func fetchActiveAlarmCount( completion: @escaping (Int) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             completion(0)
@@ -33,12 +35,16 @@ final class FirestoreHelper {
             }
     }
     
-    static func saveAlarm(
+    //--------------------------
+    // Save alarms
+    //--------------------------
+    static func saveOrUpdateAlarm(
+        alarmID: String? = nil,
         locationName: String,
         coordinate: CLLocationCoordinate2D,
         radius: Double,
         unit: String,
-        isActive: Bool,
+        isActive: Bool? = nil, // only used for creation
         completion: @escaping (Result<String, Error>) -> Void
     ) {
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -46,66 +52,67 @@ final class FirestoreHelper {
             return
         }
 
-        let radiusInMeters = RadiusHelper.calculateRadiusInMeters(
-            unit: unit,
-            value: radius
-        )
-
+        let radiusInMeters = RadiusHelper.calculateRadiusInMeters(unit: unit, value: radius)
         let maxRadius = RadiusHelper.maxRadius(for: unit)
+        let minRadius = RadiusHelper.minRadius(for: unit)
+
         guard radiusInMeters <= 1000 else {
-            completion(.failure(
-                AlarmSaveError.radiusTooLarge(max: maxRadius, unit: unit)
-            ))
+            completion(.failure(AlarmSaveError.radiusTooLarge(max: maxRadius, unit: unit)))
             return
         }
 
-        let minRadius = RadiusHelper.minRadius(for: unit)
         guard radiusInMeters >= 100 else {
-            completion(.failure(
-                AlarmSaveError.radiusTooSmall(min: minRadius, unit: unit)
-            ))
+            completion(.failure(AlarmSaveError.radiusTooSmall(min: minRadius, unit: unit)))
             return
         }
 
         let db = Firestore.firestore()
-        
-        let alarmRef = db
-            .collection("users")
-            .document(userId)
-            .collection("alarms")
-            .document()
-
-        let alarmID = alarmRef.documentID
-        
-        let alarmData: [String: Any] = [
+        let docRef: DocumentReference
+        var data: [String: Any] = [
             "locationName": locationName,
             "latitude": coordinate.latitude,
             "longitude": coordinate.longitude,
             "radius": radius,
-            "unit": unit,
-            "isActive": isActive,
-            "createdAt": Timestamp(date: Date())
+            "unit": unit
         ]
+        
+        if let alarmID = alarmID {
+            // Editing existing alarm
+            docRef = db.collection("users").document(userId)
+                        .collection("alarms").document(alarmID)
+        } else {
+            // Creating new alarm
+            docRef = db.collection("users").document(userId)
+                        .collection("alarms").document()
+            data["createdAt"] = Timestamp(date: Date())
+            data["isActive"] = isActive ?? false
+        }
 
-        alarmRef.setData(alarmData) { error in
-            if let error {
+        let action: (DocumentReference, [String: Any], ((Error?) -> Void)?) -> Void =
+            alarmID == nil ? { $0.setData($1, completion: $2) } : { $0.updateData($1, completion: $2) }
+
+        action(docRef, data) { error in
+            if let error = error {
                 completion(.failure(error))
                 return
             }
 
-            if isActive {
+            if alarmID == nil, isActive == true {
                 LocationManager.shared.addGeofence(
-                    id: alarmID,
+                    id: docRef.documentID,
                     latitude: coordinate.latitude,
                     longitude: coordinate.longitude,
                     radius: radiusInMeters
                 )
             }
 
-            completion(.success(alarmID))
+            completion(.success(docRef.documentID))
         }
     }
     
+    //--------------------------
+    // Delete ALL alarms
+    //--------------------------
     static func deleteAllAlarms(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             completion(.success(()))
@@ -145,6 +152,9 @@ final class FirestoreHelper {
         }
     }
         
+    //--------------------------
+    // Get all alarms
+    //--------------------------
     @discardableResult
     static func listenToAlarms(
         orderedByCreationDate: Bool = false,
@@ -182,6 +192,9 @@ final class FirestoreHelper {
         }
     }
     
+    //--------------------------
+    // Update alarms state
+    //--------------------------
     static func updateAlarmActiveState(
         alarmID: String,
         isActive: Bool,
@@ -201,6 +214,5 @@ final class FirestoreHelper {
 
         completion(.success(()))
     }
-
     
 }
