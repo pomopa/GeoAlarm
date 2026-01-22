@@ -36,7 +36,7 @@ final class FirestoreHelper {
     }
     
     //--------------------------
-    // Save alarms
+    // Save or edit alarms
     //--------------------------
     static func saveOrUpdateAlarm(
         alarmID: String? = nil,

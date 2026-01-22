@@ -84,6 +84,15 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         let alarmsToShow = activeAlarms.isEmpty ? alarms : activeAlarms
         var coordinates = alarmsToShow.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
 
+        if coordinates.isEmpty, let userLocation = mapView.userLocation.location?.coordinate {
+            let region = MKCoordinateRegion(
+                center: userLocation,
+                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            )
+            mapView.setRegion(region, animated: true)
+            return
+        }
+        
         if let userLocation = mapView.userLocation.location?.coordinate {
             coordinates.append(userLocation)
         }
@@ -96,29 +105,28 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Calculate map region to fit all coordinates
     private func mapRegion(for coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
-        var minLat = coordinates[0].latitude
-        var maxLat = coordinates[0].latitude
-        var minLon = coordinates[0].longitude
-        var maxLon = coordinates[0].longitude
-        
-        for coordinate in coordinates {
-            minLat = min(minLat, coordinate.latitude)
-            maxLat = max(maxLat, coordinate.latitude)
-            minLon = min(minLon, coordinate.longitude)
-            maxLon = max(maxLon, coordinate.longitude)
-        }
-        
-        let center = CLLocationCoordinate2D(
-            latitude: (minLat + maxLat) / 2,
-            longitude: (minLon + maxLon) / 2
+        let latitudes = coordinates.map { $0.latitude }
+        let longitudes = coordinates.map { $0.longitude }
+
+        let minLat = latitudes.min()!
+        let maxLat = latitudes.max()!
+        let minLon = longitudes.min()!
+        let maxLon = longitudes.max()!
+
+        let centerLat = (minLat + maxLat) / 2
+        let centerLon = (minLon + maxLon) / 2
+
+        var spanLat = (maxLat - minLat) * 1.2
+        var spanLon = (maxLon - minLon) * 1.2
+
+        // Clamp to MapKit safe limits
+        spanLat = max(0.01, min(spanLat, 180))
+        spanLon = max(0.01, min(spanLon, 360))
+
+        return MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: centerLat, longitude: centerLon),
+            span: MKCoordinateSpan(latitudeDelta: spanLat, longitudeDelta: spanLon)
         )
-        
-        let span = MKCoordinateSpan(
-            latitudeDelta: (maxLat - minLat) * 1.5,
-            longitudeDelta: (maxLon - minLon) * 1.5
-        )
-        
-        return MKCoordinateRegion(center: center, span: span)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -255,6 +263,18 @@ extension MapViewController: MKMapViewDelegate {
         markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         
         return markerView
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        let activeAlarms = alarms.filter { $0.isActive }
+        guard activeAlarms.isEmpty else { return }
+
+        let coordinate = userLocation.coordinate
+        let region = MKCoordinateRegion(
+            center: coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        )
+        mapView.setRegion(region, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {

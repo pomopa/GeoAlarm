@@ -172,6 +172,9 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
                 value: alarm.radius
             )
 
+            if alarm.locationName == "New Zealand" {
+                print (alarm.latitude, alarm.longitude, radiusInMeters)
+            }
             addGeofence(
                 id: alarm.id,
                 latitude: alarm.latitude,
