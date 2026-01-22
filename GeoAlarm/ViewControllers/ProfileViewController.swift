@@ -99,12 +99,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             .child("profile_images/\(user.uid).jpg")
 
         storageRef.putData(imageData) { _, error in
-            if error != nil {
+            if let error = error {
+                print("Upload error: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    self.showAlert(
-                        title: "Upload failed",
-                        message: "Your profile picture was updated locally, but couldn't be uploaded to the cloud. Please try again later."
-                    )
+                    self.showAlert(title: "Upload failed", message: "Your profile picture was updated locally, but couldn't be uploaded to the cloud. Please try again later.")
                 }
                 return
             }
