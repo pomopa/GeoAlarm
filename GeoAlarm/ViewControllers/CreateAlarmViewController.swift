@@ -40,24 +40,6 @@ class CreateAlarmViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    private func fetchActiveAlarmCount(
-        completion: @escaping (Int) -> Void
-    ) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            completion(0)
-            return
-        }
-
-        Firestore.firestore()
-            .collection("users")
-            .document(userId)
-            .collection("alarms")
-            .whereField("isActive", isEqualTo: true)
-            .getDocuments { snapshot, _ in
-                completion(snapshot?.documents.count ?? 0)
-            }
-    }
-    
     private func saveAlarm(
         locationName: String,
         coordinate: CLLocationCoordinate2D,
@@ -141,7 +123,7 @@ class CreateAlarmViewController: UIViewController {
         
         let unit = unitButton.title(for: .normal) ?? "km"
         
-        self.fetchActiveAlarmCount { activeCount in
+        FirestoreHelper.fetchActiveAlarmCount { activeCount in
             let canActivate = activeCount < 20
 
             self.saveAlarm(

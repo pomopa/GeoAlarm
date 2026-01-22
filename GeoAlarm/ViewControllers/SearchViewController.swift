@@ -71,24 +71,6 @@ class SearchViewController: UIViewController {
 
         searchBar.resignFirstResponder()
     }
-    
-    private func fetchActiveAlarmCount(
-        completion: @escaping (Int) -> Void
-    ) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            completion(0)
-            return
-        }
-
-        Firestore.firestore()
-            .collection("users")
-            .document(userId)
-            .collection("alarms")
-            .whereField("isActive", isEqualTo: true)
-            .getDocuments { snapshot, _ in
-                completion(snapshot?.documents.count ?? 0)
-            }
-    }
 
     private func saveAlarm(
         locationName: String,
@@ -189,7 +171,7 @@ class SearchViewController: UIViewController {
                 return
             }
 
-            self.fetchActiveAlarmCount { activeCount in
+            FirestoreHelper.fetchActiveAlarmCount { activeCount in
                 let canActivate = activeCount < 20
 
                 self.saveAlarm(
