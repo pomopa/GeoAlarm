@@ -71,76 +71,6 @@ class SearchViewController: UIViewController {
 
         searchBar.resignFirstResponder()
     }
-
-    private func saveAlarm(
-        locationName: String,
-        coordinate: CLLocationCoordinate2D,
-        radius: Double,
-        unit: String,
-        isActive: Bool,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            showAlert(title: "Error", message: "User not logged in")
-            return
-        }
-
-        let radiusInMeters = RadiusHelper.calculateRadiusInMeters(unit: unit, value: radius)
-        let maxRadius = RadiusHelper.maxRadius(for: unit)
-        guard radiusInMeters <= 1000 else {
-            let message = String(format: "The maximum allowed radius for %@ is %.2f %@", unit, maxRadius, unit)
-            showAlert(title: "Invalid radius", message: message)
-            return
-        }
-        
-        let minRadius = RadiusHelper.minRadius(for: unit)
-        guard radiusInMeters >= 100 else {
-            let message = String(format: "The minimum allowed radius for %@ is %.2f %@", unit, minRadius, unit)
-            showAlert(title: "Invalid radius", message: message)
-            return
-        }
-        
-        let db = Firestore.firestore()
-        
-        let alarmRef = db
-            .collection("users")
-            .document(userId)
-            .collection("alarms")
-            .document()
-        
-        let alarmID = alarmRef.documentID
-        
-        let alarmData: [String: Any] = [
-            "locationName": locationName,
-            "latitude": coordinate.latitude,
-            "longitude": coordinate.longitude,
-            "radius": radius,
-            "unit": unit,
-            "isActive": isActive,
-            "createdAt": Timestamp(date: Date())
-        ]
-
-        alarmRef.setData(alarmData) { error in
-            if let error {
-                completion(.failure(error))
-                return
-            }
-
-            if isActive {
-                LocationManager.shared.addGeofence(
-                    id: alarmID,
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude,
-                    radius: radiusInMeters
-                )
-            }
-            
-            completion(.success(()))
-        }
-        
-        searchBar.text = ""
-        radiusTextField.text = ""
-    }
     
     // --------------------------------------------
     // Add alarm
@@ -174,7 +104,7 @@ class SearchViewController: UIViewController {
             FirestoreHelper.fetchActiveAlarmCount { activeCount in
                 let canActivate = activeCount < 20
 
-                self.saveAlarm(
+                FirestoreHelper.saveAlarm(
                     locationName: selectedCompletion.title,
                     coordinate: coordinate,
                     radius: radius,
@@ -190,6 +120,9 @@ class SearchViewController: UIViewController {
                         )
 
                     case .success:
+                        self.searchBar.text = ""
+                        self.radiusTextField.text = ""
+                        
                         if canActivate {
                             self.showAlert(
                                 title: "Success",
