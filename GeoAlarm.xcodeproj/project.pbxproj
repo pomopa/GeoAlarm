@@ -19,7 +19,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		251C85C92F0009B200E59965 /* Exceptions for "GeoAlarm" folder in "GeoAlarm" target */ = {
+		2599E9C62F21D72C00068C30 /* Exceptions for "GeoAlarm" folder in "GeoAlarm" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -32,7 +32,7 @@
 		251C85B92F0009B000E59965 /* GeoAlarm */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				251C85C92F0009B200E59965 /* Exceptions for "GeoAlarm" folder in "GeoAlarm" target */,
+				2599E9C62F21D72C00068C30 /* Exceptions for "GeoAlarm" folder in "GeoAlarm" target */,
 			);
 			path = GeoAlarm;
 			sourceTree = "<group>";
