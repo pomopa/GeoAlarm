@@ -144,5 +144,63 @@ final class FirestoreHelper {
             }
         }
     }
+        
+    @discardableResult
+    static func listenToAlarms(
+        orderedByCreationDate: Bool = false,
+        completion: @escaping (Result<[Alarm], Error>) -> Void
+    ) -> ListenerRegistration? {
+
+        guard let userId = Auth.auth().currentUser?.uid else {
+            completion(.success([]))
+            return nil
+        }
+
+        var query: Query = Firestore.firestore()
+            .collection("users")
+            .document(userId)
+            .collection("alarms")
+
+        if orderedByCreationDate {
+            query = query.order(
+                by: "createdAt",
+                descending: true
+            )
+        }
+
+        return query.addSnapshotListener { snapshot, error in
+            if let error {
+                completion(.failure(error))
+                return
+            }
+
+            let alarms = snapshot?.documents.compactMap {
+                Alarm(id: $0.documentID, data: $0.data())
+            } ?? []
+
+            completion(.success(alarms))
+        }
+    }
+    
+    static func updateAlarmActiveState(
+        alarmID: String,
+        isActive: Bool,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            completion(.failure(NSError()))
+            return
+        }
+
+        Firestore.firestore()
+            .collection("users")
+            .document(userId)
+            .collection("alarms")
+            .document(alarmID)
+            .updateData(["isActive": isActive])
+
+        completion(.success(()))
+    }
+
     
 }

@@ -17,7 +17,10 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
     
     private var alarms: [Alarm] = []
     private let db = Firestore.firestore()
+    private var alarmsListener: ListenerRegistration?
     let locationManager = CLLocationManager()
+    private var isTogglingAlarm = false
+    private var isApplyingLocalChange = false
     
     private lazy var sizingCell: AlarmTableViewCell = {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlarmTableViewCell") as! AlarmTableViewCell
@@ -77,32 +80,25 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func loadAlarms() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("No authenticated user")
-            return
-        }
+        alarmsListener = FirestoreHelper.listenToAlarms(
+            orderedByCreationDate: true
+        ) { [weak self] result in
+            guard let self else { return }
 
-        db.collection("users")
-            .document(userId)
-            .collection("alarms")
-            .order(by: "createdAt", descending: true)
-            .addSnapshotListener { [weak self] snapshot, error in
+            switch result {
+            case .failure(let error):
+                print("Firestore error:", error)
+                return
 
-                if let error = error {
-                    print("Firestore error:", error)
-                    return
+            case .success(let alarms):
+                self.alarms = alarms
+                LocationManager.shared.syncActiveAlarms(alarms)
+                if !self.isTogglingAlarm {
+                    self.tableView.reloadData()
                 }
-
-                guard let documents = snapshot?.documents else { return }
-                
-                self?.alarms = documents.compactMap {
-                    Alarm(id: $0.documentID, data: $0.data())
-                }
-
-                LocationManager.shared.syncActiveAlarms(self!.alarms)
-                self?.tableView.reloadData()
-                self?.updateEmptyState()
+                self.updateEmptyState()
             }
+        }
     }
     
     private func activeAlarmCount(excluding alarmID: String? = nil) -> Int {
@@ -115,28 +111,6 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
         if let tabBarController = self.tabBarController {
             tabBarController.selectedIndex = 2
         }
-    }
-    
-    private func updateAlarmActiveState(
-        alarmID: String,
-        isActive: Bool
-    ) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("User not logged in")
-            return
-        }
-
-        db.collection("users")
-            .document(userId)
-            .collection("alarms")
-            .document(alarmID)
-            .updateData([
-                "isActive": isActive
-            ]) { error in
-                if let error = error {
-                    print("Firestore update failed:", error)
-                }
-            }
     }
 
     private func updateEmptyState() {
@@ -232,32 +206,63 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
 
             let alarm = self.alarms[indexPath.row]
 
-            // User is trying to ENABLE the alarm
-            if isOn {
-                let activeCount = self.activeAlarmCount(excluding: alarm.id)
+            if self.isTogglingAlarm { return }
+            self.isTogglingAlarm = true
+            self.isApplyingLocalChange = true
 
-                if activeCount >= 20 {
-                    self.showAlert(title: "Maximum Active Alarms", message:  "You can only have up to 20 active alarms at the same time. Please deactivate one before enabling another.")
-
-                    // Revert switch visually
+            if isOn && self.activeAlarmCount(excluding: alarm.id) >= 20 {
+                DispatchQueue.main.async {
                     cell?.setSwitchOn(false, animated: true)
-                    return
+                    self.showAlert(
+                        title: "Maximum Active Alarms",
+                        message: "You can only have up to 20 active alarms."
+                    )
+                    self.isTogglingAlarm = false
+                    self.isApplyingLocalChange = false
                 }
+                return
             }
 
             self.alarms[indexPath.row].isActive = isOn
-
-            if isOn {
-                LocationManager.shared.enableGeofence(for: alarm)
-            } else {
-                LocationManager.shared.disableGeofence(id: alarm.id)
-            }
             
-            self.updateAlarmActiveState(
+            if !NetworkMonitor.shared.isConnected {
+                DispatchQueue.main.async {
+                    self.showAlert(
+                        title: "Offline Mode",
+                        message: "Changes will sync automatically when you're back online."
+                    )
+                }
+            }
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                if isOn {
+                    LocationManager.shared.enableGeofence(for: alarm)
+                } else {
+                    LocationManager.shared.disableGeofence(id: alarm.id)
+                }
+            }
+
+            FirestoreHelper.updateAlarmActiveState(
                 alarmID: alarm.id,
                 isActive: isOn
-            )
+            ) { [weak self, weak cell] result in
+                guard let self else { return }
+
+                self.isTogglingAlarm = false
+                self.isApplyingLocalChange = false
+
+                if case .failure = result {
+                    self.alarms[indexPath.row].isActive.toggle()
+                    cell?.setSwitchOn(!isOn, animated: true)
+
+                    self.showAlert(
+                        title: "Offline",
+                        message: "Changes will sync when you're back online."
+                    )
+                }
+            }
         }
+
 
         return cell
     }
