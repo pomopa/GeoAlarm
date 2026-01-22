@@ -106,4 +106,43 @@ final class FirestoreHelper {
         }
     }
     
+    static func deleteAllAlarms(completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            completion(.success(()))
+            return
+        }
+
+        let db = Firestore.firestore()
+        let alarmsRef = db
+            .collection("users")
+            .document(userId)
+            .collection("alarms")
+
+        alarmsRef.getDocuments { snapshot, error in
+            if let error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let documents = snapshot?.documents, !documents.isEmpty else {
+                completion(.success(()))
+                return
+            }
+
+            let batch = db.batch()
+            
+            documents.forEach { document in
+                batch.deleteDocument(document.reference)
+            }
+            
+            batch.commit { error in
+                if let error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        }
+    }
+    
 }

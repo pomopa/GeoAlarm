@@ -6,8 +6,6 @@
 //
 import UIKit
 import MapKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class CreateAlarmViewController: UIViewController {
     

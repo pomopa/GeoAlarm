@@ -7,8 +7,6 @@
 
 import UIKit
 import MapKit
-import FirebaseFirestore
-import FirebaseAuth
 
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
