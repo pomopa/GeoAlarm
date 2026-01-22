@@ -178,7 +178,14 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         let alarm = alarms[indexPath.row]
-        let distanceText = "\(alarm.radius) \(alarm.unit)"
+        let radius = alarm.radius
+        var radiusText = ""
+        if floor(radius) == radius {
+            radiusText = String(format: "%.0f", radius)
+        } else {
+            radiusText = String(radius)
+        }
+        let distanceText = "\(radiusText) \(alarm.unit)"
 
         cell.configure(
             title: alarm.locationName,
@@ -225,9 +232,16 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let alarm = alarms[indexPath.row]
+        let radius = alarm.radius
+        var radiusText = ""
+        if floor(radius) == radius {
+            radiusText = String(format: "%.0f", radius)
+        } else {
+            radiusText = String(radius)
+        }
 
         sizingCell.configure(title: alarm.locationName,
-                             distance: "\(alarm.radius) \(alarm.unit)",
+                             distance: "\(radiusText) \(alarm.unit)",
                              isEnabled: alarm.isActive)
         sizingCell.layoutIfNeeded()
 

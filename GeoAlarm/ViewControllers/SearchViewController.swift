@@ -16,12 +16,13 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var radiusTextField: UITextField!
     @IBOutlet weak var maxRadiusLabel: UILabel!
     @IBOutlet weak var unitButton: UIButton!
-    
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
     private let searchCompleter = MKLocalSearchCompleter()
     private var searchResults: [MKLocalSearchCompletion] = []
     private var selectedCompletion: MKLocalSearchCompletion?
     private let locationSearchService = LocationSearchService()
+    private let decimalDelegate = DecimalTextFieldDelegate(maxDecimals: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class SearchViewController: UIViewController {
         configureTableView()
         tableViewHeightConstraint.constant = 0
         hideKeyboardWhenTappedAround()
+        radiusTextField.delegate = decimalDelegate
     }
     
     // --------------------------------------------
