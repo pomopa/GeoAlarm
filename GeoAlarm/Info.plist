@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>OPENWEATHER_API_KEY</key>
-	<string>084a52fc3bc94cec860a188f87b48330</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
