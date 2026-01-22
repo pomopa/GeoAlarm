@@ -16,6 +16,7 @@ class CreateAlarmViewController: UIViewController {
     
     var initialCoordinate: CLLocationCoordinate2D?
     private let decimalDelegate = DecimalTextFieldDelegate(maxDecimals: 3)
+    private let nameDelegate = MaxLengthTextFieldDelegate(maxLength: 50)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class CreateAlarmViewController: UIViewController {
         }
         
         radiusTextField.delegate = decimalDelegate
+        nameTextField.delegate = nameDelegate
         hideKeyboardWhenTappedAround()
     }
     
