@@ -45,7 +45,12 @@ class EditAlarmViewController: UIViewController {
     // --------------------------------------------
     private func populateUI() {
         nameSearchBar.text = alarm.locationName
-        radiusTextField.text = String(format: "%.2f", alarm.radius)
+        let radius = alarm.radius
+        if floor(radius) == radius {
+            radiusTextField.text = String(format: "%.0f", radius)
+        } else {
+            radiusTextField.text = String(radius)
+        }
         unitButton.setTitle(alarm.unit, for: .normal)
         currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
                                                    longitude: alarm.longitude)
