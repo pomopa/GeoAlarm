@@ -170,24 +170,48 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     private func performAccountDeletion() {
         guard let user = Auth.auth().currentUser else { return }
 
-        let imageRef = Storage.storage().reference()
-            .child("profile_images/\(user.uid).jpg")
+        let userId = user.uid
+
+        let imageRef = Storage.storage()
+            .reference()
+            .child("profile_images/\(userId).jpg")
 
         imageRef.delete(completion: nil)
 
-        user.delete { error in
-            if let error = error {
-                self.showAlert(title: "Error", message: error.localizedDescription)
+        FirestoreHelper.deleteAllAlarms { result in
+            if case .failure(let error) = result {
+                DispatchQueue.main.async {
+                    self.showAlert(
+                        title: "Error",
+                        message: error.localizedDescription
+                    )
+                }
                 return
             }
 
-            DispatchQueue.main.async {
-                ProfileImageCache.shared.delete()
-                LocationManager.shared.removeAllGeofences()
-                self.performSegue(withIdentifier: "profileToLogin", sender: nil)
+            user.delete { error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.showAlert(
+                            title: "Error",
+                            message: error.localizedDescription
+                        )
+                    }
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    ProfileImageCache.shared.delete()
+                    LocationManager.shared.removeAllGeofences()
+                    self.performSegue(
+                        withIdentifier: "profileToLogin",
+                        sender: nil
+                    )
+                }
             }
         }
     }
+
 
     
     @IBAction func deleteAccount(_ sender: Any) {

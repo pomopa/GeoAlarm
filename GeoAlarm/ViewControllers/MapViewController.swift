@@ -1,17 +1,15 @@
 import UIKit
 import MapKit
 import FirebaseFirestore
-import FirebaseAuth
 
 class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     private var alarms: [Alarm] = []
-    private let db = Firestore.firestore()
     private var selectedCoordinate: CLLocationCoordinate2D?
     private var addAlarmButton: UIButton?
     private var mapTapGesture: UITapGestureRecognizer!
-
+    private var alarmsListener: ListenerRegistration?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,38 +27,23 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Fetch all alarms for the current user
     private func fetchAlarms() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("No user logged in")
-            return
-        }
-        
-        db.collection("users")
-            .document(userId)
-            .collection("alarms")
-            .addSnapshotListener { [weak self] querySnapshot, error in
-                guard let self = self else { return }
-                
-                if let error = error {
-                    print("Error fetching alarms: \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let documents = querySnapshot?.documents else {
-                    print("No alarms found")
-                    return
-                }
-                
+        alarmsListener = FirestoreHelper.listenToAlarms { [weak self] result in
+            guard let self else { return }
+
+            switch result {
+            case .failure(let error):
+                print("Error fetching alarms:", error.localizedDescription)
+
+            case .success(let alarms):
+                self.alarms = alarms
+
                 // Clear existing annotations
                 self.mapView.removeAnnotations(self.mapView.annotations)
                 self.mapView.removeOverlays(self.mapView.overlays)
-                
-                // Parse alarms and add to map
-                self.alarms = documents.compactMap { doc in
-                    Alarm(id: doc.documentID, data: doc.data())
-                }
-                
+
                 self.displayAlarmsOnMap()
             }
+        }
     }
  
     private func displayAlarmsOnMap() {
