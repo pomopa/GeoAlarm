@@ -44,6 +44,38 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
         tableView.separatorStyle = .none
     }
     
+    @IBAction func tutorialPressed(_ sender: Any) {
+        let text = """
+        CREATE ALARMS
+        • Tap the + button, search icon, or a map location.
+            
+        REQUIREMENTS
+        • Allow notifications and location access (Always).
+        • Make sure Silent Mode is off.
+
+        EDIT ALARMS
+        • Tap an alarm in the list or on the map.
+        """
+
+        let attributedText = NSMutableAttributedString(string: text)
+
+        let headers = ["CREATE ALARMS", "REQUIREMENTS", "EDIT ALARMS"]
+        for header in headers {
+            let range = (text as NSString).range(of: header)
+            attributedText.addAttribute(
+                .font,
+                value: UIFont.preferredFont(forTextStyle: .headline),
+                range: range
+            )
+        }
+
+        let alert = UIAlertController(title: "App Tutorial", message: nil, preferredStyle: .alert)
+        alert.setValue(attributedText, forKey: "attributedMessage")
+
+        alert.addAction(UIAlertAction(title: "Got it", style: .default))
+        present(alert, animated: true)
+    }
+    
     private func loadAlarms() {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("No authenticated user")

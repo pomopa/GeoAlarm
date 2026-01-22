@@ -346,10 +346,28 @@
                                 <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vxl-hc-KCR">
+                                <rect key="frame" x="30" y="89" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="dTx-Ox-51R"/>
+                                    <constraint firstAttribute="width" constant="36" id="vgb-9t-7V3"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="questionmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="medium"/>
+                                    <color key="baseForegroundColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="qdH-86-5Zz" eventType="touchUpInside" id="LhK-qn-hnZ"/>
+                                    <action selector="tutorialPressed:" destination="DZY-Jf-qKJ" eventType="touchUpInside" id="yc5-dk-pY8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TXI-PE-Isk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Vxl-hc-KCR" firstAttribute="leading" secondItem="TXI-PE-Isk" secondAttribute="leading" constant="30" id="3b3-20-52N"/>
                             <constraint firstItem="HB8-id-CjT" firstAttribute="top" secondItem="MgZ-sB-NlN" secondAttribute="bottom" constant="23" id="6JE-31-HbQ"/>
                             <constraint firstItem="MgZ-sB-NlN" firstAttribute="centerX" secondItem="fK8-UG-tet" secondAttribute="centerX" id="IDd-Wp-h91"/>
                             <constraint firstAttribute="bottom" secondItem="HB8-id-CjT" secondAttribute="bottom" id="Lx1-hy-Dcp"/>
@@ -358,6 +376,7 @@
                             <constraint firstItem="HB8-id-CjT" firstAttribute="leading" secondItem="TXI-PE-Isk" secondAttribute="leading" id="jLR-aY-cHv"/>
                             <constraint firstItem="MgZ-sB-NlN" firstAttribute="top" secondItem="TXI-PE-Isk" secondAttribute="top" constant="89" id="rQe-jV-dP1"/>
                             <constraint firstItem="TXI-PE-Isk" firstAttribute="trailing" secondItem="7Px-ao-PCh" secondAttribute="trailing" constant="35" id="u1I-yf-gGD"/>
+                            <constraint firstItem="Vxl-hc-KCR" firstAttribute="top" secondItem="TXI-PE-Isk" secondAttribute="top" constant="30" id="xqH-1t-NSX"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="alarm" catalog="system" selectedImage="alarm.fill" id="SA9-HY-yKa"/>
@@ -953,6 +972,7 @@
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="questionmark" catalog="system" width="94" height="128"/>
         <image name="trash.fill" catalog="system" width="117" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
