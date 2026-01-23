@@ -14,13 +14,17 @@ enum AlarmSaveError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notLoggedIn:
-            return "User not logged in"
+            return NSLocalizedString("not_logged_in", comment: "")
 
         case .radiusTooLarge(let max, let unit):
-            return String(format: "The maximum allowed radius for %@ is %.2f %@", unit, max, unit)
+            let format = NSLocalizedString("maxRadius", comment: "")
+
+            return String(format: format, unit, max, unit)
 
         case .radiusTooSmall(let min, let unit):
-            return String(format: "The minimum allowed radius for %@ is %.2f %@", unit, min, unit)
+            let format = NSLocalizedString("minRadius", comment: "")
+
+            return String(format: format, unit, min, unit)
         }
     }
     

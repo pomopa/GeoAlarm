@@ -48,16 +48,19 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         temperature: Double?
     ) {
         let content = UNMutableNotificationContent()
-        let locationName = alarms[region.identifier]?.locationName ?? "your location"
+        let locationName = alarms[region.identifier]?.locationName ?? NSLocalizedString("your_location", comment: "")
 
-        content.title = "⏰ Alarm Active in \(locationName)"
+        let format = NSLocalizedString("alarm_active", comment: "Message when an alarm is active at a location")
+        let message = String(format: format, locationName)
+        
+        content.title = message
 
         if let temperature = temperature {
-            content.body = """
-            Current temperature: \(Int(temperature))°C
-            """
+            let format = NSLocalizedString("current_temperature", comment: "")
+            content.body = String(format: format, Int(temperature))
         } else {
-            content.body = "The alarm you set in \(locationName) has been activated"
+            let format = NSLocalizedString("alarm_activated", comment: "")
+            content.body = String(format: format, locationName)
         }
 
         content.sound = UNNotificationSound(
@@ -92,7 +95,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
             ) as? [String: Any],
             let apiKey = plist["OPENWEATHER_API_KEY"] as? String
         else {
-            fatalError("API key not found in APIs.plist")
+            fatalError(NSLocalizedString("api_not_found", comment: ""))
         }
         
         let api_url = "https://api.openweathermap.org/data/2.5/weather"
@@ -172,9 +175,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
                 value: alarm.radius
             )
 
-            if alarm.locationName == "New Zealand" {
-                print (alarm.latitude, alarm.longitude, radiusInMeters)
-            }
             addGeofence(
                 id: alarm.id,
                 latitude: alarm.latitude,

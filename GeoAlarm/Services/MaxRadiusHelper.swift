@@ -61,10 +61,11 @@ struct RadiusHelper {
             minStr = String(format: "%.0f", minValue)
             maxStr = String(format: "%.0f", maxValue)
         default:
-            return "TThe radius must be in the range 0.1-1km."
+            return  NSLocalizedString("current_temperature", comment: "")
         }
 
-        return "The radius must be in the range \(minStr)-\(maxStr) \(unit)."
+        let format = NSLocalizedString("radius_range_error", comment: "")
+        return String(format: format, minStr, maxStr, unit)
     }
 
 

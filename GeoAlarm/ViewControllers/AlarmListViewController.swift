@@ -45,21 +45,16 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func tutorialPressed(_ sender: Any) {
-        let text = """
-        CREATE ALARMS
-        • Tap the + button, search icon, or a map location.
-            
-        REQUIREMENTS
-        • Allow notifications and location access (Always).
-        • Make sure Silent Mode is off.
-
-        EDIT ALARMS
-        • Tap an alarm in the list or on the map.
-        """
+        
+        let text = NSLocalizedString("info_use", comment: "")
 
         let attributedText = NSMutableAttributedString(string: text)
+        let headers = [
+            NSLocalizedString("tutorial_header_create_alarms", comment: ""),
+            NSLocalizedString("tutorial_header_requirements", comment: ""),
+            NSLocalizedString("tutorial_header_edit_alarms", comment: "")
+        ]
 
-        let headers = ["CREATE ALARMS", "REQUIREMENTS", "EDIT ALARMS"]
         for header in headers {
             let range = (text as NSString).range(of: header)
             attributedText.addAttribute(
@@ -69,10 +64,16 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
             )
         }
 
-        let alert = UIAlertController(title: "App Tutorial", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: NSLocalizedString("tutorial_alert_title", comment: ""),
+            message: nil,
+            preferredStyle: .alert
+        )
         alert.setValue(attributedText, forKey: "attributedMessage")
-
-        alert.addAction(UIAlertAction(title: "Got it", style: .default))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("tutorial_got_it_button", comment: ""),
+            style: .default
+        ))
         present(alert, animated: true)
     }
     

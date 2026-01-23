@@ -160,7 +160,7 @@ final class FirestoreHelper {
             completion(.failure(NSError(
                 domain: "FirestoreHelper",
                 code: 401,
-                userInfo: [NSLocalizedDescriptionKey: "User not logged in"]
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("not_logged_in", comment: "")]
             )))
             return
         }

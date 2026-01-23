@@ -1,0 +1,281 @@
+{
+  "sourceLanguage" : "ca",
+  "strings" : {
+    "alarm_activated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’alarma que has posat a %@ s’ha activat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The alarm you set at %@ has been activated"
+          }
+        }
+      }
+    },
+    "alarm_active" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⏰ Alarma activa a %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⏰ Alarm Active in %@"
+          }
+        }
+      }
+    },
+    "api_not_found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La clau de l’API no s’ha trobat al l-Info.plist"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "API key not found in APIs.plist"
+          }
+        }
+      }
+    },
+    "current_temperature" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperatura actual: %d°C"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current temperature: %d ºC"
+          }
+        }
+      }
+    },
+    "info_use" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CREAR ALARMES\\n• Toca el botó +, la icona de cerca o una ubicació al mapa.\\n\\nREQUISITS\\n• Permet les notificacions i l’accés a la ubicació (Sempre).\\n• Assegura’t que el mode silenciós està desactivat.\\n\\nEDITAR ALARMES\\n• Toca una alarma a la llista o al mapa."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "CREATE ALARMS\\n• Tap the + button, search icon, or a map location.\\n\\nREQUIREMENTS\\n• Allow notifications and location access (Always).\\n• Make sure Silent Mode is off.\\n\\nEDIT ALARMS\\n• Tap an alarm in the list or on the map."
+          }
+        }
+      }
+    },
+    "maxRadius" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El radi maxim en %@ es %.2f %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The maximum allowed radius for %@ is %.2f %@"
+          }
+        }
+      }
+    },
+    "minRadius" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El radi minim en %@ es %.2f %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The minimum allowed radius for %@ is %.2f %@"
+          }
+        }
+      }
+    },
+    "not_logged_in" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’usuari no esta autenticat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User not logged in"
+          }
+        }
+      }
+    },
+    "radius_range" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El radi ha de ser entre 0.1 i 1km"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "The radius must be in the range 0.1-1km."
+          }
+        }
+      }
+    },
+    "radius_range_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El radi ha de ser entre %@ i %@ %@."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The radius must be in the range %@-%@ %@."
+          }
+        }
+      }
+    },
+    "tutorial_alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutorial de l’App"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App tutorial"
+          }
+        }
+      }
+    },
+    "tutorial_got_it_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entesos"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got it"
+          }
+        }
+      }
+    },
+    "tutorial_header_create_alarms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CREAR ALARMES"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CREATING ALARMS"
+          }
+        }
+      }
+    },
+    "tutorial_header_edit_alarms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EDITAR ALARMES"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EDITING ALARMS"
+          }
+        }
+      }
+    },
+    "tutorial_header_requirements" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "REQUISITS"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "REQUIREMENTS"
+          }
+        }
+      }
+    },
+    "use_info" : {
+
+    },
+    "your_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la teva posicio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "your location"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

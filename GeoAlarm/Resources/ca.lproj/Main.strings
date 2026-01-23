@@ -1,0 +1,160 @@
+
+/* Class = "UIButton"; configuration.title = "km"; ObjectID = "1e0-jJ-JWH"; */
+"1e0-jJ-JWH.configuration.title" = "km";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "1e0-jJ-JWH"; */
+"1e0-jJ-JWH.normalTitle" = "Botó";
+
+/* Class = "UIButton"; configuration.title = "km"; ObjectID = "3DS-Sb-nqV"; */
+"3DS-Sb-nqV.configuration.title" = "km";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3DS-Sb-nqV"; */
+"3DS-Sb-nqV.normalTitle" = "Botó";
+
+/* Class = "UIButton"; configuration.title = "Already have an account? Login here"; ObjectID = "3Ex-j6-wja"; */
+"3Ex-j6-wja.configuration.title" = "Inicia sessió aquí si ja tens un compte";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3Ex-j6-wja"; */
+"3Ex-j6-wja.normalTitle" = "Botó";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "6Sx-fS-RKr"; */
+"6Sx-fS-RKr.normalTitle" = "Botó";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "7Px-ao-PCh"; */
+"7Px-ao-PCh.normalTitle" = "Botó";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "9SE-oC-bs6"; */
+"9SE-oC-bs6.normalTitle" = "Botó";
+
+/* Class = "UIButton"; configuration.title = "km"; ObjectID = "BCZ-B0-Btn"; */
+"BCZ-B0-Btn.configuration.title" = "km";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "BCZ-B0-Btn"; */
+"BCZ-B0-Btn.normalTitle" = "Botó";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "BVR-3F-7SK"; */
+"BVR-3F-7SK.normalTitle" = "Botó";
+
+/* Class = "UIButton"; configuration.title = "Sign In"; ObjectID = "CTf-8z-JiP"; */
+"CTf-8z-JiP.configuration.title" = "Inicia sessió";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "CTf-8z-JiP"; */
+"CTf-8z-JiP.normalTitle" = "Botó";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "DTo-JE-8nQ"; */
+"DTo-JE-8nQ.placeholder" = "Correu electrònic";
+
+
+/* Class = "UILabel"; text = "Select a radius:"; ObjectID = "Dau-yW-YO3"; */
+"Dau-yW-YO3.text" = "Tria el radi:";
+
+/* Class = "UILabel"; text = "Change the radius:"; ObjectID = "EzL-Ac-zhY"; */
+"EzL-Ac-zhY.text" = "Canvia el radi:";
+
+/* Class = "UILabel"; text = "© 2025 - Pau Casé & Pol Monné"; ObjectID = "HLS-Nu-IIN"; */
+"HLS-Nu-IIN.text" = "© 2025 - Pau Casé & Pol Monné";
+
+/* Class = "UILabel"; text = "The radius must be in the range 0.1-1km"; ObjectID = "KmR-hh-RnT"; */
+"KmR-hh-RnT.text" = "El radi ha de ser entre 0.1 i 1km";
+
+/* Class = "UISearchBar"; placeholder = "Search Location"; ObjectID = "Ku4-VT-C0O"; */
+"Ku4-VT-C0O.placeholder" = "Busca un lloc";
+
+/* Class = "UITextField"; placeholder = "Repeat Password"; ObjectID = "MSP-kR-8lp"; */
+"MSP-kR-8lp.placeholder" = "Repeteix la contrasenya";
+
+/* Class = "UITextField"; placeholder = "Radius"; ObjectID = "MZO-Qx-8Qz"; */
+"MZO-Qx-8Qz.placeholder" = "Radi";
+
+/* Class = "UILabel"; text = "ALARM LIST"; ObjectID = "MgZ-sB-NlN"; */
+"MgZ-sB-NlN.text" = "LLISTA D'ALARMES";
+
+/* Class = "UILabel"; text = "Alarm name:"; ObjectID = "N8l-2w-eS9"; */
+"N8l-2w-eS9.text" = "Nom de l'alarma:";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "P82-ug-hsC"; */
+"P82-ug-hsC.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Change Password"; ObjectID = "To9-8B-oqK"; */
+"To9-8B-oqK.configuration.title" = "Canvia la contrasenya";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "To9-8B-oqK"; */
+"To9-8B-oqK.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Change the radius:"; ObjectID = "TtC-jk-3ij"; */
+"TtC-jk-3ij.text" = "Canvia el radi:";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Vxl-hc-KCR"; */
+"Vxl-hc-KCR.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "2km away"; ObjectID = "bRa-Bv-VC8"; */
+"bRa-Bv-VC8.text" = "2km de radi";
+
+/* Class = "UIButton"; configuration.title = "Delete Account"; ObjectID = "brO-OW-8hr"; */
+"brO-OW-8hr.configuration.title" = "Esborra el compte";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "brO-OW-8hr"; */
+"brO-OW-8hr.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Radius"; ObjectID = "cDo-kO-6oO"; */
+"cDo-kO-6oO.placeholder" = "Radi";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "eXa-X3-iUK"; */
+"eXa-X3-iUK.placeholder" = "Contrasenya";
+
+/* Class = "UIButton"; configuration.title = "Logout"; ObjectID = "g9f-Wj-tP3"; */
+"g9f-Wj-tP3.configuration.title" = "Tanca la sessió";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "g9f-Wj-tP3"; */
+"g9f-Wj-tP3.normalTitle" = "Botó";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "igN-4x-eBu"; */
+"igN-4x-eBu.placeholder" = "Contrasenya";
+
+/* Class = "UILabel"; text = "user@email.com"; ObjectID = "jyA-hW-dEB"; */
+"jyA-hW-dEB.text" = "user@email.com";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ko6-0o-kzp"; */
+"ko6-0o-kzp.normalTitle" = "Botó";
+
+/* Class = "UILabel"; text = "© 2025 - Pau Casé & Pol Monné"; ObjectID = "lE7-q2-EvN"; */
+"lE7-q2-EvN.text" = "© 2025 - Pau Casé & Pol Monné";
+
+/* Class = "UILabel"; text = "Airoport del Prat"; ObjectID = "mIS-eT-QNp"; */
+"mIS-eT-QNp.text" = "Aeroport del Prat";
+
+/* Class = "UIButton"; configuration.title = "Don't have an account? Register here"; ObjectID = "nT1-j3-7nN"; */
+"nT1-j3-7nN.configuration.title" = "No has creat un compte? Crea't un compte";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nT1-j3-7nN"; */
+"nT1-j3-7nN.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "The radius must be in the range 0.1-1km"; ObjectID = "pnY-m2-7JS"; */
+"pnY-m2-7JS.text" = "El radi ha de ser entre 0.1 i 1km";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "reT-Kd-zex"; */
+"reT-Kd-zex.normalTitle" = "Botó";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "rhK-8h-XGA"; */
+"rhK-8h-XGA.normalTitle" = "Botó";
+
+/* Class = "UIButton"; configuration.title = "Register"; ObjectID = "uKv-tc-JCa"; */
+"uKv-tc-JCa.configuration.title" = "Crea el compte";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "uKv-tc-JCa"; */
+"uKv-tc-JCa.normalTitle" = "Botó";
+
+/* Class = "UITextField"; placeholder = "Radius"; ObjectID = "umv-tL-ujH"; */
+"umv-tL-ujH.placeholder" = "Radi";
+
+/* Class = "UILabel"; text = "The radius must be in the range 0.1-1km"; ObjectID = "wuy-i4-0wf"; */
+"wuy-i4-0wf.text" = "El radi ha de ser entre 0.1 i 1km";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xsX-mG-GKF"; */
+"xsX-mG-GKF.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "yj5-Qo-WFi"; */
+"yj5-Qo-WFi.placeholder" = "Correu electrònic";
+
+/* Class = "UITextField"; placeholder = "e.g. Home"; ObjectID = "znL-41-0zH"; */
+"znL-41-0zH.placeholder" = "p.e. Casa";
