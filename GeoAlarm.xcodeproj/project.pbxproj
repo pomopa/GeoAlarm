@@ -128,7 +128,7 @@
 				};
 			};
 			buildConfigurationList = 251C85B22F0009B000E59965 /* Build configuration list for PBXProject "GeoAlarm" */;
-			developmentRegion = ca;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,

@@ -1,5 +1,5 @@
 {
-  "sourceLanguage" : "ca",
+  "sourceLanguage" : "en",
   "strings" : {
     "6chars" : {
       "comment" : "\t",
@@ -8,7 +8,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La contrasenya ha de tenir almenys 6 caracters"
+            "value" : "La contrasenya ha de tenir almenys 6 caràcters"
           }
         },
         "en" : {
@@ -25,7 +25,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Compte creat amb exit"
+            "value" : "Compte creat amb èxit"
           }
         },
         "en" : {
@@ -87,29 +87,12 @@
         }
       }
     },
-    "alarm_inactive_mesage" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple imposa un límit de 20 alarmes actives simultànies.\rAquesta alarma es va guardar però està inactiva.\rDesactiva una altra alarma per activar-la."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple enforces a limit of 20 active simultaneous alarms.\rThis alarm was saved but is inactive.\rDisable another alarm to activate it."
-          }
-        }
-      }
-    },
     "alarm_inactive_message" : {
       "localizations" : {
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apple imposa un límit de 20 alarmes actives simultànies.\rAquesta alarma es va guardar però està inactiva.\rDesactiva una altra alarma per activar-la."
+            "value" : "Apple imposa un límit de 20 alarmes actives simultànies.\rAquesta alarma s’ha guardat però està inactiva.\rDesactiva una altra alarma per activar-la."
           }
         },
         "en" : {
@@ -228,13 +211,13 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La clau de l’API no s’ha trobat al l’Info.plist"
+            "value" : "La clau de l’API no s’ha trobat en el sistema"
           }
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "API key not found in APIs.plist"
+            "state" : "translated",
+            "value" : "API key not found in the system"
           }
         }
       }
@@ -279,7 +262,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impossible resoldre la ubicacio"
+            "value" : "Impossible resoldre la ubicació"
           }
         },
         "en" : {
@@ -347,7 +330,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Els canvas es sincronitzaran quan tornis a tenir connexio"
+            "value" : "Els canvis es sincronitzaran quan tornis a tenir connexió"
           }
         },
         "en" : {
@@ -466,7 +449,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Les contrasenyes son diferents"
+            "value" : "Les contrasenyes són diferents"
           }
         },
         "en" : {
@@ -483,7 +466,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Introdueixi correu electronic i contrasenya"
+            "value" : "Introdueixi correu electrònic i contrasenya"
           }
         },
         "en" : {
@@ -500,7 +483,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Introdueixi un radi valid"
+            "value" : "Introdueixi un radi vàlid"
           }
         },
         "en" : {
@@ -534,7 +517,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CREAR ALARMES\r• Toca el botó +, la icona de cerca o una ubicació al mapa.\r\rREQUISITS\r• Permet les notificacions i l’accés a la ubicació (Sempre).\r• Assegura’t que el mode silenciós està desactivat.\r\rEDITAR ALARMES\r• Toca una alarma a la llista o al mapa."
+            "value" : "CREAR ALARMES\n• Toca el botó +, la icona de cerca o una ubicació al mapa.\n\nREQUISITS\n• Permet les notificacions i l’accés a la ubicació (Sempre).\n• Assegura’t que el mode silenciós està desactivat.\n\nEDITAR ALARMES\n• Toca una alarma a la llista o al mapa."
           }
         },
         "en" : {
@@ -551,7 +534,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "El radi es invalid."
+            "value" : "El radi es invàlid."
           }
         },
         "en" : {
@@ -568,7 +551,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aquesta accio es irreversible"
+            "value" : "Aquesta acció és irreversible"
           }
         },
         "en" : {
@@ -579,30 +562,13 @@
         }
       }
     },
-    "location_from_list" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seleccioni una ubicació de la llista"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Please select a location from the list"
-          }
-        }
-      }
-    },
     "login_failed" : {
       "extractionState" : "manual",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L’inici de sessio ha fallat"
+            "value" : "L’inici de sessió ha fallat"
           }
         },
         "en" : {
@@ -619,7 +585,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inicia sessio aqui"
+            "value" : "Inicia sessió aquí"
           }
         },
         "en" : {
@@ -636,13 +602,13 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tancar la sessio"
+            "value" : "Tancar la sessió"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lo out"
+            "value" : "Log out"
           }
         }
       }
@@ -653,7 +619,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esta segur que vol trancar la sessio?"
+            "value" : "Esta segur que vol trancar la sessió?"
           }
         },
         "en" : {
@@ -670,7 +636,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Limit d’alarmes actives"
+            "value" : "Límit d’alarmes actives"
           }
         },
         "en" : {
@@ -687,7 +653,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "El radi maxim en %@ es %.2f %@"
+            "value" : "El radi màxim en %@ és %.2f %@"
           }
         },
         "en" : {
@@ -721,7 +687,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "El radi minim en %@ es %.2f %@"
+            "value" : "El radi mínim en %@ és %.2f %@"
           }
         },
         "en" : {
@@ -755,7 +721,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Borrar l’alarma"
+            "value" : "Falta la ubicació"
           }
         },
         "en" : {
@@ -840,7 +806,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L’usuari no esta autenticat"
+            "value" : "L’usuari no està autenticat"
           }
         },
         "en" : {
@@ -857,7 +823,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mode sense connexio"
+            "value" : "Mode sense connexió"
           }
         },
         "en" : {
@@ -874,7 +840,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Els canvis es sincronitzaran quan tornis a tenir connexio"
+            "value" : "Els canvis es sincronitzaran automàticament quan tornis a tenir connexió"
           }
         },
         "en" : {
@@ -891,7 +857,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La contrasenya ha de tenir almenys una minuscula"
+            "value" : "La contrasenya ha de tenir almenys una minúscula"
           }
         },
         "en" : {
@@ -908,7 +874,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La contrasenya ha de tenir almenys una majuscula"
+            "value" : "La contrasenya ha de tenir almenys una majúscula"
           }
         },
         "en" : {
@@ -993,7 +959,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Crea un compte aqui"
+            "value" : "Registrat aqui"
           }
         },
         "en" : {
@@ -1010,7 +976,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error en crear el compte"
+            "value" : "Error de registre"
           }
         },
         "en" : {
@@ -1021,24 +987,13 @@
         }
       }
     },
-    "saved" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alarm saved and activated\rWill play only when silent mode is off"
-          }
-        }
-      }
-    },
     "select_location" : {
       "extractionState" : "manual",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seleccioni una  opcio de la llista"
+            "value" : "Seleccioni una ubicació de la llista"
           }
         },
         "en" : {
@@ -1168,30 +1123,13 @@
         }
       }
     },
-    "upload_failed" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error en pujar la foto"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Upload failed"
-          }
-        }
-      }
-    },
     "upload_failed_text" : {
       "extractionState" : "manual",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La seva foto de perfil s’ha guardat en local pero no s’ha guardat al Cloud. Provi-ho mes tard."
+            "value" : "La seva foto de perfil s’ha guardat en local, però no s’ha guardat al Cloud. Provi-ho més tard."
           }
         },
         "en" : {
@@ -1225,7 +1163,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Contrasenya debil"
+            "value" : "Contrasenya dèbil"
           }
         },
         "en" : {
@@ -1242,7 +1180,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "la teva posicio"
+            "value" : "la teva posició"
           }
         },
         "en" : {
