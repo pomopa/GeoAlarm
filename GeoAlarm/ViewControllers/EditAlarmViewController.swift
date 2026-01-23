@@ -102,14 +102,16 @@ class EditAlarmViewController: UIViewController {
         guard let radiusText = radiusTextField.text,
               let radius = Double(radiusText),
               radius > 0 else {
-            showAlert(title: "Invalid radius", message: "Please enter a valid radius")
+            showAlert(title: NSLocalizedString("invalid_radius", comment:""), message: NSLocalizedString("enter_valid_radius", comment:"")
+            )
             return
         }
 
         let unit = unitButton.title(for: .normal) ?? "km"
         let locationName = nameSearchBar.text ?? alarm.locationName
         guard let coordinate = currentCoordinate else {
-            showAlert(title: "Missing location", message: "Please select a location from the list")
+            showAlert(title: NSLocalizedString("missing_location", comment:""), message: NSLocalizedString("location_from_list", comment:"")
+            )
             return
         }
 
@@ -150,13 +152,14 @@ class EditAlarmViewController: UIViewController {
 
     @IBAction func deleteTapped(_ sender: Any) {
         let alert = UIAlertController(
-            title: "Delete Alarm",
-            message: "This action cannot be undone",
+            title: NSLocalizedString("delete_alarm", comment: ""),
+            message: NSLocalizedString("irreversible", comment: ""),
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""),style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive) { [weak self] _ in
             guard let self else { return }
 
             FirestoreHelper.deleteAlarm(alarmID: self.alarm.id) { result in

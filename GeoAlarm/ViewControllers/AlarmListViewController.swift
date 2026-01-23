@@ -116,9 +116,8 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
             let container = UIView(frame: tableView.bounds)
 
             let label = UILabel()
-            label.text = """
-            No alarms yet ⏰
-            """
+            label.text = NSLocalizedString("no_alarms", comment:"")
+            
             label.textColor = .secondaryLabel
             label.numberOfLines = 0
             label.textAlignment = .center
@@ -127,7 +126,7 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
             container.addSubview(label)
 
             let button = UIButton(type: .system)
-            button.setTitle("Create Alarm", for: .normal)
+            button.setTitle(NSLocalizedString("create_alarm", comment:""), for: .normal)
             button.titleLabel?.font = .boldSystemFont(ofSize: 17)
             button.addTarget(self, action: #selector(addAlarm(_:)), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -212,8 +211,8 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
                 DispatchQueue.main.async {
                     cell?.setSwitchOn(false, animated: true)
                     self.showAlert(
-                        title: "Maximum Active Alarms",
-                        message: "You can only have up to 20 active alarms."
+                        title: NSLocalizedString("max_alarms", comment:""),
+                        message: NSLocalizedString("alarm_max_warning", comment:"")
                     )
                     self.isTogglingAlarm = false
                     self.isApplyingLocalChange = false
@@ -226,8 +225,8 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
             if !NetworkMonitor.shared.isConnected {
                 DispatchQueue.main.async {
                     self.showAlert(
-                        title: "Offline Mode",
-                        message: "Changes will sync automatically when you're back online."
+                        title:  NSLocalizedString("offline_warning",comment:""),
+                        message: NSLocalizedString("offline_warning", comment: "")
                     )
                 }
             }
@@ -254,8 +253,8 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
                     cell?.setSwitchOn(!isOn, animated: true)
 
                     self.showAlert(
-                        title: "Offline",
-                        message: "Changes will sync when you're back online."
+                        title: NSLocalizedString("offline_mode", comment: ""),
+                        message:NSLocalizedString("changes_will_sync", comment: ""),
                     )
                 }
             }

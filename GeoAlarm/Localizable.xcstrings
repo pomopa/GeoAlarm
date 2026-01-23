@@ -1,6 +1,58 @@
 {
   "sourceLanguage" : "ca",
   "strings" : {
+    "6chars" : {
+      "comment" : "\t",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contrasenya ha de tenir almenys 6 caracters"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Password must be at least 6 characters"
+          }
+        }
+      }
+    },
+    "account_created_succ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compte creat amb exit"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account created successfully"
+          }
+        }
+      }
+    },
+    "active" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activada"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active"
+          }
+        }
+      }
+    },
     "alarm_activated" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -35,19 +87,307 @@
         }
       }
     },
+    "alarm_inactive_mesage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple imposa un límit de 20 alarmes actives simultànies.\rAquesta alarma es va guardar però està inactiva.\rDesactiva una altra alarma per activar-la."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple enforces a limit of 20 active simultaneous alarms.\rThis alarm was saved but is inactive.\rDisable another alarm to activate it."
+          }
+        }
+      }
+    },
+    "alarm_inactive_message" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple imposa un límit de 20 alarmes actives simultànies.\rAquesta alarma es va guardar però està inactiva.\rDesactiva una altra alarma per activar-la."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple enforces a limit of 20 active simultaneous alarms.\rThis alarm was saved but is inactive.\rDisable another alarm to activate it."
+          }
+        }
+      }
+    },
+    "alarm_inactive_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarma creada però inactiva"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarm created but inactive"
+          }
+        }
+      }
+    },
+    "alarm_max_warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pots tenir un màxim de 20 alarmes activades alhora."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "You can only have up to 20 active alarms."
+          }
+        }
+      }
+    },
+    "alarm_success_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’alarma s’ha afegit i activat. \rNomés sonarà si el mode silenciós està desactivat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alarm saved and activated\rIt will play only when silent mode is off"
+          }
+        }
+      }
+    },
+    "alarm_success_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afegida!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Success"
+          }
+        }
+      }
+    },
+    "all_fields" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tots els camps son necessaris"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "All fields are required"
+          }
+        }
+      }
+    },
+    "already_account" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja tens un compte? "
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Already have an account? "
+          }
+        }
+      }
+    },
     "api_not_found" : {
       "extractionState" : "manual",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La clau de l’API no s’ha trobat al l-Info.plist"
+            "value" : "La clau de l’API no s’ha trobat al l’Info.plist"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "API key not found in APIs.plist"
+          }
+        }
+      }
+    },
+    "camera" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Càmera"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Camera"
+          }
+        }
+      }
+    },
+    "cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "cant_resolve" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible resoldre la ubicacio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Unable to resolve location"
+          }
+        }
+      }
+    },
+    "change" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canviar"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "API key not found in APIs.plist"
+            "value" : "Change"
+          }
+        }
+      }
+    },
+    "change_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canvia la contrasenya"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change password"
+          }
+        }
+      }
+    },
+    "change_profile_picture" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canvia la foto de perfil"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Change Profile Picture"
+          }
+        }
+      }
+    },
+    "changes_will_sync" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Els canvas es sincronitzaran quan tornis a tenir connexio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Changes will sync when you're back online."
+          }
+        }
+      }
+    },
+    "create_alarm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea l’alarma"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Create Alarm"
+          }
+        }
+      }
+    },
+    "current_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrasenya actual"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current password"
           }
         }
       }
@@ -69,19 +409,274 @@
         }
       }
     },
+    "delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esborrar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Delete"
+          }
+        }
+      }
+    },
+    "delete_account" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esborrar el compte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete account"
+          }
+        }
+      }
+    },
+    "delete_alarm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esborrar l’alarma"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Delete Alarm"
+          }
+        }
+      }
+    },
+    "dont_match" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les contrasenyes son diferents"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passwords do not match"
+          }
+        }
+      }
+    },
+    "email_and_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introdueixi correu electronic i contrasenya"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter email and password"
+          }
+        }
+      }
+    },
+    "enter_valid_radius" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introdueixi un radi valid"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid radius"
+          }
+        }
+      }
+    },
+    "inactive" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivada"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inactive"
+          }
+        }
+      }
+    },
     "info_use" : {
       "extractionState" : "manual",
       "localizations" : {
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CREAR ALARMES\\n• Toca el botó +, la icona de cerca o una ubicació al mapa.\\n\\nREQUISITS\\n• Permet les notificacions i l’accés a la ubicació (Sempre).\\n• Assegura’t que el mode silenciós està desactivat.\\n\\nEDITAR ALARMES\\n• Toca una alarma a la llista o al mapa."
+            "value" : "CREAR ALARMES\r• Toca el botó +, la icona de cerca o una ubicació al mapa.\r\rREQUISITS\r• Permet les notificacions i l’accés a la ubicació (Sempre).\r• Assegura’t que el mode silenciós està desactivat.\r\rEDITAR ALARMES\r• Toca una alarma a la llista o al mapa."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CREATE ALARMS\r• Tap the + button, search icon, or a map location.\r\rREQUIREMENTS\r• Allow notifications and location access (Always).\r• Make sure Silent Mode is off.\r\rEDIT ALARMS\r• Tap an alarm in the list or on the map."
+          }
+        }
+      }
+    },
+    "invalid_radius" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El radi es invalid."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "CREATE ALARMS\\n• Tap the + button, search icon, or a map location.\\n\\nREQUIREMENTS\\n• Allow notifications and location access (Always).\\n• Make sure Silent Mode is off.\\n\\nEDIT ALARMS\\n• Tap an alarm in the list or on the map."
+            "value" : "Invalid radius"
+          }
+        }
+      }
+    },
+    "irreversible" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquesta accio es irreversible"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This action cannot be undone"
+          }
+        }
+      }
+    },
+    "location_from_list" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccioni una ubicació de la llista"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Please select a location from the list"
+          }
+        }
+      }
+    },
+    "login_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’inici de sessio ha fallat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login failed"
+          }
+        }
+      }
+    },
+    "login_here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia sessio aqui"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login here"
+          }
+        }
+      }
+    },
+    "logout" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tancar la sessio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lo out"
+          }
+        }
+      }
+    },
+    "logout_confirmation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta segur que vol trancar la sessio?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to log out?"
+          }
+        }
+      }
+    },
+    "max_alarms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limit d’alarmes actives"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum Active Alarms"
           }
         }
       }
@@ -103,6 +698,23 @@
         }
       }
     },
+    "medium_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrasenya mitjana"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Medium password"
+          }
+        }
+      }
+    },
     "minRadius" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -120,6 +732,108 @@
         }
       }
     },
+    "missing_alarm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta el nom de l’alarma"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Missing alarm’s name"
+          }
+        }
+      }
+    },
+    "missing_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar l’alarma"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Missing location"
+          }
+        }
+      }
+    },
+    "new_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova contrasenya"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New password"
+          }
+        }
+      }
+    },
+    "no_account" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tens un compte? "
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Don't have an account? "
+          }
+        }
+      }
+    },
+    "no_alarms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encara no hi ha alarmes ⏰"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No alarms yet ⏰"
+          }
+        }
+      }
+    },
+    "no_name_warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introdueixi el nom de l’alarma"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Please select a name for your alarm"
+          }
+        }
+      }
+    },
     "not_logged_in" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -133,6 +847,108 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "User not logged in"
+          }
+        }
+      }
+    },
+    "offline_mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode sense connexio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offline mMode"
+          }
+        }
+      }
+    },
+    "offline_warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Els canvis es sincronitzaran quan tornis a tenir connexio"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Changes will sync automatically when you're back online."
+          }
+        }
+      }
+    },
+    "one_lowercase" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contrasenya ha de tenir almenys una minuscula"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Password must contain at least one lowercase letter"
+          }
+        }
+      }
+    },
+    "one_uppercase" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contrasenya ha de tenir almenys una majuscula"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Password must contain at least one uppercase letter"
+          }
+        }
+      }
+    },
+    "password_updated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrasenya actualitzada"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password Updated"
+          }
+        }
+      }
+    },
+    "photo_library" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galeria de fotos"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Library"
           }
         }
       }
@@ -167,6 +983,102 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The radius must be in the range %@-%@ %@."
+          }
+        }
+      }
+    },
+    "register_here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea un compte aqui"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Register here"
+          }
+        }
+      }
+    },
+    "registration_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error en crear el compte"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Registration failed"
+          }
+        }
+      }
+    },
+    "saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarm saved and activated\rWill play only when silent mode is off"
+          }
+        }
+      }
+    },
+    "select_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccioni una  opcio de la llista"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please select a location from the list"
+          }
+        }
+      }
+    },
+    "strong_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrasenya forta"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Strong password"
+          }
+        }
+      }
+    },
+    "success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fet"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Success"
           }
         }
       }
@@ -256,8 +1168,73 @@
         }
       }
     },
-    "use_info" : {
-
+    "upload_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error en pujar la foto"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Upload failed"
+          }
+        }
+      }
+    },
+    "upload_failed_text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La seva foto de perfil s’ha guardat en local pero no s’ha guardat al Cloud. Provi-ho mes tard."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your profile picture was updated locally, but couldn't be uploaded to the cloud. Please try again later."
+          }
+        }
+      }
+    },
+    "user_not_found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuari no trobat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "User not found"
+          }
+        }
+      }
+    },
+    "weak_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrasenya debil"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weak password"
+          }
+        }
+      }
     },
     "your_location" : {
       "extractionState" : "manual",

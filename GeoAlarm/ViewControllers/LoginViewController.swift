@@ -13,6 +13,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRegisterButton()
@@ -34,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let secondColor = UIColor(red: 0xDB/255, green: 0x65/255, blue: 0x4D/255, alpha: 1)
 
         let text = NSMutableAttributedString(
-            string: "Don't have an account? ",
+            string: NSLocalizedString("no_account", comment: ""),
             attributes: [
                 .foregroundColor: firstColor,
                 .font: UIFont.systemFont(ofSize: 15)
@@ -42,7 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         )
 
         text.append(NSAttributedString(
-            string: "Register here",
+            string: NSLocalizedString("register_here", comment: ""),
             attributes: [
                 .foregroundColor: secondColor,
                 .font: UIFont.boldSystemFont(ofSize: 15)
@@ -62,7 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginUser(_ sender: Any) {
         guard let email = emailField.text, !email.isEmpty,
                   let password = passwordField.text, !password.isEmpty else {
-            showAlert(title: "Error", message: "Please enter email and password")
+            showAlert(title: "Error", message: NSLocalizedString("email_and_password", comment: ""))
             return
         }
 
@@ -70,12 +71,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             guard let self = self else { return }
 
             if let error = error {
-                self.showAlert(title: "Login Failed", message: error.localizedDescription)
+                self.showAlert(title: NSLocalizedString("login_failed", comment: ""), message: error.localizedDescription)
                 return
             }
 
             guard let user = result?.user else {
-                self.showAlert(title: "Login Failed", message: "User not found")
+                self.showAlert(title: NSLocalizedString("login_failed", comment: ""), message: NSLocalizedString("user_not_found", comment: "")
+                )
                 return
             }
 

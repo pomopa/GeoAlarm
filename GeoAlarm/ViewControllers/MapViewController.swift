@@ -55,7 +55,10 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
                 longitude: alarm.longitude
             )
             annotation.title = alarm.locationName
-            annotation.subtitle = alarm.isActive ? "Active" : "Inactive"
+            annotation.subtitle = alarm.isActive
+                ? NSLocalizedString("active", comment: "")
+                : NSLocalizedString("inactive", comment: "")
+            
             mapView.addAnnotation(annotation)
             
             let active = alarm.isActive
@@ -75,7 +78,10 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
                 center: annotation.coordinate,
                 radius: radiusInMeters
             )
-            circle.subtitle = active ? "Active" : "Inactive"
+            circle.subtitle = alarm.isActive
+            ? NSLocalizedString("active", comment: "")
+            : NSLocalizedString("inactive", comment: "")
+         
             mapView.addOverlay(circle)
         }
         
@@ -227,7 +233,7 @@ extension MapViewController: MKMapViewDelegate {
 
         let renderer = MKCircleRenderer(circle: circle)
 
-        if circle.subtitle == "Active" {
+        if circle.subtitle == NSLocalizedString("active", comment: "") {
             renderer.fillColor = UIColor.systemBlue.withAlphaComponent(0.2)
             renderer.strokeColor = UIColor.systemGreen
             renderer.lineWidth = 2
@@ -255,7 +261,7 @@ extension MapViewController: MKMapViewDelegate {
         markerView.glyphImage = UIImage(systemName: "alarm")
         markerView.glyphTintColor = .white
         
-        markerView.markerTintColor = annotation.subtitle == "Active"
+        markerView.markerTintColor = annotation.subtitle == NSLocalizedString("active", comment: "")
             ? .systemGreen
             : .systemGray
         

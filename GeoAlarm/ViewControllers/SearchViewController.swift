@@ -76,7 +76,7 @@ class SearchViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         // Validate location selection
         guard let selectedCompletion = selectedCompletion else {
-            showAlert(title: "Missing location", message: "Please select a location from the list")
+            showAlert(title: "Missing location", message: NSLocalizedString("select_location", comment: ""))
             return
         }
 
@@ -84,7 +84,8 @@ class SearchViewController: UIViewController {
         guard let radiusText = radiusTextField.text,
                 let radius = Double(radiusText),
                 radius > 0 else {
-            showAlert(title: "Invalid radius", message: "Please enter a valid radius")
+            showAlert(title: NSLocalizedString("invalid_radius", comment: ""), message: NSLocalizedString("enter_valid_radius", comment: "")
+                      )
             return
         }
 
@@ -95,7 +96,7 @@ class SearchViewController: UIViewController {
             guard let self else { return }
 
             guard let coordinate else {
-                self.showAlert(title: "Error", message: "Unable to resolve location")
+                self.showAlert(title: "Error", message: NSLocalizedString("cant_resolve", comment: ""))
                 return
             }
 
@@ -123,20 +124,13 @@ class SearchViewController: UIViewController {
                         
                         if canActivate {
                             self.showAlert(
-                                title: "Success",
-                                message: """
-                                Alarm saved and activated
-                                Will play only when silent mode is off
-                                """
+                                title: NSLocalizedString("alarm_success_title", comment:""),
+                                message: NSLocalizedString("alarm_success_message", comment: "")
                             )
                         } else {
                             self.showAlert(
-                                title: "Alarm created but inactive",
-                                message: """
-                                Apple enforces a limit of 20 active simultaneous alarms.
-                                This alarm was saved but is inactive.
-                                Disable another alarm to activate it.
-                                """
+                                title: NSLocalizedString("alarm_inactive_title", comment: ""),
+                                message: NSLocalizedString("alarm_inactive_message", comment: "")
                             )
                         }
                     }

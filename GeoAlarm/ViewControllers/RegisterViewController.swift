@@ -29,7 +29,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             for: .editingChanged
         )
         
-        passwordStrengthLabel.text = "Weak password"
+        passwordStrengthLabel.text = NSLocalizedString("weak_password", comment: "")
         passwordStrengthLabel.textColor = .systemRed
     }
     
@@ -61,7 +61,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         let secondColor = UIColor(red: 0xDB/255, green: 0x65/255, blue: 0x4D/255, alpha: 1)
 
         let text = NSMutableAttributedString(
-            string: "Already have an account? ",
+            string: NSLocalizedString("already_account", comment: ""),
             attributes: [
                 .foregroundColor: firstColor,
                 .font: UIFont.systemFont(ofSize: 15)
@@ -69,7 +69,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         )
 
         text.append(NSAttributedString(
-            string: "Login here",
+            string: NSLocalizedString("login_here", comment: ""),
             attributes: [
                 .foregroundColor: secondColor,
                 .font: UIFont.boldSystemFont(ofSize: 15)
@@ -95,27 +95,29 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
 
         if email.isEmpty || password.isEmpty || repeatPassword.isEmpty {
-            showAlert(title: "Error", message: "All fields are required")
+            showAlert(title: "Error", message: NSLocalizedString("all_fields", comment: "")
+            )
             return
         }
 
         if password != repeatPassword {
-            showAlert(title: "Error", message: "Passwords do not match")
+            showAlert(title: "Error", message: NSLocalizedString("dont_match", comment: "")
+            )
             return
         }
         
         if password.count < 6 {
-            showAlert(title: "Error", message: "Password must be at least 6 characters")
+            showAlert(title: "Error", message: NSLocalizedString("6chars", comment: ""))
             return
         }
         
         if password.rangeOfCharacter(from: .lowercaseLetters) == nil {
-            showAlert(title: "Error", message: "Password must contain at least one lowercase letter")
+            showAlert(title: "Error", message: NSLocalizedString("one_lowercase", comment: ""))
             return
         }
 
         if password.rangeOfCharacter(from: .uppercaseLetters) == nil {
-            showAlert(title: "Error", message: "Password must contain at least one uppercase letter")
+            showAlert(title: "Error", message: NSLocalizedString("one_uppercase", comment: ""))
             return
         }
 
@@ -123,13 +125,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             
             if let error = error {
-                self?.showAlert(title: "Registration failed",
+                self?.showAlert(title: NSLocalizedString("registration_failed", comment: ""),
                                 message: error.localizedDescription)
                 return
             }
 
-            let alert = UIAlertController(title: "Success",
-                                          message: "Account created successfully",
+            let alert = UIAlertController(title: NSLocalizedString("success", comment: ""),
+                                          message: NSLocalizedString("account_created_succ", comment: ""),
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
                 self?.dismiss(animated: true)
@@ -161,13 +163,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
         switch score {
         case 0...1:
-            passwordStrengthLabel.text = "Weak password"
+            passwordStrengthLabel.text = NSLocalizedString("weak_password", comment: "")
             passwordStrengthLabel.textColor = .systemRed
         case 2...3:
-            passwordStrengthLabel.text = "Medium password"
+            passwordStrengthLabel.text = NSLocalizedString("medium_password", comment: "")
             passwordStrengthLabel.textColor = .systemOrange
         default:
-            passwordStrengthLabel.text = "Strong password"
+            passwordStrengthLabel.text = NSLocalizedString("strong_password", comment: "")
             passwordStrengthLabel.textColor = .systemGreen
         }
     }

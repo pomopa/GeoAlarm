@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     private func loadUserData() {
         guard let user = Auth.auth().currentUser else {
-            userEmailLabel.text = "Not logged in"
+            userEmailLabel.text = NSLocalizedString("not_logged_in", comment:"")
             return
         }
 
@@ -55,19 +55,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // IMAGE EDIT
     //--------------------------------------------
     @IBAction func editPicture(_ sender: Any) {
-        let alert = UIAlertController(title: "Change Profile Picture",
-                                      message: nil,
-                                      preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: NSLocalizedString("change_profile_picture", comment: ""),message: nil,
+                preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("camera", comment: ""), style: .default) { _ in
             self.openImagePicker(source: .camera)
         })
 
-        alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("photo_library", comment: ""), style: .default) { _ in
             self.openImagePicker(source: .photoLibrary)
         })
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel))
 
         present(alert, animated: true)
     }
@@ -102,7 +101,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             if let error = error {
                 print("Upload error: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Upload failed", message: "Your profile picture was updated locally, but couldn't be uploaded to the cloud. Please try again later.")
+                    self.showAlert(title: "Upload failed", message: NSLocalizedString("upload_failed_text", comment: ""))
                 }
                 return
             }
@@ -139,7 +138,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 if let error = error {
                     self.showAlert(title: "Error", message: error.localizedDescription)
                 } else {
-                    self.showAlert(title: "Success", message: "Password updated")
+                    self.showAlert(title:NSLocalizedString("success", comment: ""), message: NSLocalizedString("password_updated", comment: ""))
                 }
             }
         }
@@ -147,15 +146,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     
     @IBAction func changePassword(_ sender: Any) {
-        let alert = UIAlertController(title: "Change Password",
+        let alert = UIAlertController(title: NSLocalizedString("change_password", comment: ""),
                                       message: nil,
                                       preferredStyle: .alert)
 
-        alert.addTextField { $0.placeholder = "Current password"; $0.isSecureTextEntry = true }
-        alert.addTextField { $0.placeholder = "New password"; $0.isSecureTextEntry = true }
+        alert.addTextField { $0.placeholder = NSLocalizedString("current_password", comment: ""); $0.isSecureTextEntry = true }
+        
+        alert.addTextField { $0.placeholder = NSLocalizedString("new_password", comment: ""); $0.isSecureTextEntry = true }
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Change", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("change", comment: ""), style: .default) { _ in
             let current = alert.textFields?[0].text ?? ""
             let new = alert.textFields?[1].text ?? ""
             self.updatePassword(currentPassword: current, newPassword: new)
@@ -215,12 +215,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     
     @IBAction func deleteAccount(_ sender: Any) {
-        let alert = UIAlertController(title: "Delete Account",
-                                      message: "This action is permanent",
+        let alert = UIAlertController(title: NSLocalizedString("delete_account", comment: ""),
+                                      message: NSLocalizedString("irreversible", comment: ""),
                                       preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive) { _ in
             self.performAccountDeletion()
         })
 
@@ -232,14 +232,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //--------------------------------------------
     @IBAction func logoutUser(_ sender: Any) {
         let alert = UIAlertController(
-            title: "Log out",
-            message: "Are you sure you want to log out?",
+            title: NSLocalizedString("logout", comment: ""),
+            message: NSLocalizedString("logout_confirmation", comment: ""),
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel))
         
-        alert.addAction(UIAlertAction(title: "Log out", style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("logout", comment: ""), style: .destructive) { _ in
             do {
                 try Auth.auth().signOut()
                 ProfileImageCache.shared.delete()

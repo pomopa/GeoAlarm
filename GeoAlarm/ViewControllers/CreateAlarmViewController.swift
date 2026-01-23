@@ -43,14 +43,16 @@ class CreateAlarmViewController: UIViewController {
     @IBAction func addAlarm(_ sender: Any) {
         //TODO ADD LIMIT ON LENGTH
         guard let nameText = nameTextField.text else {
-            showAlert(title: "Missing alarm's name", message: "Please select a name for your alarm")
+            showAlert(title: NSLocalizedString("missing_alarm", comment: "") , message: NSLocalizedString("no_name_warning", comment: "")
+            )
             return
         }
         
         guard let radiusText = radiusTextField.text,
                 let radius = Double(radiusText),
                 radius > 0 else {
-            showAlert(title: "Invalid radius", message: "Please enter a valid radius")
+            showAlert(title: NSLocalizedString("invalid_radius",comment: ""),message: NSLocalizedString("enter_valid_radius",comment: "")
+            )
             return
         }
         
@@ -77,26 +79,20 @@ class CreateAlarmViewController: UIViewController {
                 case .success:
                     if canActivate {
                         self.showAlert(
-                            title: "Success",
-                            message: """
-                            Alarm saved and activated
-                            Will play only when silent mode is off
-                            """
+                            title: NSLocalizedString("alarm_success_title", comment: ""),
+                            message: NSLocalizedString("alarm_success_message", comment: "")
                         ) {
                             self.dismiss(animated: true)
                         }
                     } else {
                         self.showAlert(
-                            title: "Alarm created but inactive",
-                            message: """
-                            Apple enforces a limit of 20 active simultaneous alarms.
-                            This alarm was saved but is inactive.
-                            Disable another alarm to activate it.
-                            """
+                            title: NSLocalizedString("alarm_inactive_title", comment: ""),
+                            message: NSLocalizedString("alarm_inactive_message", comment: "")
                         ) {
                             self.dismiss(animated: true)
                         }
                     }
+
                 }
             }
         }
