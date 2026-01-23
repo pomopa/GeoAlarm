@@ -76,7 +76,7 @@ class SearchViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         // Validate location selection
         guard let selectedCompletion = selectedCompletion else {
-            showAlert(title: "Missing location", message: NSLocalizedString("select_location", comment: ""))
+            showAlert(title: NSLocalizedString("missing_location", comment: ""), message: NSLocalizedString("select_location", comment: ""))
             return
         }
 

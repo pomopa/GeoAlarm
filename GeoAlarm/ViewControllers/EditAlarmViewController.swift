@@ -110,7 +110,7 @@ class EditAlarmViewController: UIViewController {
         let unit = unitButton.title(for: .normal) ?? "km"
         let locationName = nameSearchBar.text ?? alarm.locationName
         guard let coordinate = currentCoordinate else {
-            showAlert(title: NSLocalizedString("missing_location", comment:""), message: NSLocalizedString("location_from_list", comment:"")
+            showAlert(title: NSLocalizedString("missing_location", comment:""), message: NSLocalizedString("select_location", comment:"")
             )
             return
         }
