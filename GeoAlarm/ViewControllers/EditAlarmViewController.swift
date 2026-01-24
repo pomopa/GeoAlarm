@@ -12,11 +12,14 @@ class EditAlarmViewController: UIViewController {
     var alarm: Alarm!
 
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var alarmNameLabel: UILabel!
+    @IBOutlet weak var customNameTextField: UITextField!
     @IBOutlet weak var nameSearchBar: UISearchBar!
     @IBOutlet weak var radiusTextField: UITextField!
     @IBOutlet weak var unitButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var maxRadiusLabel: UILabel!
+    @IBOutlet weak var customAlarmControlsView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
     
     private let searchCompleter = MKLocalSearchCompleter()
@@ -29,7 +32,7 @@ class EditAlarmViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        populateUI()
+        setupUIByAlarmType()
         unitButton.configureDropdown(options: ["km", "m", "mi", "ft"]) { [weak self] selectedUnit in
             self?.unitButton.setTitle(selectedUnit, for: .normal)
             self?.maxRadiusLabel.text = RadiusHelper.radiusText(for: selectedUnit)
@@ -46,20 +49,6 @@ class EditAlarmViewController: UIViewController {
     // --------------------------------------------
     // Configurations
     // --------------------------------------------
-    private func populateUI() {
-        nameSearchBar.text = alarm.locationName
-        let radius = alarm.radius
-        if floor(radius) == radius {
-            radiusTextField.text = String(format: "%.0f", radius)
-        } else {
-            radiusTextField.text = String(radius)
-        }
-        unitButton.setTitle(alarm.unit, for: .normal)
-        currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
-                                                   longitude: alarm.longitude)
-        maxRadiusLabel.text = RadiusHelper.radiusText(for: alarm.unit)
-    }
-    
     private func configureSearch() {
         nameSearchBar.delegate = self
         searchCompleter.delegate = self
@@ -70,6 +59,42 @@ class EditAlarmViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isHidden = true
+    }
+    
+    private func setupUIByAlarmType() {
+        switch alarm.creationType {
+        case .search:
+            // Show search bar, hide custom name
+            nameSearchBar.isHidden = false
+            customNameTextField.isHidden = true
+            alarmNameLabel.isHidden = true
+            customAlarmControlsView.isHidden = true
+            configureSearch()
+            configureTableView()
+            tableViewHeightConstraint.constant = 0
+            nameSearchBar.text = alarm.locationName
+                
+        case .map:
+            // Show custom name, hide search bar and table
+            nameSearchBar.isHidden = true
+            tableView.isHidden = true
+            alarmNameLabel.isHidden = false
+            customNameTextField.isHidden = false
+            customAlarmControlsView.isHidden = false
+            customNameTextField.text = alarm.locationName
+        }
+            
+        // Common setup
+        let radius = alarm.radius
+        if floor(radius) == radius {
+            radiusTextField.text = String(format: "%.0f", radius)
+        } else {
+            radiusTextField.text = String(radius)
+        }
+        unitButton.setTitle(alarm.unit, for: .normal)
+        currentCoordinate = CLLocationCoordinate2D(latitude: alarm.latitude,
+                                                    longitude: alarm.longitude)
+        maxRadiusLabel.text = RadiusHelper.radiusText(for: alarm.unit)
     }
     
     // --------------------------------------------
@@ -94,6 +119,18 @@ class EditAlarmViewController: UIViewController {
 
         nameSearchBar.resignFirstResponder()
     }
+    
+    private func resolveLocationName() -> String? {
+        switch alarm.creationType {
+        case .search:
+            let text = nameSearchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            return text?.isEmpty == false ? text : nil
+
+        case .map:
+            let text = customNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            return text?.isEmpty == false ? text : nil
+        }
+    }
 
     // --------------------------------------------
     // Button Actions
@@ -108,7 +145,19 @@ class EditAlarmViewController: UIViewController {
         }
 
         let unit = unitButton.title(for: .normal) ?? "km"
-        let locationName = nameSearchBar.text ?? alarm.locationName
+
+        guard let locationName = resolveLocationName() else {
+            let messageKey = alarm.creationType == .search
+                ? "select_location"
+                : "enter_name"
+            
+            showAlert(
+                title: NSLocalizedString("missing_location", comment:""),
+                message: NSLocalizedString(messageKey, comment:"")
+            )
+            return
+        }
+
         guard let coordinate = currentCoordinate else {
             showAlert(title: NSLocalizedString("missing_location", comment:""), message: NSLocalizedString("select_location", comment:"")
             )

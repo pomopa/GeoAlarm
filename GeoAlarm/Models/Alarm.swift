@@ -16,6 +16,7 @@ struct Alarm {
     let unit: String
     var isActive: Bool
     let createdAt: Timestamp
+    let creationType: AlarmCreationType
 
     init?(id: String, data: [String: Any]) {
         guard
@@ -25,7 +26,9 @@ struct Alarm {
             let radius = data["radius"] as? Double,
             let unit = data["unit"] as? String,
             let isActive = data["isActive"] as? Bool,
-            let createdAt = data["createdAt"] as? Timestamp
+            let createdAt = data["createdAt"] as? Timestamp,
+            let creationTypeString = data["creationType"] as? String,
+            let creationType = AlarmCreationType(rawValue: creationTypeString)
         else {
             return nil
         }
@@ -38,5 +41,6 @@ struct Alarm {
         self.unit = unit
         self.isActive = isActive
         self.createdAt = createdAt
+        self.creationType = creationType
     }
 }

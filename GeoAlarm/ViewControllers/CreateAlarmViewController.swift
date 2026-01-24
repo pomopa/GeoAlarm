@@ -69,6 +69,7 @@ class CreateAlarmViewController: UIViewController {
                         coordinate: self.initialCoordinate!,
                         radius: radius,
                         unit: unit,
+                        creationType: .map,
                         isActive: isActive
                     ) { result in
                         switch result {

@@ -44,6 +44,7 @@ final class FirestoreHelper {
         coordinate: CLLocationCoordinate2D,
         radius: Double,
         unit: String,
+        creationType: AlarmCreationType? = nil, // only used for creation
         isActive: Bool? = nil, // only used for creation
         completion: @escaping (Result<String, Error>) -> Void
     ) {
@@ -86,6 +87,7 @@ final class FirestoreHelper {
                         .collection("alarms").document()
             data["createdAt"] = Timestamp(date: Date())
             data["isActive"] = isActive ?? false
+            data["creationType"] = creationType?.rawValue
         }
 
         let action: (DocumentReference, [String: Any], ((Error?) -> Void)?) -> Void =
