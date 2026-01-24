@@ -59,11 +59,35 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: NSLocalizedString("camera", comment: ""), style: .default) { _ in
-            self.openImagePicker(source: .camera)
+            PermissionsHelper.checkCamera { granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        self.openImagePicker(source: .camera)
+                    } else {
+                        PermissionsHelper.showSettingsAlert(
+                            on: self,
+                            title: NSLocalizedString("camera_access_needed", comment: ""),
+                            message: NSLocalizedString("enable_camera_access", comment: "")
+                        )
+                    }
+                }
+            }
         })
 
         alert.addAction(UIAlertAction(title: NSLocalizedString("photo_library", comment: ""), style: .default) { _ in
-            self.openImagePicker(source: .photoLibrary)
+            PermissionsHelper.checkPhotoLibrary { granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        self.openImagePicker(source: .photoLibrary)
+                    } else {
+                        PermissionsHelper.showSettingsAlert(
+                            on: self,
+                            title: NSLocalizedString("library_access_needed", comment: ""),
+                            message: NSLocalizedString("enable_library_access", comment: "")
+                        )
+                    }
+                }
+            }
         })
 
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel))
@@ -101,7 +125,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             if let error = error {
                 print("Upload error: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Upload failed", message: NSLocalizedString("upload_failed_text", comment: ""))
+                    self.showAlert(title: NSLocalizedString("upload_failed", comment: ""), message: NSLocalizedString("upload_failed_text", comment: ""))
                 }
                 return
             }

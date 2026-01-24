@@ -186,7 +186,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to access the camera to take photos for your profile picture.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We want to access location always for triggering the alarm when app is in background";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to access your location in order to provide you with the possibility of setting and accessing GeoAlarms.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "to give a user profile picture";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access your photo library in order to provide you with the possibility of selecting a previously taken photograph as your profile picture.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -223,7 +223,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to access the camera to take photos for your profile picture.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We want to access location always for triggering the alarm when app is in background";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to access your location in order to provide you with the possibility of setting and accessing GeoAlarms.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "to give a user profile picture";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access your photo library in order to provide you with the possibility of selecting a previously taken photograph as your profile picture.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

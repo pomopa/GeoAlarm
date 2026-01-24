@@ -13,7 +13,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Password must be at least 6 characters"
           }
         }
@@ -103,6 +103,23 @@
         }
       }
     },
+    "alarm_inactive_permission_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquesta alarma s'ha creat en estat inactiu perquè l'accés a la ubicació està desactivat. Si us plau, habilita la ubicació a Configuració per activar-la."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This alarm was created in an inactive state because location access is disabled. Please enable location in Settings to activate it."
+          }
+        }
+      }
+    },
     "alarm_inactive_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -131,7 +148,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "You can only have up to 20 active alarms."
           }
         }
@@ -148,7 +165,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Alarm saved and activated\rIt will play only when silent mode is off"
           }
         }
@@ -182,7 +199,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "All fields are required"
           }
         }
@@ -199,7 +216,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Already have an account? "
           }
         }
@@ -233,8 +250,25 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Camera"
+          }
+        }
+      }
+    },
+    "camera_access_needed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cal accés a la càmera"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera Access Needed"
           }
         }
       }
@@ -245,12 +279,12 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancelar"
+            "value" : "Cancel·lar"
           }
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Cancel"
           }
         }
@@ -267,7 +301,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Unable to resolve location"
           }
         }
@@ -318,7 +352,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Change Profile Picture"
           }
         }
@@ -335,7 +369,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Changes will sync when you're back online."
           }
         }
@@ -352,7 +386,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Create Alarm"
           }
         }
@@ -403,7 +437,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Delete"
           }
         }
@@ -437,7 +471,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Delete Alarm"
           }
         }
@@ -473,6 +507,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please enter email and password"
+          }
+        }
+      }
+    },
+    "enable_camera_access" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si us plau, activa l’accés a la càmera a Configuració per fer una foto de perfil."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enable camera access in Settings to take a profile picture."
+          }
+        }
+      }
+    },
+    "enable_library_access" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si us plau, activa l’accés a la biblioteca de fotos a Configuració per triar una foto de perfil."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enable photo library access in Settings to choose a profile picture."
+          }
+        }
+      }
+    },
+    "enable_location_access" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si us plau, activa l’accés a la ubicació a Configuració per poder utilitzar les alarmes geofencing."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enable location access in Settings to work with geofenced alarms."
           }
         }
       }
@@ -539,7 +624,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Invalid radius"
           }
         }
@@ -558,6 +643,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This action cannot be undone"
+          }
+        }
+      }
+    },
+    "library_access_needed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cal accés a la biblioteca de fotos"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Library Access Needed"
+          }
+        }
+      }
+    },
+    "location_access_needed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cal accés a la geolocalització"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location Access Needed"
           }
         }
       }
@@ -675,7 +794,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Medium password"
           }
         }
@@ -709,7 +828,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Missing alarm’s name"
           }
         }
@@ -726,7 +845,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Missing location"
           }
         }
@@ -760,7 +879,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Don't have an account? "
           }
         }
@@ -794,7 +913,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Please select a name for your alarm"
           }
         }
@@ -845,7 +964,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Changes will sync automatically when you're back online."
           }
         }
@@ -862,7 +981,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Password must contain at least one lowercase letter"
           }
         }
@@ -879,7 +998,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Password must contain at least one uppercase letter"
           }
         }
@@ -930,7 +1049,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "The radius must be in the range 0.1-1km."
           }
         }
@@ -964,7 +1083,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Register here"
           }
         }
@@ -981,7 +1100,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Registration failed"
           }
         }
@@ -1004,6 +1123,23 @@
         }
       }
     },
+    "settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuració"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
     "strong_password" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1015,7 +1151,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Strong password"
           }
         }
@@ -1032,7 +1168,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Success"
           }
         }
@@ -1123,6 +1259,23 @@
         }
       }
     },
+    "upload_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La pujada ha fallat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upload failed"
+          }
+        }
+      }
+    },
     "upload_failed_text" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1151,7 +1304,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "User not found"
           }
         }
@@ -1185,7 +1338,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "your location"
           }
         }

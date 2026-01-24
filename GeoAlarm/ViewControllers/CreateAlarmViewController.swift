@@ -41,7 +41,6 @@ class CreateAlarmViewController: UIViewController {
     }
     
     @IBAction func addAlarm(_ sender: Any) {
-        //TODO ADD LIMIT ON LENGTH
         guard let nameText = nameTextField.text else {
             showAlert(title: NSLocalizedString("missing_alarm", comment: "") , message: NSLocalizedString("no_name_warning", comment: "")
             )
@@ -61,38 +60,40 @@ class CreateAlarmViewController: UIViewController {
         FirestoreHelper.fetchActiveAlarmCount { activeCount in
             let canActivate = activeCount < 20
 
-            FirestoreHelper.saveOrUpdateAlarm(
-                locationName: nameText,
-                coordinate: self.initialCoordinate!,
-                radius: radius,
-                unit: unit,
-                isActive: canActivate
-            ) { result in
-
-                switch result {
-                case .failure(let error):
-                    self.showAlert(
-                        title: "Error",
-                        message: error.localizedDescription
-                    )
-
-                case .success:
-                    if canActivate {
-                        self.showAlert(
-                            title: NSLocalizedString("alarm_success_title", comment: ""),
-                            message: NSLocalizedString("alarm_success_message", comment: "")
-                        ) {
-                            self.dismiss(animated: true)
-                        }
-                    } else {
-                        self.showAlert(
-                            title: NSLocalizedString("alarm_inactive_title", comment: ""),
-                            message: NSLocalizedString("alarm_inactive_message", comment: "")
-                        ) {
-                            self.dismiss(animated: true)
+            PermissionsHelper.checkLocation(always: true) { granted in
+                DispatchQueue.main.async {
+                    let isActive = canActivate && granted
+                    
+                    FirestoreHelper.saveOrUpdateAlarm(
+                        locationName: nameText,
+                        coordinate: self.initialCoordinate!,
+                        radius: radius,
+                        unit: unit,
+                        isActive: isActive
+                    ) { result in
+                        switch result {
+                        case .failure(let error):
+                            self.showAlert(title: "Error", message: error.localizedDescription)
+                            
+                        case .success:
+                            if isActive {
+                                self.showAlert(title: NSLocalizedString("alarm_success_title", comment: ""),
+                                               message: NSLocalizedString("alarm_success_message", comment: "")) {
+                                    self.dismiss(animated: true)
+                                }
+                            } else if !granted {
+                                self.showAlert(title: NSLocalizedString("alarm_inactive_title", comment: ""),
+                                               message: NSLocalizedString("alarm_inactive_permission_message", comment: "")) {
+                                    self.dismiss(animated: true)
+                                }
+                            } else {
+                                self.showAlert(title: NSLocalizedString("alarm_inactive_title", comment: ""),
+                                               message: NSLocalizedString("alarm_inactive_message", comment: "")) {
+                                    self.dismiss(animated: true)
+                                }
+                            }
                         }
                     }
-
                 }
             }
         }

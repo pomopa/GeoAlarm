@@ -56,17 +56,17 @@ class SearchViewController: UIViewController {
     private func didSelectSearchResult(_ result: MKLocalSearchCompletion) {
         selectedCompletion = result
         searchBar.text = result.title
-
+        
         searchResults.removeAll()
         tableView.reloadData()
-
+        
         tableView.isHidden = true
         tableViewHeightConstraint.constant = 0
-
+        
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
-
+        
         searchBar.resignFirstResponder()
     }
     
@@ -79,59 +79,69 @@ class SearchViewController: UIViewController {
             showAlert(title: NSLocalizedString("missing_location", comment: ""), message: NSLocalizedString("select_location", comment: ""))
             return
         }
-
+        
         // Validate radius
         guard let radiusText = radiusTextField.text,
-                let radius = Double(radiusText),
-                radius > 0 else {
+              let radius = Double(radiusText),
+              radius > 0 else {
             showAlert(title: NSLocalizedString("invalid_radius", comment: ""), message: NSLocalizedString("enter_valid_radius", comment: "")
-                      )
+            )
             return
         }
-
+        
         let unit = unitButton.title(for: .normal) ?? "km"
-
+        
         // Resolve coordinates
         locationSearchService.resolve(completion: selectedCompletion) { [weak self] coordinate in
             guard let self else { return }
-
+            
             guard let coordinate else {
                 self.showAlert(title: "Error", message: NSLocalizedString("cant_resolve", comment: ""))
                 return
             }
-
+            
             FirestoreHelper.fetchActiveAlarmCount { activeCount in
                 let canActivate = activeCount < 20
-
-                FirestoreHelper.saveOrUpdateAlarm(
-                    locationName: selectedCompletion.title,
-                    coordinate: coordinate,
-                    radius: radius,
-                    unit: unit,
-                    isActive: canActivate
-                ) { result in
-
-                    switch result {
-                    case .failure(let error):
-                        self.showAlert(
-                            title: "Error",
-                            message: error.localizedDescription
-                        )
-
-                    case .success:
-                        self.searchBar.text = ""
-                        self.radiusTextField.text = ""
+                
+                PermissionsHelper.checkLocation(always: true) { granted in
+                    DispatchQueue.main.async {
                         
-                        if canActivate {
-                            self.showAlert(
-                                title: NSLocalizedString("alarm_success_title", comment:""),
-                                message: NSLocalizedString("alarm_success_message", comment: "")
-                            )
-                        } else {
-                            self.showAlert(
-                                title: NSLocalizedString("alarm_inactive_title", comment: ""),
-                                message: NSLocalizedString("alarm_inactive_message", comment: "")
-                            )
+                        let isActive = canActivate && granted
+                        
+                        FirestoreHelper.saveOrUpdateAlarm(
+                            locationName: selectedCompletion.title,
+                            coordinate: coordinate,
+                            radius: radius,
+                            unit: unit,
+                            isActive: isActive
+                        ) { result in
+                            switch result {
+                            case .failure(let error):
+                                self.showAlert(
+                                    title: "Error",
+                                    message: error.localizedDescription
+                                )
+                            case .success:
+                                self.searchBar.text = ""
+                                self.radiusTextField.text = ""
+                                
+                                if isActive {
+                                    self.showAlert(
+                                        title: NSLocalizedString("alarm_success_title", comment:""),
+                                        message: NSLocalizedString("alarm_success_message", comment: "")
+                                    )
+                                } else if !granted {
+                                    self.showAlert(
+                                        title: NSLocalizedString("alarm_inactive_title", comment: ""),
+                                        message: NSLocalizedString("alarm_inactive_permission_message", comment: "")
+                                    )
+                                } else {
+                                    self.showAlert(
+                                        title: NSLocalizedString("alarm_inactive_title", comment: ""),
+                                        message: NSLocalizedString("alarm_inactive_message", comment: "")
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -139,7 +149,6 @@ class SearchViewController: UIViewController {
         }
     }
 }
-
 
 // --------------------------------------------
 // Delegates and Data Sources
