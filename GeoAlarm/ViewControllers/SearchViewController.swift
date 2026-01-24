@@ -113,6 +113,7 @@ class SearchViewController: UIViewController {
                             coordinate: coordinate,
                             radius: radius,
                             unit: unit,
+                            creationType: .search,
                             isActive: isActive
                         ) { result in
                             switch result {

@@ -158,3 +158,9 @@
 
 /* Class = "UITextField"; placeholder = "e.g. Home"; ObjectID = "znL-41-0zH"; */
 "znL-41-0zH.placeholder" = "p.e. Casa";
+
+/* Class = "UITextField"; placeholder = "e.g. Home"; ObjectID = "znL-41-0zH"; */
+"p5R-RD-jBI.placeholder" = "p.e. Casa";
+
+/* Class = "UILabel"; text = "Alarm name:"; ObjectID = "N8l-2w-eS9"; */
+"H2o-bN-rev.text" = "Nom de l'alarma:";
