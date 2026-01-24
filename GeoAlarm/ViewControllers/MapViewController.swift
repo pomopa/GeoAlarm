@@ -164,27 +164,24 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     private func showAddAlarmButton(at point: CGPoint) {
         addAlarmButton?.removeFromSuperview()
 
-        let buttonSize: CGFloat = 44
-        let button = UIButton(type: .system)
-        button.frame = CGRect(
-            x: point.x - buttonSize / 2,
-            y: point.y - buttonSize / 2,
-            width: buttonSize,
-            height: buttonSize
+        let pinImage = UIImage(named: "AppPinNB")!
+        let desiredWidth: CGFloat = 75
+        let scale = desiredWidth / pinImage.size.width
+        let desiredHeight = pinImage.size.height * scale
+            
+        // Position so tip is at tapped point
+        let frame = CGRect(
+            x: point.x - desiredWidth / 2,
+            y: point.y - desiredHeight,
+            width: desiredWidth,
+            height: desiredHeight
         )
 
-        button.backgroundColor = UIColor(red: 0xDB/255, green: 0x65/255, blue: 0x4D/255, alpha: 1)
-        button.tintColor = UIColor(red: 0x1B/255, green: 0x2B/255, blue: 0x42/255, alpha: 1)
-        button.layer.cornerRadius = buttonSize / 2
-        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
-        button.setImage(UIImage(systemName: "plus", withConfiguration: config), for: .normal)
-
-        button.addTarget(
-            self,
-            action: #selector(addAlarmButtonTapped),
-            for: .touchUpInside
-        )
-        
+        let button = UIButton(frame: frame)
+        button.setImage(pinImage, for: .normal)
+            
+        button.addTarget(self, action: #selector(addAlarmButtonTapped), for: .touchUpInside)
+            
         mapView.addSubview(button)
         addAlarmButton = button
     }
