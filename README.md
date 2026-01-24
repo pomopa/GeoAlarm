@@ -91,21 +91,21 @@ For the project you will need your own API key from [openweather](https://openwe
 
 ## Project Dependencies
 
-### 🔗 Alamofire
+### 🔗 [Alamofire](https://github.com/Alamofire/Alamofire)
 A powerful and elegant HTTP networking library used to handle all network requests, API communication, and response validation in a clean and maintainable way.
 
 - Simplifies REST API integration
 - Provides built-in request validation and response handling
 - Improves code readability and networking reliability
 
-### 🔥 Firebase
+### 🔥 [Firebase](https://github.com/firebase/firebase-ios-sdk)
 Firebase is used as the backend infrastructure, providing real-time services and secure cloud-based features.
 
 - User authentication and session management
 - Cloud data storage and synchronization
 - Database managment.
 
-### ⌨️ IQKeyboardManagerSwift
+### ⌨️ [IQKeyboardManagerSwift](https://github.com/hackiftekhar/IQKeyboardManager)
 IQKeyboardManagerSwift is used to automatically manage keyboard interactions across the app.
 
 - Prevents the keyboard from covering input fields
