@@ -117,3 +117,21 @@ IQKeyboardManagerSwift is used to automatically manage keyboard interactions acr
 
 ## 📸 Demo Screenshots
 Below are some preview images showcasing the main pages of the application.
+
+<p align="center">
+  <a href="demo/Login.PNG">
+    <img src="demo/Login.PNG" width="180"/>
+  </a>
+  <a href="demo/AlarmList.PNG">
+    <img src="demo/AlarmList.PNG" width="180"/>
+  </a>
+  <a href="demo/MapView.PNG">
+    <img src="demo/MapView.PNG" width="180"/>
+  </a>
+  <a href="demo/AddAlarm.PNG">
+    <img src="demo/AddAlarm.PNG" width="180"/>
+  </a>
+  <a href="demo/ProfileScreen.PNG">
+    <img src="demo/ProfileScreen.PNG" width="180"/>
+  </a>
+</p>
