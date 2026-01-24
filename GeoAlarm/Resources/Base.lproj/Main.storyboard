@@ -263,13 +263,13 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W8a-cM-26D">
                                                                     <rect key="frame" x="0.0" y="11.333333333333332" width="219" height="48.666666666666671"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airoport del Prat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-eT-QNp">
                                                                             <rect key="frame" x="0.0" y="0.0" width="219" height="20.333333333333332"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-Bv-VC8">
                                                                             <rect key="frame" x="0.0" y="28.333333333333336" width="219" height="20.333333333333336"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -883,28 +883,28 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yj5-Qo-WFi" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
-                                <rect key="frame" x="51" y="299" width="291" height="34"/>
+                                <rect key="frame" x="51" y="320" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078429999997" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igN-4x-eBu" customClass="RoundedTextField" customModule="GeoAlarm" customModuleProvider="target">
-                                <rect key="frame" x="51" y="363" width="291" height="34"/>
+                                <rect key="frame" x="51" y="384" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078429999997" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MSP-kR-8lp" customClass="NoPasteTextField" customModule="GeoAlarm" customModuleProvider="target">
-                                <rect key="frame" x="51" y="427" width="291" height="34"/>
+                                <rect key="frame" x="51" y="448" width="291" height="34"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.70196078429999997" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKv-tc-JCa">
-                                <rect key="frame" x="51" y="547" width="291" height="35"/>
+                                <rect key="frame" x="51" y="568" width="291" height="35"/>
                                 <color key="tintColor" red="0.8618164062" green="0.3999023438" blue="0.3039550781" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Register">
@@ -916,7 +916,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ex-j6-wja">
-                                <rect key="frame" x="51" y="607" width="290" height="33"/>
+                                <rect key="frame" x="51" y="628" width="290" height="33"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <attributedString key="attributedTitle">
@@ -947,7 +947,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsX-mG-GKF">
-                                <rect key="frame" x="51" y="491" width="290" height="21"/>
+                                <rect key="frame" x="51" y="512" width="290" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.1070556641" green="0.1674804688" blue="0.2600097656" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -964,7 +964,7 @@
                             <constraint firstItem="igN-4x-eBu" firstAttribute="top" secondItem="yj5-Qo-WFi" secondAttribute="bottom" constant="30" id="PYa-1j-Fdv"/>
                             <constraint firstItem="MSP-kR-8lp" firstAttribute="top" secondItem="igN-4x-eBu" secondAttribute="bottom" constant="30" id="PaG-k4-vbR"/>
                             <constraint firstItem="k4G-AB-f20" firstAttribute="trailing" secondItem="xsX-mG-GKF" secondAttribute="trailing" constant="52" id="QgV-Vh-Jd5"/>
-                            <constraint firstItem="yj5-Qo-WFi" firstAttribute="top" secondItem="jjg-I7-TOC" secondAttribute="bottom" constant="30" id="Uaq-2H-Weu"/>
+                            <constraint firstItem="yj5-Qo-WFi" firstAttribute="top" secondItem="jjg-I7-TOC" secondAttribute="bottom" constant="51" id="Uaq-2H-Weu"/>
                             <constraint firstItem="HLS-Nu-IIN" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="98" id="Vew-qc-ii9"/>
                             <constraint firstItem="3Ex-j6-wja" firstAttribute="top" secondItem="uKv-tc-JCa" secondAttribute="bottom" constant="25" id="YXQ-Ba-Afz"/>
                             <constraint firstItem="igN-4x-eBu" firstAttribute="leading" secondItem="k4G-AB-f20" secondAttribute="leading" constant="51" id="cfG-7B-hmH"/>
@@ -997,7 +997,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="z3j-AH-SMh"/>
-        <segue reference="yBE-Lu-zSb"/>
+        <segue reference="Fad-Vo-9C4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="1024" height="1024"/>

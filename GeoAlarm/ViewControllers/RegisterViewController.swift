@@ -17,7 +17,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Bundle.main.preferredLocalizations)
         setupLoginButton()
         setupTextFields()
         hideKeyboardWhenTappedAround()
