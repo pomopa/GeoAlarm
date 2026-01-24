@@ -55,7 +55,6 @@ class AlarmTableViewCell: UITableViewCell {
     }
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
-        updateEnabledState(sender.isOn)
         onSwitchToggled?(sender.isOn)
     }
     

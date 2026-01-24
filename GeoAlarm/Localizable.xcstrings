@@ -103,6 +103,23 @@
         }
       }
     },
+    "alarm_inactive_permission_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquesta alarma s'ha creat en estat inactiu perquè l'accés a la ubicació està desactivat. Si us plau, habilita la ubicació a Configuració per activar-la."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This alarm was created in an inactive state because location access is disabled. Please enable location in Settings to activate it."
+          }
+        }
+      }
+    },
     "alarm_inactive_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -528,6 +545,23 @@
         }
       }
     },
+    "enable_location_access" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si us plau, activa l’accés a la ubicació a Configuració per poder utilitzar les alarmes geofencing."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enable location access in Settings to work with geofenced alarms."
+          }
+        }
+      }
+    },
     "enter_valid_radius" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -626,6 +660,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Photo Library Access Needed"
+          }
+        }
+      }
+    },
+    "location_access_needed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cal accés a la geolocalització"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location Access Needed"
           }
         }
       }

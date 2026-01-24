@@ -8,8 +8,40 @@
 import AVFoundation
 import Photos
 import UIKit
+import CoreLocation
 
-final class PermissionsHelper {
+final class PermissionsHelper: NSObject {
+    private static var locationManager: CLLocationManager?
+    private static let shared = PermissionsHelper()
+    private var locationPermissionCompletion: ((Bool) -> Void)?
+    
+    // Location
+    static func checkLocation(always: Bool = false, completion: @escaping (Bool) -> Void) {
+        let status: CLAuthorizationStatus
+        locationManager = CLLocationManager()
+        locationManager?.delegate = shared
+        status = locationManager!.authorizationStatus
+            
+        switch status {
+        case .authorizedAlways:
+            completion(true)
+        case .authorizedWhenInUse:
+            completion(always ? false : true)
+        case .notDetermined:
+            locationManager = CLLocationManager()
+            locationManager?.delegate = shared
+            if always {
+                locationManager?.requestAlwaysAuthorization()
+            } else {
+                locationManager?.requestWhenInUseAuthorization()
+            }
+            shared.locationPermissionCompletion = completion
+        case .denied, .restricted:
+            completion(false)
+        @unknown default:
+            completion(false)
+        }
+    }
     
     // Camera
     static func checkCamera(completion: @escaping (Bool) -> Void) {
@@ -53,5 +85,25 @@ final class PermissionsHelper {
             }
         })
         vc.present(alert, animated: true)
+    }
+}
+
+extension PermissionsHelper: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard let completion = locationPermissionCompletion else { return }
+        
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            completion(true)
+        case .denied, .restricted:
+            completion(false)
+        case .notDetermined:
+            break
+        @unknown default:
+            completion(false)
+        }
+        
+        locationPermissionCompletion = nil
+        PermissionsHelper.locationManager = nil
     }
 }

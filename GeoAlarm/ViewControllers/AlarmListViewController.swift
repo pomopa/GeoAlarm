@@ -90,10 +90,40 @@ class AlarmListViewController: UIViewController, CLLocationManagerDelegate {
 
             case .success(let alarms):
                 self.alarms = alarms
-                LocationManager.shared.syncActiveAlarms(alarms)
+                
+                if !alarms.isEmpty {
+                    PermissionsHelper.checkLocation(always: true) { granted in
+                        DispatchQueue.main.async {
+                            if granted {
+                                LocationManager.shared.syncActiveAlarms(alarms)
+                            } else {
+                                for index in self.alarms.indices {
+                                    self.alarms[index].isActive = false
+                                }
+
+                                for alarm in self.alarms {
+                                    FirestoreHelper.updateAlarmActiveState(alarmID: alarm.id, isActive: false) { result in
+                                        if case .failure(let error) = result {
+                                            print("Failed to update alarm state: \(error)")
+                                        }
+                                    }
+                                }
+
+                                self.tableView.reloadData()
+                                if self.isViewLoaded && self.view.window != nil {
+                                    PermissionsHelper.showSettingsAlert(on: self, title: NSLocalizedString("location_access_needed", comment: ""),
+                                     message: NSLocalizedString("enable_location_access", comment: "")
+                                     )
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 if !self.isTogglingAlarm {
                     self.tableView.reloadData()
                 }
+                
                 self.updateEmptyState()
             }
         }
@@ -199,67 +229,71 @@ extension AlarmListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.onSwitchToggled = nil
 
         cell.onSwitchToggled = { [weak self, weak cell] isOn in
-            guard let self = self else { return }
+            guard let self else { return }
 
-            let alarm = self.alarms[indexPath.row]
-
-            if self.isTogglingAlarm { return }
-            self.isTogglingAlarm = true
-            self.isApplyingLocalChange = true
-
-            if isOn && self.activeAlarmCount(excluding: alarm.id) >= 20 {
+            // Check location permissions first
+            PermissionsHelper.checkLocation(always: true) { granted in
                 DispatchQueue.main.async {
-                    cell?.setSwitchOn(false, animated: true)
-                    self.showAlert(
-                        title: NSLocalizedString("max_alarms", comment:""),
-                        message: NSLocalizedString("alarm_max_warning", comment:"")
-                    )
-                    self.isTogglingAlarm = false
-                    self.isApplyingLocalChange = false
-                }
-                return
-            }
+                    guard granted else {
+                        self.alarms[indexPath.row].isActive = false
+                        cell?.setSwitchOn(false, animated: true)
+                        
+                        PermissionsHelper.showSettingsAlert(on: self, title: NSLocalizedString("location_access_needed", comment: ""),
+                            message: NSLocalizedString("enable_location_access", comment: "")
+                        )
+                        return
+                    }
 
-            self.alarms[indexPath.row].isActive = isOn
-            
-            if !NetworkMonitor.shared.isConnected {
-                DispatchQueue.main.async {
-                    self.showAlert(
-                        title:  NSLocalizedString("offline_warning",comment:""),
-                        message: NSLocalizedString("offline_warning", comment: "")
-                    )
-                }
-            }
+                    // Continue toggling normally
+                    let alarm = self.alarms[indexPath.row]
 
-            DispatchQueue.global(qos: .userInitiated).async {
-                if isOn {
-                    LocationManager.shared.enableGeofence(for: alarm)
-                } else {
-                    LocationManager.shared.disableGeofence(id: alarm.id)
-                }
-            }
+                    if self.isTogglingAlarm { return }
+                    self.isTogglingAlarm = true
+                    self.isApplyingLocalChange = true
 
-            FirestoreHelper.updateAlarmActiveState(
-                alarmID: alarm.id,
-                isActive: isOn
-            ) { [weak self, weak cell] result in
-                guard let self else { return }
+                    if isOn && self.activeAlarmCount(excluding: alarm.id) >= 20 {
+                        cell?.setSwitchOn(false, animated: true)
+                        self.showAlert(
+                            title: NSLocalizedString("max_alarms", comment:""),
+                            message: NSLocalizedString("alarm_max_warning", comment:"")
+                        )
+                        self.isTogglingAlarm = false
+                        self.isApplyingLocalChange = false
+                        return
+                    }
 
-                self.isTogglingAlarm = false
-                self.isApplyingLocalChange = false
+                    self.alarms[indexPath.row].isActive = isOn
 
-                if case .failure = result {
-                    self.alarms[indexPath.row].isActive.toggle()
-                    cell?.setSwitchOn(!isOn, animated: true)
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        if isOn {
+                            LocationManager.shared.enableGeofence(for: alarm)
+                        } else {
+                            LocationManager.shared.disableGeofence(id: alarm.id)
+                        }
+                    }
 
-                    self.showAlert(
-                        title: NSLocalizedString("offline_mode", comment: ""),
-                        message:NSLocalizedString("changes_will_sync", comment: ""),
-                    )
+                    FirestoreHelper.updateAlarmActiveState(
+                        alarmID: alarm.id,
+                        isActive: isOn
+                    ) { [weak self, weak cell] result in
+                        guard let self else { return }
+
+                        self.isTogglingAlarm = false
+                        self.isApplyingLocalChange = false
+
+                        if case .failure = result {
+                            self.alarms[indexPath.row].isActive.toggle()
+                            cell?.setSwitchOn(!isOn, animated: true)
+
+                            self.showAlert(
+                                title: NSLocalizedString("offline_mode", comment: ""),
+                                message: NSLocalizedString("changes_will_sync", comment: ""),
+                            )
+                        }
+                    }
                 }
             }
         }
-
 
         return cell
     }
