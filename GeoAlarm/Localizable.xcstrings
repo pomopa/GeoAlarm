@@ -336,7 +336,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Change password"
+            "value" : "Change Password"
           }
         }
       }
@@ -602,13 +602,13 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CREAR ALARMES\n• Toca el botó +, la icona de cerca o una ubicació al mapa.\n\nREQUISITS\n• Permet les notificacions i l’accés a la ubicació (Sempre).\n• Assegura’t que el mode silenciós està desactivat.\n\nEDITAR ALARMES\n• Toca una alarma a la llista o al mapa."
+            "value" : "Crear Alarmes\n• Toca el botó +, la icona de cerca o una ubicació al mapa.\n\nRequisits\n• Permet les notificacions i l’accés a la ubicació (Sempre).\n• Assegura’t que el mode silenciós està desactivat.\n\nEeditar Alarmes\n• Toca una alarma a la llista o al mapa."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CREATE ALARMS\r• Tap the + button, search icon, or a map location.\r\rREQUIREMENTS\r• Allow notifications and location access (Always).\r• Make sure Silent Mode is off.\r\rEDIT ALARMS\r• Tap an alarm in the list or on the map."
+            "value" : "Create Alarms\r• Tap the + button, search icon, or a map location.\r\rRequirements\r• Allow notifications and location access (Always).\r• Make sure Silent Mode is off.\r\rEdit Alarms\r• Tap an alarm in the list or on the map."
           }
         }
       }
@@ -1214,13 +1214,13 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CREAR ALARMES"
+            "value" : "Crear Alarmes"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CREATING ALARMS"
+            "value" : "Create Alarms"
           }
         }
       }
@@ -1231,13 +1231,13 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "EDITAR ALARMES"
+            "value" : "Editar Alarmes"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "EDITING ALARMS"
+            "value" : "Edit Alarms"
           }
         }
       }
@@ -1247,14 +1247,14 @@
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "REQUISITS"
+            "state" : "needs_review",
+            "value" : "Requisits"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "REQUIREMENTS"
+            "value" : "Requirements"
           }
         }
       }
