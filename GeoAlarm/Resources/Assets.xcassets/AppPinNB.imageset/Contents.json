@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "AppPinNB.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
