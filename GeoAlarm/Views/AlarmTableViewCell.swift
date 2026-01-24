@@ -34,8 +34,8 @@ class AlarmTableViewCell: UITableViewCell {
 
         enabledSwitch.onTintColor = .systemGreen
         
-        titleLabel.numberOfLines = 0
-        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.numberOfLines = 4
+        titleLabel.lineBreakMode = .byTruncatingTail
         distanceLabel.numberOfLines = 0
         distanceLabel.lineBreakMode = .byWordWrapping
     }
