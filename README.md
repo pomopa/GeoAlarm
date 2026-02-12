@@ -15,7 +15,7 @@
 ## 🧠 Project Description
 This repository showcases the final project of the Mobile Devices Programming subject. It implements a geolocation based alarm system that allows the user to dynamically set alarms 
 that will activate based on their geographical coordinates.
-
+  
 ---
 
 ## 📑 Table of Contents
